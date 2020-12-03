@@ -8,13 +8,16 @@ const md5 = require('crypto-js/md5.js');
 const config = require("./config/default.json");
 
 const app = express()
+
 // Render static files
-app.use(express.static('public'));
+app.use(express.static('statichtml'));
+
 app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true
 }));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Set the view engine to ejs
