@@ -75,44 +75,29 @@ app.get('/u/:id', (req, res) => {
     } catch (err) { }
 })
 
+function Player(username, rankedScore, accuracy, totalScore, rank) {
+    this.username = username;
+    this.rankedScore = rankedScore;
+    this.accuracy = accuracy;
+    this.totalScore = totalScore;
+    this.rank = rank
+};
+
 app.get('/ranking', (req, res) => {
     try {
-        hashes = [];
-        scores = [];
-        maps = [];
-        text = "";
+        players = [];
 
-        connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC;', req.params.id, (err, results, fields) => {
-            rank = 1
-            results.forEach(r => {
-                if (req.params.id.toLowerCase() == r.username.toLowerCase()) {
-                    text += r.username + " (#" + rank + ")\nranked score: " + r.rankedscore + " | total score: " + r.totalscore + "\naccuracy: " + r.accuracy + "%\nplaycount: " + r.playcount
-                }
-                rank++
-            })
-        });
-
-        connection.query('SELECT * FROM osu_scores WHERE username = ? and pass = True ORDER BY score DESC', req.params.id, (err, results, fields) => {
+        connection.query('SELECT * FROM users ORDER BY rankedscore DESC', req.params.id, (err, userResults, fields) => {
             if (err) throw err;
-            connection.query('SELECT * FROM osu_maps WHERE ranking = 2;', (err, results2, fields) => {
-                results.forEach(r2 => {
-                    results2.forEach(r => {
-                        if (r2.osuhash == r.md5) {
-                            if (hashes.indexOf(r2.osuhash) == -1) {
-                                scores.push("score: " + r2.score + " | | " + r.name.split("|").join(" ") + "\n");
-                                maps.push(r.setid);
-                                hashes.push(r2.osuhash);
-                            }
-                        }
-
-                    });
-                });
-                // Render index page
-                res.render('pages/user.ejs', {
-                    // EJS variable and server-side variable
-                    maps: maps,
-                    scores: scores
-                });
+            userResults.forEach(user => {
+                var rank = 1;
+                players.push(new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank));
+                rank++;
+            });
+            // Render index page
+            res.render('pages/ranking.ejs', {
+                // EJS variable and server-side variable
+                players: players
             });
         });
     } catch (err) { }
