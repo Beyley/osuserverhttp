@@ -1,7 +1,11 @@
 {
   "name": "osuserverhttp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web frontend for the osu!2012 server project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeesusmies/osuserverhttp.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
