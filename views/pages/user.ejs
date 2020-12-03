@@ -25,13 +25,15 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container">        
         <a style="white-space: pre-wrap"><%= player.username + " (#" + player.rank + ")\nRanked Score: " + player.rankedScore + " | Total Score: " + player.totalScore + "\nAccuracy: " + player.accuracy + "%\nPlaycount: " + player.playcount%></a>
-        <br>=========================</br>
-        <p class="lead">Top scores</p>
-        <% for (var i = 0; i < scores.length; i++) { %>
-            <p href="<%= 'https://osu.ppy.sh/beatmapsets/'+maps[i]%>"; style="white-space: pre-wrap"><%= "\nScore: " + scores[i].score + " | | " + scores[i].artist + " : " + scores[i].title + " [" + scores[i].diff + "]" + "\n"%></p>
-        <%}%>
+
+        <div class="starter-template">
+            <p class="lead">Top scores</p>
+            <% for (var i = 0; i < scores.length; i++) { %>
+                <p href="<%= 'https://osu.ppy.sh/beatmapsets/'+maps[i]%>"; style="white-space: pre-wrap"><%= "\nScore: " + scores[i].score + " | | " + scores[i].artist + " : " + scores[i].title + " [" + scores[i].diff + "]" + "\n"%></p>
+            <%}%>
+        </div>
     </div>
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
