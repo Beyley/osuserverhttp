@@ -4,6 +4,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
 var ejs = require('ejs');
+var vm = require('vm');
 const md5 = require('crypto-js/md5.js');
 const config = require("./config/default.json");
 
@@ -35,26 +36,7 @@ var connection = mysql.createConnection({
     insecureAuth: true
 });
 
-class Player {
-    constructor(username, rankedScore, accuracy, totalScore, rank) {
-        this.username = username;
-        this.rankedScore = rankedScore;
-        this.accuracy = accuracy;
-        this.totalScore = totalScore;
-        this.rank = rank;
-
-        this.playCount = 0;
-    }
-};
-
-class Score {
-    constructor(score, title, artist, diff) {
-        this.score = score;
-        this.title = title;
-        this.artist = artist;
-        this.diff = diff;
-    }
-}
+vm.runInThisContext(fs.readFileSync("objects.js"));
 
 app.get('/u/:id', (req, res) => {
     try {
@@ -92,7 +74,7 @@ app.get('/u/:id', (req, res) => {
                             if (hashes.indexOf(userScore.osuhash) == -1) {
                                 var mapName = map.name.split("|");
 
-                                scores.push(new Score(userScore.score, mapName[1], mapName[0], mapName[2]));
+                                scores.push(new Score(userScore.score, mapName[0], mapName[1], mapName[2]));
                                 maps.push(map.setid);
                                 hashes.push(userScore.osuhash);
                             }
