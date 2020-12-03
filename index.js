@@ -35,33 +35,66 @@ var connection = mysql.createConnection({
     insecureAuth: true
 });
 
+class Player {
+    constructor(username, rankedScore, accuracy, totalScore, rank) {
+        this.username = username;
+        this.rankedScore = rankedScore;
+        this.accuracy = accuracy;
+        this.totalScore = totalScore;
+        this.rank = rank;
+
+        this.playCount = 0;
+    }
+};
+
+class Score {
+    constructor(score, title, artist, diff) {
+        this.score = score;
+        this.title = title;
+        this.artist = artist;
+        this.diff = diff;
+    }
+}
+
 app.get('/u/:id', (req, res) => {
     try {
+        player = new Player("", 0, 0, 0, 0);
+
         hashes = [];
         scores = [];
         maps = [];
-        text = "";
 
         connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC;', req.params.id, (err, results, fields) => {
-            rank = 1
+            rank = 1;
+
             results.forEach(r => {
                 if (req.params.id.toLowerCase() == r.username.toLowerCase()) {
-                    text += r.username + " (#" + rank + ")\nranked score: " + r.rankedscore + " | total score: " + r.totalscore + "\naccuracy: " + r.accuracy + "%\nplaycount: " + r.playcount
+                    player.username = r.username;
+                    player.rankedScore = r.rankedscore;
+                    player.totalScore = r.totalscore;
+                    player.accuracy = r.accuracy;
+                    player.rank = rank;
+
+                    player.playcount = r.playcount;
+                    //text += r.username + " (#" + rank + ")\nranked score: " + r.rankedscore + " | total score: " + r.totalscore + "\naccuracy: " + r.accuracy + "%\nplaycount: " + r.playcount
                 }
-                rank++
+
+                rank++;
             })
         });
 
-        connection.query('SELECT * FROM osu_scores WHERE username = ? and pass = True ORDER BY score DESC', req.params.id, (err, results, fields) => {
+        connection.query('SELECT * FROM osu_scores WHERE username = ? and pass = True ORDER BY score DESC', req.params.id, (err, usersScores, fields) => {
             if (err) throw err;
-            connection.query('SELECT * FROM osu_maps WHERE ranking = 2;', (err, results2, fields) => {
-                results.forEach(r2 => {
-                    results2.forEach(r => {
-                        if (r2.osuhash == r.md5) {
-                            if (hashes.indexOf(r2.osuhash) == -1) {
-                                scores.push("score: " + r2.score + " | | " + r.name.split("|").join(" ") + "\n");
-                                maps.push(r.setid);
-                                hashes.push(r2.osuhash);
+            connection.query('SELECT * FROM osu_maps WHERE ranking = 2;', (err, allRankedMaps, fields) => {
+                usersScores.forEach(userScore => {
+                    allRankedMaps.forEach(map => {
+                        if (userScore.osuhash == map.md5) {
+                            if (hashes.indexOf(userScore.osuhash) == -1) {
+                                var mapName = map.name.split("|");
+
+                                scores.push(new Score(userScore.score, mapName[1], mapName[0], mapName[2]));
+                                maps.push(map.setid);
+                                hashes.push(userScore.osuhash);
                             }
                         }
 
@@ -71,28 +104,21 @@ app.get('/u/:id', (req, res) => {
                 res.render('pages/user.ejs', {
                     // EJS variable and server-side variable
                     maps: maps,
-                    scores: scores
+                    scores: scores,
+                    player: player
                 });
             });
         });
     } catch (err) { }
 })
 
-function Player(username, rankedScore, accuracy, totalScore, rank) {
-    this.username = username;
-    this.rankedScore = rankedScore;
-    this.accuracy = accuracy;
-    this.totalScore = totalScore;
-    this.rank = rank
-};
-
 app.get('/ranking', (req, res) => {
     try {
         players = [];
 
-        connection.query('SELECT * FROM users ORDER BY rankedscore DESC', req.params.id, (err, userResults, fields) => {
+        connection.query('SELECT * FROM users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
             if (err) throw err;
-            userResults.forEach(user => {
+            allUsers.forEach(user => {
                 var rank = 1;
                 players.push(new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank));
                 rank++;

@@ -1,14 +1,37 @@
 <html>
-    <head>
-        <title>userpage or something im not sure</title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="starter-template.css" rel="stylesheet">
 
-    <body>
-        <a style="white-space: pre-wrap"><%= text%></a>
+    <title><%= player.username%></title>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">osu!2012</a></div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li> <a href="/register">Register</a></li>
+                    <li> <a href="/ranking">Rankings</a></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a style="white-space: pre-wrap"><%= player.username + " (#" + player.rank + ")\nRanked Score: " + player.rankedscore + " | Total Score: " + player.totalscore + "\nAccuracy: " + player.accuracy + "%\nPlaycount: " + player.playcount%></a>
         <br>=========================</br>
-        top scores
+        <p class="lead">Top scores</p>
         <% for (var i = 0; i < scores.length; i++) { %>
-            <a href="<%= 'https://osu.ppy.sh/beatmapsets/'+maps[i]%>"; style="white-space: pre-wrap"><%= "\n"+scores[i]%></a>
+            <p class="lead" href="<%= 'https://osu.ppy.sh/beatmapsets/'+maps[i]%>"; style="white-space: pre-wrap"><%= "\nScore: " + scores[i].score + " | | " + scores[i].artist + " : " + scores[i].title + " [" + scores[i].diff + "]" + "\n"%></p>
         <%}%>
-    </body>
+    </div>
+</body>
 </html>
