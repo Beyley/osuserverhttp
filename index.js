@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var ejs = require('ejs');
 var vm = require('vm');
+var fs = require("fs");
 const md5 = require('crypto-js/md5.js');
 const config = require("./config/default.json");
 
