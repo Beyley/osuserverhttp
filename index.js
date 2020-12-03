@@ -12,7 +12,7 @@ const config = require("./config/default.json");
 const app = express()
 
 // Render static files
-app.use(express.static('statichtml'));
+app.use(express.static('statichtml/'));
 
 app.use(session({
     secret: 'secret',
