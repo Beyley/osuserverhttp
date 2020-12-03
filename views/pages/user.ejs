@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>userpage or something im not sure</title>
+    </head>
+
+    <body>
+        <a style="white-space: pre-wrap"><%= text%></a>
+        <br>=========================</br>
+        top scores
+        <% for (var i = 0; i < scores.length; i++) { %>
+            <a href="<%= 'https://osu.ppy.sh/beatmapsets/'+maps[i]%>"; style="white-space: pre-wrap"><%= "\n"+scores[i]%></a>
+        <%}%>
+    </body>
+</html>
