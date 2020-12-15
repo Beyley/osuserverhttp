@@ -26,12 +26,12 @@
     </nav>
 
     <div class="container">        
-        <a style="white-space: pre-wrap"<%= " href=\"" + player.username +"\"> "+ player.username%> </a> <%="(#" + player.rank + ")\nRanked Score: " + player.rankedScore + " | Total Score: " + player.totalScore + "\nAccuracy: " + player.accuracy + "%\nPlaycount: " + player.playcount%>
+        <a style="white-space: pre-wrap" href="<%=player.username%>"> <%=player.username%> </a> <%="(#" + player.rank + ")\nRanked Score: " + player.rankedScore + " | Total Score: " + player.totalScore + "\nAccuracy: " + player.accuracy + "%\nPlaycount: " + player.playcount%>
 
         <div class="starter-template">
             <p class="lead">Top scores</p>
             <% for (var i = 0; i < scores.length; i++) { %>
-                <p href="<%= 'https://osu.ppy.sh/beatmapsets/'+maps[i]%>"; style="white-space: pre-wrap"><%= "\nScore: " + scores[i].score + " | | " + scores[i].artist + " : " + scores[i].title + " [" + scores[i].diff + "]" + "\n"%></p>
+                <p href="<%='https://osu.ppy.sh/beatmapsets/'+maps[i]%>"; style="white-space: pre-wrap"><%= "\nScore: " + scores[i].score + " | | " + scores[i].artist + " : " + scores[i].title + " [" + scores[i].diff + "]" + "\n"%></p>
             <%}%>
         </div>
     </div>
