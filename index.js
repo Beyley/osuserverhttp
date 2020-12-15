@@ -29,7 +29,7 @@ const port = 999
 
 var mysql = require('mysql');
 const { response } = require('express');
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
     host: config.host,
     user: config.name,
     password: config.password,
@@ -123,8 +123,9 @@ app.post('/registerauth', (req, res) => {
     try {
         var username = req.body.username;
         var password = md5(req.body.password).toString();
+        var passwordConfirm = md5(req.body.passwordConfirm).toString();
         var email = req.body.email;
-        if (username && password && email) {
+        if (username && password && email && password == passwordConfrim) {
             connection.query('INSERT INTO osu_users (email, username, password, playcount, totalscore, rankedscore, accuracy, s300, s100, s50, s0) VALUES (?, ?, ?, 0, 0, 0, 0, 0, 0, 0, 0)', [email, username, password], function (err, results, fields) {
                 if (err) {
                     if (err.code == 'ER_DUP_ENTRY' || err.errno == 1062) {
@@ -141,7 +142,7 @@ app.post('/registerauth', (req, res) => {
                 }
             });
         } else {
-            res.send('Please enter Username and Password and Email!');
+            res.send('Please enter Username and Password and Email or ur passowrd didnt match with second password!');
             res.end();
         }
     } catch { res.send("error happened"); res.end(); }
