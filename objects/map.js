@@ -1,6 +1,6 @@
-class Score {
-    constructor(score, artist, title, diff, setId) {
-        this.score = score;
+class Map {
+    constructor(md5, artist, title, diff, setId) {
+        this.md5 = md5;
         this.title = title;
         this.artist = artist;
         this.diff = diff;
@@ -8,4 +8,4 @@ class Score {
     }
 }
 
-exports.Score = Score;
+exports.Map = Map;

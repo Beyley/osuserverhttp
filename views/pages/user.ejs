@@ -34,7 +34,7 @@
         <div class="starter-template">
             <p class="lead">Top scores</p>
             <% for (var i = 0; i < scores.length; i++) { %>
-                <p style="white-space: pre-wrap">Score: <%=scores[i].score%> | | <a href="https://osu.ppy.sh/beatmapsets/<%=maps[i]%>"><%=scores[i].artist%> : <%=scores[i].title%> [<%=scores[i].diff%>]</a><br></p>
+                <p style="white-space: pre-wrap">Score: <%=scores[i].score%> | | <a href="https://osu.ppy.sh/beatmapsets/<%=scores[i].setId%>"><%=scores[i].artist%> - <%=scores[i].title%> [<%=scores[i].diff%>]</a><br></p>
             <%}%>
         </div>
     </div>
