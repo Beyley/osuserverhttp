@@ -41,7 +41,7 @@ var connection = mysql.createPool({
 
 app.get('/u/:id', (req, res) => {
     try {
-        player = new Player("", 0, 0, 0, 0);
+        player = new Player("", 0, 0, 0, 0, 0);
 
         hashes = [];
         scores = [];
@@ -59,7 +59,6 @@ app.get('/u/:id', (req, res) => {
                     player.rank = rank;
 
                     player.playcount = r.playcount;
-                    //text += r.username + " (#" + rank + ")\nranked score: " + r.rankedscore + " | total score: " + r.totalscore + "\naccuracy: " + r.accuracy + "%\nplaycount: " + r.playcount
                 }
 
                 rank++;
@@ -101,9 +100,10 @@ app.get('/ranking', (req, res) => {
 
         connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
             if (err) throw err;
+            var rank = 1;
+
             allUsers.forEach(user => {
-                var rank = 1;
-                players.push(new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank));
+                players.push(new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount));
                 rank++;
             });
             // Render index page
