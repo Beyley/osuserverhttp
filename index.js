@@ -8,8 +8,10 @@ var vm = require('vm');
 var fs = require("fs");
 const md5 = require('crypto-js/md5.js');
 const config = require("./config/default.json");
+var { Player } = require("./objects/player.js");
+var { Score } = require("./objects/score.js");
 
-const app = express()
+const app = express();
 
 // Render static files
 app.use(express.static('statichtml/'));
@@ -25,7 +27,7 @@ app.use(bodyParser.json());
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
 
-const port = 999
+const port = 999;
 
 var mysql = require('mysql');
 const { response } = require('express');
@@ -36,8 +38,6 @@ var connection = mysql.createPool({
     database: config.database,
     insecureAuth: true
 });
-
-vm.runInThisContext(fs.readFileSync("objects.js"));
 
 app.get('/u/:id', (req, res) => {
     try {
@@ -99,7 +99,7 @@ app.get('/ranking', (req, res) => {
     try {
         players = [];
 
-        connection.query('SELECT * FROM users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
+        connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
             if (err) throw err;
             allUsers.forEach(user => {
                 var rank = 1;
