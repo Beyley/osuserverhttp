@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!-- saved from url=(0081)https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2 -->
+<html><div id="twoseven-scripts" data-info="Scripts added by TwoSeven extension" style="display: none !important; position: static !important; top: 0px !important; left: 0px !important; width: 0px !important; height: 0px !important;"><script type="text/javascript" async="" src="./ctbscorerankings_files/ga.js.download"></script><script type="text/javascript" id="__tmpScript-163805512" data-added-by-two-seven="1">(function() {
+    window.twoseven = {};
+  })();</script><script type="text/javascript" id="__tmpScript-959984614" data-added-by-two-seven="1">(function() {
+    window.twoseven.waitForDOMNode = async function waitForDOMNode(e,t=document){e=e||{};const{type:n,value:o}=e;if(!n||!o)throw new Error("Must specify identifier");let s=o;switch(n){case"tag":s=o.toUpperCase()}if("check"!==n){const e=await i({type:"selector",value:s},[],t);if(e)return new Promise(t=>t(e))}async function i({type:e,value:t},n,o){let s;switch(e){case"tag":s=n.find(e=>e.tagName===t);break;case"selector":s=o.querySelector(t);break;case"check":for(const e of n){if(await t(e))return e}}return s}return new Promise((e,o)=>{const r=new MutationObserver(async o=>{for(const a of o)if("childList"===a.type){const o=Array.from(a.addedNodes),c=await i({type:n,value:s},o,t);if(c)return r.disconnect(),e(c)}});r.observe(t,{childList:!0,subtree:!0})})};
+  })();</script><script type="text/javascript" id="__tmpScript-642878" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.reportError = function reportError(e,t,n){"string"==typeof(n=n||{})&&(n={message:n});const{message:o,stack:s}=t;Object.assign(n,{tag:e,error:{message:o,stack:s}}),window.tsExtGetPostToParent()({name:name,tag:e,action:"report-error",json:n}),console.error(JSON.stringify(n.error))}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-179235797" data-added-by-two-seven="1">(function() {
+    
+  window.twosevenHmsToSecondsOnly = function(str) {
+      var p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+
+      return s;
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-380096351" data-added-by-two-seven="1">(function() {
+    window.twosevenExtLog = function twosevenExtLog(e,o,c){o||(o=e,e=void 0);let n=c||"black";if(c)switch(c){case"success":n="Green";break;case"info":n="DodgerBlue";break;case"error":n="Red";break;case"warning":n="Orange";break;default:n=c}e?console.log("%c"+e+": "+o,`color:${n}`):console.log("%c"+o,`color:${n}`)};
+  })();</script><script type="text/javascript" id="__tmpScript-94471255" data-added-by-two-seven="1">(function() {
+    
+  document.twosevenGET = function(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          callback(null, xmlhttp.responseText);
+        } else {
+          callback('something else other than 200 was returned', '');
+        }
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  };
+;
+  })();</script><script type="text/javascript" id="__tmpScript-253884938" data-added-by-two-seven="1">(function() {
+    
+  window.triggerEvent = function(e,t,n,o=!1){let s;o?(n&&"string"!=typeof n&&(n=JSON.stringify(n)),s=n):s={data:n},window.twosevenScriptsDiv&&n&&"object"==typeof n&&(console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(n)}`),console.error((new Error).stack));var i=new CustomEvent(t,{bubbles:!0,composed:!0,detail:s});e.dispatchEvent(i)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-424032950" data-added-by-two-seven="1">(function() {
+    window.twoseven.postTo = async function postTo(e,t,n=!1){let o;return t.name=t.name||name,o=n?new Promise(e=>{const n=`ack-${t.action}-${1e9*Math.random()|0}`;t.ack={event:n};window.debug&&["play","pause","currentTime"].some(e=>t.action.includes(e)),window.addEventListener("message",function t({data:o={}}){o.action===n&&(window.removeEventListener("message",t),e(o.json))})}):new Promise(e=>e()),e.postMessage(t,"*"),o};
+  })();</script><script type="text/javascript" id="__tmpScript-761825673" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostTo = function tsExtGetPostTo(){return window.twoseven&&window.twoseven.postTo||window.postTo};
+  })();</script><script type="text/javascript" id="__tmpScript-456538540" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostToParent = function tsExtGetPostToParent(){return window.twoseven&&window.twoseven.postToParent||window.postToParent};
+  })();</script><script type="text/javascript" id="__tmpScript-35687535" data-added-by-two-seven="1">(function() {
+    window.twoseven.postResponse = async function postResponse(e,t){const{source:n,data:{ack:{event:o}}}=e;window.tsExtGetPostTo()(n,{action:o,json:t})};
+  })();</script><script type="text/javascript" id="__tmpScript-55881315" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToParent = async function postToParent(e,t=!1){return window.tsExtGetPostTo()(window.parent,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-165801665" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToTop = async function postToTop(e,t=!1){return window.tsExtGetPostTo()(window.top,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-508193212" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.getFromStorage = e=>new Promise((t,n)=>{const o="get-from-storage-"+(1e9*Math.random()|0);window.addEventListener(o,e=>{window.removeEventListener(o,this);const{detail:{data:{value:n}}}=e;t(n)}),triggerEvent(window,"get-from-storage",{key:e,evt:o})})
+  window.twoseven.saveToStorage = e=>{triggerEvent(window,"save-to-storage",e)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-619338061" data-added-by-two-seven="1">(function() {
+    
+  function attachHistoryListeners(){var e=history.pushState;history.pushState=function(t,n,o){return"function"==typeof history.onpushstate&&history.onpushstate({state:t}),triggerEvent(window,"pushstate",{uri:o}),e.apply(history,arguments)};var t=history.replaceState;history.replaceState=function(e){return"function"==typeof history.onreplacestate&&history.onreplacestate({state:e}),t.apply(history,arguments)}}
+  attachHistoryListeners()
+;
+  })();</script><script type="text/javascript" id="__tmpScript-490975067" data-added-by-two-seven="1">(function() {
+    window.twoseven.once = function once(e,t,n){e.addEventListener(t,function o(s){e.removeEventListener(t,o),n(s)})};
+  })();</script><script type="text/javascript" id="__tmpScript-460670183" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isOnTwoSevenTab = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'is-on-twoseven-tab' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-185340541" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isPaused = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'twoseven:pause-state' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-890397396" data-added-by-two-seven="1">(function() {
+    
+      const modal = document.querySelector('.twoseven-ext-tab-media-modal')
+      const modalCloseBtn = modal.querySelector('.close')
+      function closeModal () {
+        modal.style.display = 'none'
+        const frame = document.querySelector('#twoseven-ext-tab-media-iframe').contentWindow
+        frame.postMessage({
+          __evt_name: 'modal-hide'
+        }, '*')
+      }
+      modalCloseBtn.onclick = closeModal
+
+      window.onmessage = function (e) {
+        if (e.data.__evt_name === 'modal-hide') {
+          closeModal()
+        }
+      }
+
+      window.twoseven.closeTabMediaModal = closeModal
+
+      window.onclick = function (e) {
+        if (e.target.id === 'twoseven-ext-tab-media-modal' && modal.style.display === 'block') {
+            closeModal()
+        }
+      }
+    ;
+  })();</script></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./ctbscorerankings_files/analytics.js.download" type="text/javascript"></script>
+<script type="text/javascript">window.addEventListener('DOMContentLoaded',function(){var v=archive_analytics.values;v.service='wb';v.server_name='wwwb-app57.us.archive.org';v.server_ms=1653;archive_analytics.send_pageview({});});</script><script type="text/javascript" src="./ctbscorerankings_files/playback.bundle.js.download" charset="utf-8"></script>
+<script type="text/javascript" src="./ctbscorerankings_files/wombat.js.download" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://osu.ppy.sh/p/playerranking/?m=2","20120503014754","https://web.archive.org/","web","/_static/",
+	      "1336009674");
+</script>
+<link rel="stylesheet" type="text/css" href="./ctbscorerankings_files/banner-styles.css">
+<link rel="stylesheet" type="text/css" href="./ctbscorerankings_files/iconochive.css">
+<!-- End Wayback Rewrite JS Include -->
+
+<link rel="shortcut icon" href="https://web.archive.org/web/20120503014754im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="https://web.archive.org/web/20120503014754im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+
+<meta name="description" content="osu! - Rhythm is just a *click* away!  With Ouendan/EBA, Taiko and original gameplay modes, as well as a fully functional level editor.">
+<meta name="keywords" content="osu, peppy, ouendan, elite, beat, agents, ds, windows, game, taiko, tatsujin, simulator, sim, xna, ddr, beatmania, osu!, osume">
+
+<link rel="stylesheet" type="text/css" href="./ctbscorerankings_files/style.css" media="all">
+
+<script type="text/javascript" src="./ctbscorerankings_files/jquery.min.js.download"></script>
+<script type="text/javascript" src="./ctbscorerankings_files/main.js.download"></script>
+<title>osu! - Player Ranking (Catch the Beat)</title>
+
+<meta name="viewport" content="width=864, user-scalable=yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4774947-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://web.archive.org/web/20120503014754/https://ssl' : 'https://web.archive.org/web/20120503014754/http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<link href="chrome-extension://cjdnfmjmdligcpfcekfmenlhiopehjkd/web_resources/modal/modal.css" rel="stylesheet" id="__tmpStyle"></head>
+<body data-new-gr-c-s-check-loaded="14.987.0" data-gr-ext-installed=""><!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  /*min-width:800px !important;*/
+}
+</style>
+<script>__wm.rw(0);</script>
+<div id="wm-ipp-base" lang="en" style="display: block; direction: ltr;">
+</div><div id="donato" style="position:relative;width:100%;">
+  <div id="donato-base">
+    <iframe id="donato-if" src="./ctbscorerankings_files/donate.html" scrolling="no" frameborder="0" style="width:100%; height:100%">
+    </iframe>
+  </div>
+</div><script type="text/javascript">
+__wm.bt(625,27,25,2,"web","http://osu.ppy.sh/p/playerranking/?m=2","20120503014754",1996,"/_static/",["/_static/css/banner-styles.css?v=bsmaklHF","/_static/css/iconochive.css?v=qtvMKcIJ"]);
+  __wm.rw(1);
+</script>
+<!-- END WAYBACK TOOLBAR INSERT --><a name="top"></a>
+
+
+<div class="bodytopbg">
+    <div class="mainbody"><div class="mainbody2">
+		<div id="coolheader" style="background-image: url(&#39;https://web.archive.org/web/20120503014754im_/http://s.ppy.sh/images/right-pippi.jpg&#39;);"></div>
+		<div id="donation" style="width:140px">
+			<a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/support"><img src="./ctbscorerankings_files/paypal.gif"></a>&nbsp;&nbsp;
+			<a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/twitter"><img src="./ctbscorerankings_files/twitter.gif"></a>
+		</div>
+		<div class="main-osu-logo"><img src="./ctbscorerankings_files/head-logo.png"></div>
+         <div class="header clickable-cell">
+			<a class="hidden" href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/">home</a>
+			<div id="playstats">
+                <b>1,339,885</b> users, <b>2,463</b> online now.<br>
+                A total of <b><span id="playcount">785.67m</span></b> ranked plays!
+            </div>
+        <div class="menu">
+            <ul class="sf-menu sf-js-enabled sf-shadow">
+                <li>
+                    <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/about" class="sf-with-ul">Info<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/changelog">Changelog</a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/history">The Game (PC)</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/iphone">The Game (iPhone)</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/team">The Team</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/screenshots">Screenshots</a></li>
+
+
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/download">Download</a></li>
+                <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/wiki/">Wiki</a></li>
+                <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/faq" class="sf-with-ul">Help!<span class="sf-sub-indicator"> »</span></a>
+					<ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/faq">FAQ</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/formatpost&amp;id=21575">Terms Glossary</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/forum/viewtopic.php?f=13&amp;t=3815">Video Tutorials</a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/forum/viewtopic.php?f=5&amp;t=576">Report a Bug</a></li>
+                    </ul>
+				</li>
+                <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/beatmaplist" class="sf-with-ul">Beatmaps<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=0">Ranked</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=6">Approved</a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/beatmaplist&amp;s=7&amp;r=2">Pending</a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/packlist">Beatmap Packs</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/pp" class="sf-with-ul">Rankings<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/pp">Performance <span style="color:#eca1dd; vertical-align: super">beta</span></a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/chart">Charts</a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking">Score</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/countryranking">Countries</a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/mapperranking">Mappers</a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/modranking">BAT</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/kudosu">Kudosu</a></li>
+                    </ul>
+                </li>
+                <li class=""><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/forum/" class="sf-with-ul">Community<span class="sf-sub-indicator"> »</span></a>
+					<ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/forum/">Forums</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/support">Supporting osu!</a></li>
+                        <li><a href="https://web.archive.org/web/20120503014754/http://www.cafepress.com/osume" target="_blank">Goodies</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://www.youtube.com/user/VideosuTV/videos?sort=da&amp;view=1" target="_blank">Videos</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/chat">Web Chat</a></li>
+						<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/gallery?g=fanart">Fanart</a></li>
+                    </ul>
+				</li>
+            </ul>
+        </div>
+        </div>
+                <div class="content">
+                <div class="content-infoline">
+				<form class="inline-form" action="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/search" id="cse-search-box">
+				  <div>
+					<input type="hidden" name="cx" value="007714945049801807819:fwdivvi5sik">
+					<input type="hidden" name="cof" value="FORID:10">
+					<input type="hidden" name="ie" value="UTF-8">
+					<input type="text" name="q" size="15" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url(&quot;https://web.archive.org/web/20120503014754if_/http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif&quot;) left center no-repeat rgb(255, 255, 255);">
+				  </div>
+				<input name="siteurl" type="hidden" value="osu.ppy.sh/p/playerranking/?m=2"><input name="ref" type="hidden" value=""></form>
+				<form class="inline-form" onsubmit="return userSearch()">
+					<input type="text" class="default form-text form-default-value-processed" name="user-search" id="user-search" size="10" value="User" style="color: rgb(185, 186, 181);">
+				</form>
+				<form class="inline-form" onsubmit="return beatmapSearch()">
+					<input type="text" class="default form-text form-default-value-processed" name="beatmap-search" id="beatmap-search" size="10" value="Beatmap" style="color: rgb(185, 186, 181);">
+				</form>
+									<form action="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/forum/ucp.php?mode=login" method="post">
+						user:
+						<input class="post" type="text" name="username" size="15" maxlength="40" value="" tabindex="0">
+						pass:
+						<input class="post" type="password" name="password" size="15" maxlength="100" tabindex="0">
+						<a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/forgot" title="Forgot Password">?</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/forum/ucp.php?mode=register" title="Register New Account">register</a>
+						<input type="checkbox" class="radio" name="autologin" id="autologin"> <label for="autologin">save</label>
+						<input type="hidden" name="redirect" value="/p/playerranking/?m=2">
+						<input type="hidden" name="sid" value="9a604388ac4dd71ee22c39900e893c26">
+						<input type="submit" name="login" value="login" tabindex="5">
+					</form>
+				                </div>
+                <div class="content-with-bg">
+<h1>Player Rankings for All Locations (Catch the Beat)</h1>
+
+<div class="paddingboth">The primary ranking is the "Ranked Score".  This is calculated based on the highest score achieved from each beatmap set.  This means that if you play multiple difficulties of the same beatmap, only the <b>highest</b> score you achieve will be included in your ranked score.  To search for a particular username, use the search below.</div>
+
+<!--
+
+<div style="padding-top:10px;"><center>
+	<b>Please login to use search functionality.</b><br/><br/>
+</center></div>
+
+-->
+
+<center>
+</center>
+
+
+<div id="tablist">
+	<ul>
+		<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=0">osu! Standard</a></li>
+		<li><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=1">Taiko</a></li>
+		<li><a class="active" href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2">Catch The Beat</a></li>
+	</ul>
+</div>
+
+<div class="pagination">Displaying 1 to 50 of 1000 results.<br><b>1</b> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=2">2</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=3">3</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=4">4</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=5">5</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=6">6</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=7">7</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=8">8</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=9">9</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=10">10</a>  ... <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=2">Next</a></div>
+<table class="beatmapListing" cellspacing="0">
+<tbody><tr>
+	<th>Rank</th>
+		<th>Player Name</th>
+	<th>Accuracy</th>
+	<th><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=1&amp;r=&amp;q=&amp;f=">Play Count</a></th>
+	<th>Total Score (level)</th>
+	<th><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=0&amp;r=&amp;q=&amp;f=">Ranked Score</a><img src="./ctbscorerankings_files/down.gif"></th>
+	<th><img src="./ctbscorerankings_files/X_small.png"><img src="./ctbscorerankings_files/XH_small.png"></th>
+	<th><img src="./ctbscorerankings_files/S_small.png"><img src="./ctbscorerankings_files/SH_small.png"></th>
+	<th><img src="./ctbscorerankings_files/A_small.png"></th>
+</tr>
+
+<tr class="row1p" onclick="document.location=&quot;/u/92457&quot;"><td><b>#1</b></td><td><img class="flag" src="./ctbscorerankings_files/jp.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/92457">kenji</a></td><td>99.88%</td><td><span>93,257</span></td><td><span>218,590,960,239 (101)</span></td><td><span style="font-weight:bold">50,651,632,635</span></td><td align="center">4,093</td><td align="center">2,048</td><td align="center">0</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/723787&quot;"><td><b>#2</b></td><td><img class="flag" src="./ctbscorerankings_files/cl.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/723787">Dark_Diego</a></td><td>99.89%</td><td><span>38,734</span></td><td><span>120,400,975,709 (100)</span></td><td><span style="font-weight:bold">49,703,227,545</span></td><td align="center">3,272</td><td align="center">2,104</td><td align="center">7</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/430337&quot;"><td><b>#3</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/430337">SS_Kanzaki</a></td><td>99.81%</td><td><span>48,535</span></td><td><span>109,247,414,136 (100)</span></td><td><span style="font-weight:bold">47,667,338,939</span></td><td align="center">2,621</td><td align="center">3,377</td><td align="center">0</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/881667&quot;"><td><b>#4</b></td><td><img class="flag" src="./ctbscorerankings_files/us.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/881667">dbzguru32</a></td><td>99.80%</td><td><span>23,597</span></td><td><span>78,716,284,390 (100)</span></td><td><span style="font-weight:bold">47,576,890,166</span></td><td align="center">3,323</td><td align="center">3,170</td><td align="center">62</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/290249&quot;"><td><b>#5</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/290249">Ibuki Suika</a></td><td>100.00%</td><td><span>40,279</span></td><td><span>112,573,013,340 (100)</span></td><td><span style="font-weight:bold">47,445,534,431</span></td><td align="center">11,979</td><td align="center">0</td><td align="center">0</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/131195&quot;"><td><b>#6</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/131195">Skyblue</a></td><td>99.82%</td><td><span>40,486</span></td><td><span>90,237,813,684 (100)</span></td><td><span style="font-weight:bold">46,756,070,555</span></td><td align="center">2,936</td><td align="center">3,430</td><td align="center">2</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/471491&quot;"><td><b>#7</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/471491">Silver Flash</a></td><td>100.00%</td><td><span>45,549</span></td><td><span>103,902,180,228 (100)</span></td><td><span style="font-weight:bold">44,479,362,464</span></td><td align="center">6,098</td><td align="center">0</td><td align="center">0</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/47842&quot;"><td><b>#8</b></td><td><img class="flag" src="./ctbscorerankings_files/es.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/47842">mikhe</a></td><td>99.75%</td><td><span>65,465</span></td><td><span>169,510,713,664 (101)</span></td><td><span style="font-weight:bold">44,060,171,106</span></td><td align="center">2,157</td><td align="center">3,566</td><td align="center">7</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/760714&quot;"><td><b>#9</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/760714">Hidden</a></td><td>99.87%</td><td><span>8,772</span></td><td><span>48,842,564,861 (100)</span></td><td><span style="font-weight:bold">43,146,902,785</span></td><td align="center">2,778</td><td align="center">2,310</td><td align="center">0</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/169128&quot;"><td><b>#10</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/169128">joynama</a></td><td>99.67%</td><td><span>45,100</span></td><td><span>114,600,221,601 (100)</span></td><td><span style="font-weight:bold">43,142,545,856</span></td><td align="center">1,536</td><td align="center">3,750</td><td align="center">42</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/234781&quot;"><td><b>#11</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/234781">Laune</a></td><td>99.91%</td><td><span>26,425</span></td><td><span>85,931,458,985 (100)</span></td><td><span style="font-weight:bold">41,301,357,473</span></td><td align="center">3,879</td><td align="center">2,064</td><td align="center">1</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/281841&quot;"><td><b>#12</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/281841">nfield</a></td><td>100.00%</td><td><span>110,108</span></td><td><span>227,806,621,179 (102)</span></td><td><span style="font-weight:bold">38,351,726,699</span></td><td align="center">14,322</td><td align="center">1</td><td align="center">0</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/214574&quot;"><td><b>#13</b></td><td><img class="flag" src="./ctbscorerankings_files/pe.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/214574">AleZer0</a></td><td>99.79%</td><td><span>56,958</span></td><td><span>117,658,544,163 (100)</span></td><td><span style="font-weight:bold">38,120,743,669</span></td><td align="center">2,454</td><td align="center">2,158</td><td align="center">10</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/259383&quot;"><td><b>#14</b></td><td><img class="flag" src="./ctbscorerankings_files/br.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/259383">Kakarotto</a></td><td>99.79%</td><td><span>28,194</span></td><td><span>61,503,227,899 (100)</span></td><td><span style="font-weight:bold">37,497,677,749</span></td><td align="center">2,248</td><td align="center">2,869</td><td align="center">25</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/480820&quot;"><td><b>#15</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/480820">Musogu[CH]</a></td><td>99.73%</td><td><span>33,812</span></td><td><span>103,701,656,889 (100)</span></td><td><span style="font-weight:bold">37,351,182,815</span></td><td align="center">1,740</td><td align="center">3,588</td><td align="center">4</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/89908&quot;"><td><b>#16</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/89908">singma</a></td><td>100.00%</td><td><span>53,479</span></td><td><span>115,760,563,600 (100)</span></td><td><span style="font-weight:bold">36,088,452,668</span></td><td align="center">7,636</td><td align="center">17</td><td align="center">0</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/452809&quot;"><td><b>#17</b></td><td><img class="flag" src="./ctbscorerankings_files/pl.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/452809">Nadger</a></td><td>99.91%</td><td><span>62,541</span></td><td><span>135,798,759,561 (101)</span></td><td><span style="font-weight:bold">35,134,175,909</span></td><td align="center">3,210</td><td align="center">1,123</td><td align="center">5</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/891388&quot;"><td><b>#18</b></td><td><img class="flag" src="./ctbscorerankings_files/tw.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/891388">Flanet</a></td><td>99.99%</td><td><span>33,226</span></td><td><span>78,182,344,707 (100)</span></td><td><span style="font-weight:bold">34,810,037,126</span></td><td align="center">4,192</td><td align="center">55</td><td align="center">4</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/145197&quot;"><td><b>#19</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/145197">Arche</a></td><td>99.80%</td><td><span>34,280</span></td><td><span>89,395,079,574 (100)</span></td><td><span style="font-weight:bold">34,015,536,168</span></td><td align="center">2,291</td><td align="center">2,528</td><td align="center">19</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/112055&quot;"><td><b>#20</b></td><td><img class="flag" src="./ctbscorerankings_files/tw.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/112055">andysun</a></td><td>100.00%</td><td><span>93,813</span></td><td><span>147,244,711,408 (101)</span></td><td><span style="font-weight:bold">33,276,182,784</span></td><td align="center">13,200</td><td align="center">31</td><td align="center">0</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/54081&quot;"><td><b>#21</b></td><td><img class="flag" src="./ctbscorerankings_files/tw.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/54081">Keroze</a></td><td>99.93%</td><td><span>49,894</span></td><td><span>112,069,673,034 (100)</span></td><td><span style="font-weight:bold">29,680,753,598</span></td><td align="center">3,385</td><td align="center">650</td><td align="center">2</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/339413&quot;"><td><b>#22</b></td><td><img class="flag" src="./ctbscorerankings_files/ru.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/339413">Danzetsu</a></td><td>99.87%</td><td><span>35,875</span></td><td><span>72,597,635,426 (100)</span></td><td><span style="font-weight:bold">28,942,726,900</span></td><td align="center">2,835</td><td align="center">1,873</td><td align="center">6</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/233667&quot;"><td><b>#23</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/233667">Berncastell</a></td><td>99.75%</td><td><span>70,761</span></td><td><span>94,640,035,805 (100)</span></td><td><span style="font-weight:bold">28,605,303,099</span></td><td align="center">1,454</td><td align="center">2,261</td><td align="center">9</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/595140&quot;"><td><b>#24</b></td><td><img class="flag" src="./ctbscorerankings_files/jp.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/595140">rullu</a></td><td>100.00%</td><td><span>59,465</span></td><td><span>147,191,015,368 (101)</span></td><td><span style="font-weight:bold">28,505,905,984</span></td><td align="center">4,545</td><td align="center">4</td><td align="center">0</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/231875&quot;"><td><b>#25</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/231875">Hurude Rika</a></td><td>99.67%</td><td><span>11,809</span></td><td><span>41,754,588,863 (100)</span></td><td><span style="font-weight:bold">26,599,040,344</span></td><td align="center">1,331</td><td align="center">2,407</td><td align="center">70</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/679399&quot;"><td><b>#26</b></td><td><img class="flag" src="./ctbscorerankings_files/ph.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/679399">thOnz</a></td><td>99.71%</td><td><span>50,656</span></td><td><span>83,081,605,404 (100)</span></td><td><span style="font-weight:bold">25,748,043,270</span></td><td align="center">2,132</td><td align="center">1,523</td><td align="center">76</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/533210&quot;"><td><b>#27</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/533210">Dusk</a></td><td>99.93%</td><td><span>33,598</span></td><td><span>78,019,252,981 (100)</span></td><td><span style="font-weight:bold">25,658,048,943</span></td><td align="center">2,099</td><td align="center">909</td><td align="center">2</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/203108&quot;"><td><b>#28</b></td><td><img class="flag" src="./ctbscorerankings_files/cl.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/203108">Asenath</a></td><td>99.52%</td><td><span>21,345</span></td><td><span>56,020,278,094 (100)</span></td><td><span style="font-weight:bold">25,367,338,750</span></td><td align="center">1,202</td><td align="center">2,794</td><td align="center">114</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/288991&quot;"><td><b>#29</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/288991">Jeya</a></td><td>99.58%</td><td><span>57,296</span></td><td><span>129,997,273,253 (101)</span></td><td><span style="font-weight:bold">25,149,870,985</span></td><td align="center">702</td><td align="center">1,979</td><td align="center">35</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/243877&quot;"><td><b>#30</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/243877">hy1hy1hy</a></td><td>99.57%</td><td><span>57,737</span></td><td><span>116,167,691,254 (100)</span></td><td><span style="font-weight:bold">24,642,729,195</span></td><td align="center">1,063</td><td align="center">2,566</td><td align="center">95</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/37088&quot;"><td><b>#31</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/37088">shajohn81</a></td><td>99.53%</td><td><span>10,068</span></td><td><span>45,580,752,584 (100)</span></td><td><span style="font-weight:bold">24,579,543,578</span></td><td align="center">1,008</td><td align="center">2,524</td><td align="center">135</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/792196&quot;"><td><b>#32</b></td><td><img class="flag" src="./ctbscorerankings_files/by.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/792196">jekasa</a></td><td>99.59%</td><td><span>67,247</span></td><td><span>111,433,782,913 (100)</span></td><td><span style="font-weight:bold">24,265,962,374</span></td><td align="center">1,051</td><td align="center">2,949</td><td align="center">87</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/137620&quot;"><td><b>#33</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/137620">tmddlekt</a></td><td>99.72%</td><td><span>35,408</span></td><td><span>77,167,861,357 (100)</span></td><td><span style="font-weight:bold">23,938,359,472</span></td><td align="center">1,175</td><td align="center">1,675</td><td align="center">34</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/194404&quot;"><td><b>#34</b></td><td><img class="flag" src="./ctbscorerankings_files/us.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/194404">killzone86</a></td><td>99.89%</td><td><span>29,546</span></td><td><span>51,790,275,576 (100)</span></td><td><span style="font-weight:bold">23,903,332,196</span></td><td align="center">2,874</td><td align="center">1,840</td><td align="center">0</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/351814&quot;"><td><b>#35</b></td><td><img class="flag" src="./ctbscorerankings_files/hu.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/351814">TaylorXIII</a></td><td>99.65%</td><td><span>26,196</span></td><td><span>62,928,061,565 (100)</span></td><td><span style="font-weight:bold">23,804,473,417</span></td><td align="center">1,241</td><td align="center">2,129</td><td align="center">58</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/921963&quot;"><td><b>#36</b></td><td><img class="flag" src="./ctbscorerankings_files/gb.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/921963">Miss</a></td><td>99.94%</td><td><span>11,973</span></td><td><span>42,153,250,567 (100)</span></td><td><span style="font-weight:bold">23,743,315,788</span></td><td align="center">1,609</td><td align="center">667</td><td align="center">0</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/212203&quot;"><td><b>#37</b></td><td><img class="flag" src="./ctbscorerankings_files/tw.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/212203">NanaYukari</a></td><td>99.74%</td><td><span>43,259</span></td><td><span>77,825,625,249 (100)</span></td><td><span style="font-weight:bold">23,711,448,456</span></td><td align="center">2,049</td><td align="center">3,034</td><td align="center">10</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/103583&quot;"><td><b>#38</b></td><td><img class="flag" src="./ctbscorerankings_files/pl.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/103583">Blackiris</a></td><td>99.59%</td><td><span>21,061</span></td><td><span>50,814,412,377 (100)</span></td><td><span style="font-weight:bold">23,266,843,653</span></td><td align="center">1,111</td><td align="center">2,709</td><td align="center">110</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/671320&quot;"><td><b>#39</b></td><td><img class="flag" src="./ctbscorerankings_files/de.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/671320">Kael</a></td><td>99.68%</td><td><span>26,388</span></td><td><span>67,613,932,921 (100)</span></td><td><span style="font-weight:bold">23,081,812,638</span></td><td align="center">1,356</td><td align="center">1,859</td><td align="center">30</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/335178&quot;"><td><b>#40</b></td><td><img class="flag" src="./ctbscorerankings_files/kr.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/335178">xm0928</a></td><td>99.92%</td><td><span>39,872</span></td><td><span>82,458,108,058 (100)</span></td><td><span style="font-weight:bold">22,845,538,579</span></td><td align="center">1,617</td><td align="center">797</td><td align="center">2</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/284445&quot;"><td><b>#41</b></td><td><img class="flag" src="./ctbscorerankings_files/cl.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/284445">Ironik</a></td><td>99.69%</td><td><span>21,200</span></td><td><span>52,701,442,350 (100)</span></td><td><span style="font-weight:bold">22,795,567,495</span></td><td align="center">1,179</td><td align="center">2,082</td><td align="center">29</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/235150&quot;"><td><b>#42</b></td><td><img class="flag" src="./ctbscorerankings_files/hk.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/235150">Madoka</a></td><td>99.20%</td><td><span>21,543</span></td><td><span>52,975,863,582 (100)</span></td><td><span style="font-weight:bold">22,228,741,103</span></td><td align="center">673</td><td align="center">1,141</td><td align="center">5</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/259834&quot;"><td><b>#43</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/259834">MgerSy</a></td><td>99.74%</td><td><span>14,019</span></td><td><span>34,522,535,863 (100)</span></td><td><span style="font-weight:bold">22,082,620,626</span></td><td align="center">1,530</td><td align="center">1,858</td><td align="center">3</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/313993&quot;"><td><b>#44</b></td><td><img class="flag" src="./ctbscorerankings_files/de.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/313993">Nicolinha</a></td><td>99.69%</td><td><span>13,609</span></td><td><span>51,697,126,268 (100)</span></td><td><span style="font-weight:bold">22,058,161,138</span></td><td align="center">1,974</td><td align="center">2,520</td><td align="center">50</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/303168&quot;"><td><b>#45</b></td><td><img class="flag" src="./ctbscorerankings_files/ru.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/303168">AlicelJX</a></td><td>99.72%</td><td><span>25,267</span></td><td><span>48,740,029,244 (100)</span></td><td><span style="font-weight:bold">22,019,817,128</span></td><td align="center">1,228</td><td align="center">2,242</td><td align="center">13</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/637873&quot;"><td><b>#46</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/637873">asdfgq1hjkl</a></td><td>99.81%</td><td><span>53,222</span></td><td><span>88,587,956,528 (100)</span></td><td><span style="font-weight:bold">21,775,689,806</span></td><td align="center">1,686</td><td align="center">1,461</td><td align="center">9</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/352382&quot;"><td><b>#47</b></td><td><img class="flag" src="./ctbscorerankings_files/tw.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/352382">madaoB</a></td><td>99.83%</td><td><span>26,960</span></td><td><span>65,971,061,107 (100)</span></td><td><span style="font-weight:bold">21,756,055,167</span></td><td align="center">1,639</td><td align="center">1,243</td><td align="center">0</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/289127&quot;"><td><b>#48</b></td><td><img class="flag" src="./ctbscorerankings_files/cn.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/289127">lorvd</a></td><td>99.36%</td><td><span>16,077</span></td><td><span>46,033,969,894 (100)</span></td><td><span style="font-weight:bold">21,636,778,983</span></td><td align="center">914</td><td align="center">3,399</td><td align="center">227</td></tr>
+<tr class="row1p" onclick="document.location=&quot;/u/523582&quot;"><td><b>#49</b></td><td><img class="flag" src="./ctbscorerankings_files/mx.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/523582">White D0nkey</a></td><td>99.83%</td><td><span>24,305</span></td><td><span>67,278,238,394 (100)</span></td><td><span style="font-weight:bold">21,628,502,126</span></td><td align="center">2,225</td><td align="center">645</td><td align="center">44</td></tr>
+<tr class="row2p" onclick="document.location=&quot;/u/609627&quot;"><td><b>#50</b></td><td><img class="flag" src="./ctbscorerankings_files/es.gif" title=""> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/u/609627">raimoncortese</a></td><td>99.81%</td><td><span>73,277</span></td><td><span>89,008,669,950 (100)</span></td><td><span style="font-weight:bold">20,723,508,569</span></td><td align="center">3,054</td><td align="center">1,244</td><td align="center">9</td></tr>
+</tbody></table>
+
+<div class="pagination"><b>1</b> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=2">2</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=3">3</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=4">4</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=5">5</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=6">6</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=7">7</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=8">8</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=9">9</a> <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=10">10</a>  ... <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/playerranking/?m=2&amp;s=3&amp;o=1&amp;page=2">Next</a></div>
+				<div class="clear"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <table width="100%">			<tbody><tr>
+			<td width="33%"></td>
+			<td width="33%" align="middle">osu! is © peppy 2007-2012</td>
+			<td width="34%" align="right"><a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/terms">Terms of Service</a> | <a href="https://web.archive.org/web/20120503014754/http://osu.ppy.sh/p/copyright">Copyright</a></td>
+			</tr>
+			</tbody></table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./ctbscorerankings_files/brand"></script>
+
+
+<!--
+     FILE ARCHIVED ON 01:47:54 May 03, 2012 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:04:38 Dec 16, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  esindex: 0.01
+  CDXLines.iter: 21.699 (3)
+  exclusion.robots: 345.838
+  PetaboxLoader3.datanode: 1156.026 (4)
+  exclusion.robots.policy: 345.824
+  xauthn.chkprivs: 117.215
+  load_resource: 1019.994
+  PetaboxLoader3.resolve: 44.439
+  captures_list: 602.29
+  LoadShardBlock: 224.19 (3)
+  xauthn.identify: 228.261
+  RedisCDXSource: 2.514
+--></div><div class="igtranslator-main-div" style="display: none; width: 0px; height: 0px;"><iframe src="./ctbscorerankings_files/saved_resource.html" class="igtranslator-iframe" scrolling="no" frameborder="0"></iframe></div><div class="igtranslator-activator-icon bounceIn" style="background-image: url(&quot;chrome-extension://jgnebchahhepphmokjeohhoebakpfggp/data/icons/home.png&quot;); display: none;" title="Click to Show Translation"></div><div>
+    <div id="twoseven-ext-tab-media-modal" class="twoseven-ext-tab-media-modal" style="display: none;">
+      <!-- Modal content -->
+      <div class="twoseven-ext-tab-media-modal-content">
+        <div class="iframe-container" style="height: 100%; width: 100%;">
+          <span class="close">×</span>
+        </div>
+      </div>
+    </div></div></body><style type="text/css" id="igtranslator-color"></style></html>

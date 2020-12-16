@@ -106,9 +106,8 @@ app.get('/ranking', (req, res) => {
                 players.push(new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount));
                 rank++;
             });
-            // Render index page
+
             res.render('pages/ranking.ejs', {
-                // EJS variable and server-side variable
                 players: players
             });
         });
