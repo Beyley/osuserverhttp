@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!-- saved from url=(0071)https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/download -->
+<html><div id="twoseven-scripts" data-info="Scripts added by TwoSeven extension" style="display: none !important; position: static !important; top: 0px !important; left: 0px !important; width: 0px !important; height: 0px !important;"><script type="text/javascript" async="" src="./download_files/ga.js.download"></script><script type="text/javascript" id="__tmpScript-844737154" data-added-by-two-seven="1">(function() {
+    window.twoseven = {};
+  })();</script><script type="text/javascript" id="__tmpScript-685016330" data-added-by-two-seven="1">(function() {
+    window.twoseven.waitForDOMNode = async function waitForDOMNode(e,t=document){e=e||{};const{type:n,value:o}=e;if(!n||!o)throw new Error("Must specify identifier");let s=o;switch(n){case"tag":s=o.toUpperCase()}if("check"!==n){const e=await i({type:"selector",value:s},[],t);if(e)return new Promise(t=>t(e))}async function i({type:e,value:t},n,o){let s;switch(e){case"tag":s=n.find(e=>e.tagName===t);break;case"selector":s=o.querySelector(t);break;case"check":for(const e of n){if(await t(e))return e}}return s}return new Promise((e,o)=>{const r=new MutationObserver(async o=>{for(const a of o)if("childList"===a.type){const o=Array.from(a.addedNodes),c=await i({type:n,value:s},o,t);if(c)return r.disconnect(),e(c)}});r.observe(t,{childList:!0,subtree:!0})})};
+  })();</script><script type="text/javascript" id="__tmpScript-496971610" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.reportError = function reportError(e,t,n){"string"==typeof(n=n||{})&&(n={message:n});const{message:o,stack:s}=t;Object.assign(n,{tag:e,error:{message:o,stack:s}}),window.tsExtGetPostToParent()({name:name,tag:e,action:"report-error",json:n}),console.error(JSON.stringify(n.error))}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-897258425" data-added-by-two-seven="1">(function() {
+    
+  window.twosevenHmsToSecondsOnly = function(str) {
+      var p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+
+      return s;
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-441672434" data-added-by-two-seven="1">(function() {
+    window.twosevenExtLog = function twosevenExtLog(e,o,c){o||(o=e,e=void 0);let n=c||"black";if(c)switch(c){case"success":n="Green";break;case"info":n="DodgerBlue";break;case"error":n="Red";break;case"warning":n="Orange";break;default:n=c}e?console.log("%c"+e+": "+o,`color:${n}`):console.log("%c"+o,`color:${n}`)};
+  })();</script><script type="text/javascript" id="__tmpScript-409946320" data-added-by-two-seven="1">(function() {
+    
+  document.twosevenGET = function(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          callback(null, xmlhttp.responseText);
+        } else {
+          callback('something else other than 200 was returned', '');
+        }
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  };
+;
+  })();</script><script type="text/javascript" id="__tmpScript-288143433" data-added-by-two-seven="1">(function() {
+    
+  window.triggerEvent = function(e,t,n,o=!1){let s;o?(n&&"string"!=typeof n&&(n=JSON.stringify(n)),s=n):s={data:n},window.twosevenScriptsDiv&&n&&"object"==typeof n&&(console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(n)}`),console.error((new Error).stack));var i=new CustomEvent(t,{bubbles:!0,composed:!0,detail:s});e.dispatchEvent(i)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-969499450" data-added-by-two-seven="1">(function() {
+    window.twoseven.postTo = async function postTo(e,t,n=!1){let o;return t.name=t.name||name,o=n?new Promise(e=>{const n=`ack-${t.action}-${1e9*Math.random()|0}`;t.ack={event:n};window.debug&&["play","pause","currentTime"].some(e=>t.action.includes(e)),window.addEventListener("message",function t({data:o={}}){o.action===n&&(window.removeEventListener("message",t),e(o.json))})}):new Promise(e=>e()),e.postMessage(t,"*"),o};
+  })();</script><script type="text/javascript" id="__tmpScript-139826246" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostTo = function tsExtGetPostTo(){return window.twoseven&&window.twoseven.postTo||window.postTo};
+  })();</script><script type="text/javascript" id="__tmpScript-178160305" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostToParent = function tsExtGetPostToParent(){return window.twoseven&&window.twoseven.postToParent||window.postToParent};
+  })();</script><script type="text/javascript" id="__tmpScript-140775104" data-added-by-two-seven="1">(function() {
+    window.twoseven.postResponse = async function postResponse(e,t){const{source:n,data:{ack:{event:o}}}=e;window.tsExtGetPostTo()(n,{action:o,json:t})};
+  })();</script><script type="text/javascript" id="__tmpScript-269714271" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToParent = async function postToParent(e,t=!1){return window.tsExtGetPostTo()(window.parent,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-190256752" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToTop = async function postToTop(e,t=!1){return window.tsExtGetPostTo()(window.top,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-109420229" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.getFromStorage = e=>new Promise((t,n)=>{const o="get-from-storage-"+(1e9*Math.random()|0);window.addEventListener(o,e=>{window.removeEventListener(o,this);const{detail:{data:{value:n}}}=e;t(n)}),triggerEvent(window,"get-from-storage",{key:e,evt:o})})
+  window.twoseven.saveToStorage = e=>{triggerEvent(window,"save-to-storage",e)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-702784850" data-added-by-two-seven="1">(function() {
+    
+  function attachHistoryListeners(){var e=history.pushState;history.pushState=function(t,n,o){return"function"==typeof history.onpushstate&&history.onpushstate({state:t}),triggerEvent(window,"pushstate",{uri:o}),e.apply(history,arguments)};var t=history.replaceState;history.replaceState=function(e){return"function"==typeof history.onreplacestate&&history.onreplacestate({state:e}),t.apply(history,arguments)}}
+  attachHistoryListeners()
+;
+  })();</script><script type="text/javascript" id="__tmpScript-893864189" data-added-by-two-seven="1">(function() {
+    window.twoseven.once = function once(e,t,n){e.addEventListener(t,function o(s){e.removeEventListener(t,o),n(s)})};
+  })();</script><script type="text/javascript" id="__tmpScript-883254970" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isOnTwoSevenTab = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'is-on-twoseven-tab' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-374625605" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isPaused = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'twoseven:pause-state' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-710359457" data-added-by-two-seven="1">(function() {
+    
+      const modal = document.querySelector('.twoseven-ext-tab-media-modal')
+      const modalCloseBtn = modal.querySelector('.close')
+      function closeModal () {
+        modal.style.display = 'none'
+        const frame = document.querySelector('#twoseven-ext-tab-media-iframe').contentWindow
+        frame.postMessage({
+          __evt_name: 'modal-hide'
+        }, '*')
+      }
+      modalCloseBtn.onclick = closeModal
+
+      window.onmessage = function (e) {
+        if (e.data.__evt_name === 'modal-hide') {
+          closeModal()
+        }
+      }
+
+      window.twoseven.closeTabMediaModal = closeModal
+
+      window.onclick = function (e) {
+        if (e.target.id === 'twoseven-ext-tab-media-modal' && modal.style.display === 'block') {
+            closeModal()
+        }
+      }
+    ;
+  })();</script></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./download_files/analytics.js.download" type="text/javascript"></script>
+<script type="text/javascript">window.addEventListener('DOMContentLoaded',function(){var v=archive_analytics.values;v.service='wb';v.server_name='wwwb-app200.us.archive.org';v.server_ms=1145;archive_analytics.send_pageview({});});</script><script type="text/javascript" src="./download_files/playback.bundle.js.download" charset="utf-8"></script>
+<script type="text/javascript" src="./download_files/wombat.js.download" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://osu.ppy.sh/p/download","20120501045410","https://web.archive.org/","web","/_static/",
+	      "1335848050");
+</script>
+<link rel="stylesheet" type="text/css" href="./download_files/banner-styles.css">
+<link rel="stylesheet" type="text/css" href="./download_files/iconochive.css">
+<!-- End Wayback Rewrite JS Include -->
+
+<link rel="shortcut icon" href="https://web.archive.org/web/20120501045410im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="https://web.archive.org/web/20120501045410im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+
+<meta name="description" content="osu! - Rhythm is just a *click* away!  With Ouendan/EBA, Taiko and original gameplay modes, as well as a fully functional level editor.">
+<meta name="keywords" content="osu, peppy, ouendan, elite, beat, agents, ds, windows, game, taiko, tatsujin, simulator, sim, xna, ddr, beatmania, osu!, osume">
+
+<link rel="stylesheet" type="text/css" href="./download_files/style.css" media="all">
+
+<script type="text/javascript" src="./download_files/jquery.min.js.download"></script>
+<script type="text/javascript" src="./download_files/main.js.download"></script>
+<title>osu! - Download</title>
+
+<meta name="viewport" content="width=864, user-scalable=yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4774947-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://web.archive.org/web/20120501045410/https://ssl' : 'https://web.archive.org/web/20120501045410/http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<link href="chrome-extension://cjdnfmjmdligcpfcekfmenlhiopehjkd/web_resources/modal/modal.css" rel="stylesheet" id="__tmpStyle"></head>
+<body data-new-gr-c-s-check-loaded="14.987.0" data-gr-ext-installed=""><!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  /*min-width:800px !important;*/
+}
+</style>
+<script>__wm.rw(0);</script>
+<div id="wm-ipp-base" lang="en" style="display: block; direction: ltr;">
+</div><div id="donato" style="position:relative;width:100%;">
+  <div id="donato-base">
+    <iframe id="donato-if" src="./download_files/donate.html" scrolling="no" frameborder="0" style="width:100%; height:100%">
+    </iframe>
+  </div>
+</div><script type="text/javascript">
+__wm.bt(625,27,25,2,"web","http://osu.ppy.sh/p/download","20120501045410",1996,"/_static/",["/_static/css/banner-styles.css?v=bsmaklHF","/_static/css/iconochive.css?v=qtvMKcIJ"]);
+  __wm.rw(1);
+</script>
+<!-- END WAYBACK TOOLBAR INSERT --><a name="top"></a>
+
+
+<div class="bodytopbg">
+    <div class="mainbody"><div class="mainbody2">
+		<div id="coolheader" style="background-image: url(&#39;https://web.archive.org/web/20120501045410im_/http://s.ppy.sh/images/right-ryuuta.jpg&#39;);"></div>
+		<div id="donation" style="width:140px">
+			<a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/support"><img src="./download_files/paypal.gif"></a>&nbsp;&nbsp;
+			<a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/twitter"><img src="./download_files/twitter.gif"></a>
+		</div>
+		<div class="main-osu-logo"><img src="./download_files/head-logo.png"></div>
+         <div class="header clickable-cell">
+			<a class="hidden" href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/">home</a>
+			<div id="playstats">
+                <b>1,336,481</b> users, <b>3,283</b> online now.<br>
+                A total of <b><span id="playcount">783.22m</span></b> ranked plays!
+            </div>
+        <div class="menu">
+            <ul class="sf-menu sf-js-enabled sf-shadow">
+                <li class="">
+                    <a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/about" class="sf-with-ul">Info<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/changelog">Changelog</a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/history">The Game (PC)</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/iphone">The Game (iPhone)</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/team">The Team</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/screenshots">Screenshots</a></li>
+
+
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/download" class="">Download</a></li>
+                <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/wiki/">Wiki</a></li>
+                <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/faq" class="sf-with-ul">Help!<span class="sf-sub-indicator"> »</span></a>
+					<ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/faq">FAQ</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/formatpost&amp;id=21575">Terms Glossary</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/viewtopic.php?f=13&amp;t=3815">Video Tutorials</a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/viewtopic.php?f=5&amp;t=576">Report a Bug</a></li>
+                    </ul>
+				</li>
+                <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/beatmaplist" class="sf-with-ul">Beatmaps<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=0">Ranked</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=6">Approved</a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/beatmaplist&amp;s=7&amp;r=2">Pending</a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/packlist">Beatmap Packs</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/pp" class="sf-with-ul">Rankings<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/pp">Performance <span style="color:#eca1dd; vertical-align: super">beta</span></a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/chart">Charts</a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/playerranking">Score</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/countryranking">Countries</a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/mapperranking">Mappers</a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/modranking">BAT</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/kudosu">Kudosu</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/" class="sf-with-ul">Community<span class="sf-sub-indicator"> »</span></a>
+					<ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/">Forums</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/support">Supporting osu!</a></li>
+                        <li><a href="https://web.archive.org/web/20120501045410/http://www.cafepress.com/osume" target="_blank">Goodies</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://www.youtube.com/user/VideosuTV/videos?sort=da&amp;view=1" target="_blank">Videos</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/chat">Web Chat</a></li>
+						<li><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/gallery?g=fanart">Fanart</a></li>
+                    </ul>
+				</li>
+            </ul>
+        </div>
+        </div>
+                <div class="content">
+                <div class="content-infoline">
+				<form class="inline-form" action="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/search" id="cse-search-box">
+				  <div>
+					<input type="hidden" name="cx" value="007714945049801807819:fwdivvi5sik">
+					<input type="hidden" name="cof" value="FORID:10">
+					<input type="hidden" name="ie" value="UTF-8">
+					<input type="text" name="q" size="15" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url(&quot;https://web.archive.org/web/20120501045410if_/http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif&quot;) left center no-repeat rgb(255, 255, 255);">
+				  </div>
+				<input name="siteurl" type="hidden" value="osu.ppy.sh/p/download"><input name="ref" type="hidden" value=""></form>
+				<form class="inline-form" onsubmit="return userSearch()">
+					<input type="text" class="default form-text form-default-value-processed" name="user-search" id="user-search" size="10" value="User" style="color: rgb(185, 186, 181);">
+				</form>
+				<form class="inline-form" onsubmit="return beatmapSearch()">
+					<input type="text" class="default form-text form-default-value-processed" name="beatmap-search" id="beatmap-search" size="10" value="Beatmap" style="color: rgb(185, 186, 181);">
+				</form>
+									<form action="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/ucp.php?mode=login" method="post">
+						user:
+						<input class="post" type="text" name="username" size="15" maxlength="40" value="" tabindex="0">
+						pass:
+						<input class="post" type="password" name="password" size="15" maxlength="100" tabindex="0">
+						<a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/forgot" title="Forgot Password">?</a> <a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/ucp.php?mode=register" title="Register New Account">register</a>
+						<input type="checkbox" class="radio" name="autologin" id="autologin"> <label for="autologin">save</label>
+						<input type="hidden" name="redirect" value="/p/download">
+						<input type="hidden" name="sid" value="f2159c6ea89d0a514087872b83831039">
+						<input type="submit" name="login" value="login" tabindex="5">
+					</form>
+				                </div>
+                <div class="content-with-bg"><div class="paddingboth">
+<h2>Let's get you started!</h2>
+
+<table>
+<tbody><tr>
+	<td width="30%" valign="top">
+		<h3>System Requirements</h3>
+		<ul><li>1GHz+ Processor<br>
+		</li><li>512mb+ RAM<br>
+		</li><li><a href="https://web.archive.org/web/20120501045410/http://www.microsoft.com/downloads/details.aspx?FamilyID=0856EACB-4362-4B0D-8EDD-AAB15C5E04F5&amp;displaylang=en">Microsoft .NET Framework</a> (2.0+, 32bit)<br>
+					<div class="message">
+
+		<div>
+		</div></div></li></ul>
+		<h3>Remember</h3>
+		<ul><li>If you have problems that can't be solved by <a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/faq">reading the FAQ</a> or <a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/search.php">searching the forums</a>, please create a thread in the <a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/5">Support forum</a>.<br>
+		</li></ul>
+
+		<h3>OS X Users:</h3>
+		<ul><li>Please see <a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/forum/p/909738">this thread</a> for a semi-working release.</li></ul>
+		
+
+
+		
+	</td>
+	<td>
+		<a href="https://web.archive.org/web/20120501045410/http://osu.r-a-dio.com/osu!install.exe"><img src="./download_files/download-osu.png"></a>
+		<img src="./download_files/download-next.png">
+		<a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/beatmaplist"><img src="./download_files/download-beatmaps.png"></a>
+		<img src="./download_files/download-next.png">
+		<a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/faq"><img src="./download_files/download-help.png"></a><br>
+
+		<br>
+
+		<div>
+			<a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/images/download-import.jpg" rel="lightbox"><b>How to import beatmaps into osu!</b></a>
+
+			<br><br>
+
+			If you need further help, check out these step-by-step tutorials:<br>
+			<a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/download#" onclick="$(&#39;#tutorial1&#39;).show(0); $(&#39;#tutorial2&#39;).hide(0);return false;">Tutorial 1: Downloading and Installing osu!</a> |
+			<a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/download#" onclick="$(&#39;#tutorial2&#39;).show(0); $(&#39;#tutorial1&#39;).hide(0); return false;">Tutorial 2: Importing Beatmaps</a>
+			</div>
+
+
+			<div>
+					<div id="tutorial1" style="display:none;">
+							<center><object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/cHAhWr6QJnI&amp;hl=en"><embed src="https://web.archive.org/web/20120501045410oe_/http://www.youtube.com/v/cHAhWr6QJnI&amp;hl=en" type="application/x-shockwave-flash" width="425" height="344"></object></center>
+					</div>
+					<div id="tutorial2" style="display:none;">
+							<center><object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/lROieS0nn2U&amp;hl=en"><embed src="https://web.archive.org/web/20120501045410oe_/http://www.youtube.com/v/lROieS0nn2U&amp;hl=en" type="application/x-shockwave-flash" width="425" height="344"></object></center>
+					</div>
+			</div>
+		
+	</td>
+</tr>
+</tbody></table>
+
+				<div class="clear"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <table width="100%">
+			<tbody><tr>
+			<td width="33%"></td>
+			<td width="33%" align="middle">osu! is © peppy 2007-2012</td>
+			<td width="34%" align="right"><a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/terms">Terms of Service</a> | <a href="https://web.archive.org/web/20120501045410/http://osu.ppy.sh/p/copyright">Copyright</a></td>
+			</tr>
+			</tbody></table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./download_files/brand"></script>
+
+
+<!--
+     FILE ARCHIVED ON 04:54:10 May 01, 2012 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 17:19:49 Dec 16, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 1058.182
+  exclusion.robots: 686.541
+  exclusion.robots.policy: 686.531
+  xauthn.identify: 221.951
+  xauthn.chkprivs: 464.309
+  RedisCDXSource: 39.755
+  esindex: 0.011
+  LoadShardBlock: 308.511 (3)
+  PetaboxLoader3.datanode: 69.671 (4)
+  CDXLines.iter: 15.619 (3)
+  load_resource: 78.498
+  PetaboxLoader3.resolve: 31.304
+--></div></div><div class="igtranslator-main-div" style="display: none; width: 0px; height: 0px;"><iframe src="./download_files/saved_resource.html" class="igtranslator-iframe" scrolling="no" frameborder="0"></iframe></div><div class="igtranslator-activator-icon bounceIn" style="background-image: url(&quot;chrome-extension://jgnebchahhepphmokjeohhoebakpfggp/data/icons/home.png&quot;); display: none;" title="Click to Show Translation"></div><div>
+    <div id="twoseven-ext-tab-media-modal" class="twoseven-ext-tab-media-modal" style="display: none;">
+      <!-- Modal content -->
+      <div class="twoseven-ext-tab-media-modal-content">
+        <div class="iframe-container" style="height: 100%; width: 100%;">
+          <span class="close">×</span>
+        </div>
+      </div>
+    </div></div></body><style type="text/css" id="igtranslator-color"></style></html>

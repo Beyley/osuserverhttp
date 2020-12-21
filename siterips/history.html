@@ -1,0 +1,553 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!-- saved from url=(0070)https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/history -->
+<html><div id="twoseven-scripts" data-info="Scripts added by TwoSeven extension" style="display: none !important; position: static !important; top: 0px !important; left: 0px !important; width: 0px !important; height: 0px !important;"><script type="text/javascript" async="" src="./history_files/ga.js.download"></script><script type="text/javascript" id="__tmpScript-54465771" data-added-by-two-seven="1">(function() {
+    window.twoseven = {};
+  })();</script><script type="text/javascript" id="__tmpScript-163992775" data-added-by-two-seven="1">(function() {
+    window.twoseven.waitForDOMNode = async function waitForDOMNode(e,t=document){e=e||{};const{type:n,value:o}=e;if(!n||!o)throw new Error("Must specify identifier");let s=o;switch(n){case"tag":s=o.toUpperCase()}if("check"!==n){const e=await i({type:"selector",value:s},[],t);if(e)return new Promise(t=>t(e))}async function i({type:e,value:t},n,o){let s;switch(e){case"tag":s=n.find(e=>e.tagName===t);break;case"selector":s=o.querySelector(t);break;case"check":for(const e of n){if(await t(e))return e}}return s}return new Promise((e,o)=>{const r=new MutationObserver(async o=>{for(const a of o)if("childList"===a.type){const o=Array.from(a.addedNodes),c=await i({type:n,value:s},o,t);if(c)return r.disconnect(),e(c)}});r.observe(t,{childList:!0,subtree:!0})})};
+  })();</script><script type="text/javascript" id="__tmpScript-349228559" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.reportError = function reportError(e,t,n){"string"==typeof(n=n||{})&&(n={message:n});const{message:o,stack:s}=t;Object.assign(n,{tag:e,error:{message:o,stack:s}}),window.tsExtGetPostToParent()({name:name,tag:e,action:"report-error",json:n}),console.error(JSON.stringify(n.error))}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-64590856" data-added-by-two-seven="1">(function() {
+    
+  window.twosevenHmsToSecondsOnly = function(str) {
+      var p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+
+      return s;
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-201292929" data-added-by-two-seven="1">(function() {
+    window.twosevenExtLog = function twosevenExtLog(e,o,c){o||(o=e,e=void 0);let n=c||"black";if(c)switch(c){case"success":n="Green";break;case"info":n="DodgerBlue";break;case"error":n="Red";break;case"warning":n="Orange";break;default:n=c}e?console.log("%c"+e+": "+o,`color:${n}`):console.log("%c"+o,`color:${n}`)};
+  })();</script><script type="text/javascript" id="__tmpScript-794711578" data-added-by-two-seven="1">(function() {
+    
+  document.twosevenGET = function(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          callback(null, xmlhttp.responseText);
+        } else {
+          callback('something else other than 200 was returned', '');
+        }
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  };
+;
+  })();</script><script type="text/javascript" id="__tmpScript-617816019" data-added-by-two-seven="1">(function() {
+    
+  window.triggerEvent = function(e,t,n,o=!1){let s;o?(n&&"string"!=typeof n&&(n=JSON.stringify(n)),s=n):s={data:n},window.twosevenScriptsDiv&&n&&"object"==typeof n&&(console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(n)}`),console.error((new Error).stack));var i=new CustomEvent(t,{bubbles:!0,composed:!0,detail:s});e.dispatchEvent(i)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-619765615" data-added-by-two-seven="1">(function() {
+    window.twoseven.postTo = async function postTo(e,t,n=!1){let o;return t.name=t.name||name,o=n?new Promise(e=>{const n=`ack-${t.action}-${1e9*Math.random()|0}`;t.ack={event:n};window.debug&&["play","pause","currentTime"].some(e=>t.action.includes(e)),window.addEventListener("message",function t({data:o={}}){o.action===n&&(window.removeEventListener("message",t),e(o.json))})}):new Promise(e=>e()),e.postMessage(t,"*"),o};
+  })();</script><script type="text/javascript" id="__tmpScript-707532490" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostTo = function tsExtGetPostTo(){return window.twoseven&&window.twoseven.postTo||window.postTo};
+  })();</script><script type="text/javascript" id="__tmpScript-635099594" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostToParent = function tsExtGetPostToParent(){return window.twoseven&&window.twoseven.postToParent||window.postToParent};
+  })();</script><script type="text/javascript" id="__tmpScript-638640011" data-added-by-two-seven="1">(function() {
+    window.twoseven.postResponse = async function postResponse(e,t){const{source:n,data:{ack:{event:o}}}=e;window.tsExtGetPostTo()(n,{action:o,json:t})};
+  })();</script><script type="text/javascript" id="__tmpScript-344774049" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToParent = async function postToParent(e,t=!1){return window.tsExtGetPostTo()(window.parent,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-65764537" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToTop = async function postToTop(e,t=!1){return window.tsExtGetPostTo()(window.top,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-445618775" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.getFromStorage = e=>new Promise((t,n)=>{const o="get-from-storage-"+(1e9*Math.random()|0);window.addEventListener(o,e=>{window.removeEventListener(o,this);const{detail:{data:{value:n}}}=e;t(n)}),triggerEvent(window,"get-from-storage",{key:e,evt:o})})
+  window.twoseven.saveToStorage = e=>{triggerEvent(window,"save-to-storage",e)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-564014786" data-added-by-two-seven="1">(function() {
+    
+  function attachHistoryListeners(){var e=history.pushState;history.pushState=function(t,n,o){return"function"==typeof history.onpushstate&&history.onpushstate({state:t}),triggerEvent(window,"pushstate",{uri:o}),e.apply(history,arguments)};var t=history.replaceState;history.replaceState=function(e){return"function"==typeof history.onreplacestate&&history.onreplacestate({state:e}),t.apply(history,arguments)}}
+  attachHistoryListeners()
+;
+  })();</script><script type="text/javascript" id="__tmpScript-188238241" data-added-by-two-seven="1">(function() {
+    window.twoseven.once = function once(e,t,n){e.addEventListener(t,function o(s){e.removeEventListener(t,o),n(s)})};
+  })();</script><script type="text/javascript" id="__tmpScript-61705671" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isOnTwoSevenTab = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'is-on-twoseven-tab' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-68698070" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isPaused = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'twoseven:pause-state' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-199573061" data-added-by-two-seven="1">(function() {
+    
+      const modal = document.querySelector('.twoseven-ext-tab-media-modal')
+      const modalCloseBtn = modal.querySelector('.close')
+      function closeModal () {
+        modal.style.display = 'none'
+        const frame = document.querySelector('#twoseven-ext-tab-media-iframe').contentWindow
+        frame.postMessage({
+          __evt_name: 'modal-hide'
+        }, '*')
+      }
+      modalCloseBtn.onclick = closeModal
+
+      window.onmessage = function (e) {
+        if (e.data.__evt_name === 'modal-hide') {
+          closeModal()
+        }
+      }
+
+      window.twoseven.closeTabMediaModal = closeModal
+
+      window.onclick = function (e) {
+        if (e.target.id === 'twoseven-ext-tab-media-modal' && modal.style.display === 'block') {
+            closeModal()
+        }
+      }
+    ;
+  })();</script></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./history_files/analytics.js.download" type="text/javascript"></script>
+<script type="text/javascript">window.addEventListener('DOMContentLoaded',function(){var v=archive_analytics.values;v.service='wb';v.server_name='wwwb-app202.us.archive.org';v.server_ms=4370;archive_analytics.send_pageview({});});</script><script type="text/javascript" src="./history_files/playback.bundle.js.download" charset="utf-8"></script>
+<script type="text/javascript" src="./history_files/wombat.js.download" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://osu.ppy.sh/p/history","20120501082514","https://web.archive.org/","web","/_static/",
+	      "1335860714");
+</script>
+<link rel="stylesheet" type="text/css" href="./history_files/banner-styles.css">
+<link rel="stylesheet" type="text/css" href="./history_files/iconochive.css">
+<!-- End Wayback Rewrite JS Include -->
+
+<link rel="shortcut icon" href="https://web.archive.org/web/20120501082514im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="https://web.archive.org/web/20120501082514im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+
+<meta name="description" content="osu! - Rhythm is just a *click* away!  With Ouendan/EBA, Taiko and original gameplay modes, as well as a fully functional level editor.">
+<meta name="keywords" content="osu, peppy, ouendan, elite, beat, agents, ds, windows, game, taiko, tatsujin, simulator, sim, xna, ddr, beatmania, osu!, osume">
+
+<link rel="stylesheet" type="text/css" href="./history_files/style.css" media="all">
+
+<script type="text/javascript" src="./history_files/jquery.min.js.download"></script>
+<script type="text/javascript" src="./history_files/main.js.download"></script>
+<title>osu! - About</title>
+
+<meta name="viewport" content="width=864, user-scalable=yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4774947-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://web.archive.org/web/20120501082514/https://ssl' : 'https://web.archive.org/web/20120501082514/http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<link href="chrome-extension://cjdnfmjmdligcpfcekfmenlhiopehjkd/web_resources/modal/modal.css" rel="stylesheet" id="__tmpStyle"></head>
+<body data-new-gr-c-s-check-loaded="14.987.0" data-gr-ext-installed=""><!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  /*min-width:800px !important;*/
+}
+</style>
+<script>__wm.rw(0);</script>
+<div id="wm-ipp-base" lang="en" style="display: block; direction: ltr;">
+</div><div id="donato" style="position:relative;width:100%;">
+  <div id="donato-base">
+    <iframe id="donato-if" src="./history_files/donate.html" scrolling="no" frameborder="0" style="width:100%; height:100%">
+    </iframe>
+  </div>
+</div><script type="text/javascript">
+__wm.bt(625,27,25,2,"web","http://osu.ppy.sh/p/history","20120501082514",1996,"/_static/",["/_static/css/banner-styles.css?v=bsmaklHF","/_static/css/iconochive.css?v=qtvMKcIJ"]);
+  __wm.rw(1);
+</script>
+<!-- END WAYBACK TOOLBAR INSERT --><a name="top"></a>
+
+
+<div class="bodytopbg">
+    <div class="mainbody"><div class="mainbody2">
+		<div id="coolheader" style="background-image: url(&#39;https://web.archive.org/web/20120501082514im_/http://s.ppy.sh/images/right-ryuuta.jpg&#39;);"></div>
+		<div id="donation" style="width:140px">
+			<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/support"><img src="./history_files/paypal.gif"></a>&nbsp;&nbsp;
+			<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/twitter"><img src="./history_files/twitter.gif"></a>
+		</div>
+		<div class="main-osu-logo"><img src="./history_files/head-logo.png"></div>
+         <div class="header clickable-cell">
+			<a class="hidden" href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/">home</a>
+			<div id="playstats">
+                <b>1,336,765</b> users, <b>3,949</b> online now.<br>
+                A total of <b><span id="playcount">783.41m</span></b> ranked plays!
+            </div>
+        <div class="menu">
+            <ul class="sf-menu sf-js-enabled sf-shadow">
+                <li class="">
+                    <a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/about" class="sf-with-ul">Info<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/changelog" class="">Changelog</a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/history" class="">The Game (PC)</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/iphone" class="">The Game (iPhone)</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/team" class="">The Team</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/screenshots" class="">Screenshots</a></li>
+
+
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/download" class="">Download</a></li>
+                <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/wiki/">Wiki</a></li>
+                <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/faq" class="sf-with-ul">Help!<span class="sf-sub-indicator"> »</span></a>
+					<ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/faq">FAQ</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/formatpost&amp;id=21575">Terms Glossary</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/forum/viewtopic.php?f=13&amp;t=3815">Video Tutorials</a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/forum/viewtopic.php?f=5&amp;t=576">Report a Bug</a></li>
+                    </ul>
+				</li>
+                <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/beatmaplist" class="sf-with-ul">Beatmaps<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=0">Ranked</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=6">Approved</a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/beatmaplist&amp;s=7&amp;r=2">Pending</a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/packlist">Beatmap Packs</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/pp" class="sf-with-ul">Rankings<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/pp">Performance <span style="color:#eca1dd; vertical-align: super">beta</span></a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/chart">Charts</a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/playerranking">Score</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/countryranking">Countries</a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/mapperranking">Mappers</a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/modranking">BAT</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/kudosu">Kudosu</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/forum/" class="sf-with-ul">Community<span class="sf-sub-indicator"> »</span></a>
+					<ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/forum/">Forums</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/support">Supporting osu!</a></li>
+                        <li><a href="https://web.archive.org/web/20120501082514/http://www.cafepress.com/osume" target="_blank">Goodies</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://www.youtube.com/user/VideosuTV/videos?sort=da&amp;view=1" target="_blank">Videos</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/chat">Web Chat</a></li>
+						<li><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/gallery?g=fanart">Fanart</a></li>
+                    </ul>
+				</li>
+            </ul>
+        </div>
+        </div>
+                <div class="content">
+                <div class="content-infoline">
+				<form class="inline-form" action="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/search" id="cse-search-box">
+				  <div>
+					<input type="hidden" name="cx" value="007714945049801807819:fwdivvi5sik">
+					<input type="hidden" name="cof" value="FORID:10">
+					<input type="hidden" name="ie" value="UTF-8">
+					<input type="text" name="q" size="15" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url(&quot;https://web.archive.org/web/20120501082514if_/http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif&quot;) left center no-repeat rgb(255, 255, 255);">
+				  </div>
+				<input name="siteurl" type="hidden" value="osu.ppy.sh/p/history"><input name="ref" type="hidden" value=""></form>
+				<form class="inline-form" onsubmit="return userSearch()">
+					<input type="text" class="default form-text form-default-value-processed" name="user-search" id="user-search" size="10" value="User" style="color: rgb(185, 186, 181);">
+				</form>
+				<form class="inline-form" onsubmit="return beatmapSearch()">
+					<input type="text" class="default form-text form-default-value-processed" name="beatmap-search" id="beatmap-search" size="10" value="Beatmap" style="color: rgb(185, 186, 181);">
+				</form>
+									<form action="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/forum/ucp.php?mode=login" method="post">
+						user:
+						<input class="post" type="text" name="username" size="15" maxlength="40" value="" tabindex="0">
+						pass:
+						<input class="post" type="password" name="password" size="15" maxlength="100" tabindex="0">
+						<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/forgot" title="Forgot Password">?</a> <a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/forum/ucp.php?mode=register" title="Register New Account">register</a>
+						<input type="checkbox" class="radio" name="autologin" id="autologin"> <label for="autologin">save</label>
+						<input type="hidden" name="redirect" value="/p/history">
+						<input type="hidden" name="sid" value="8c43da3712822413d10515813175ea21">
+						<input type="submit" name="login" value="login" tabindex="5">
+					</form>
+				                </div>
+                <div class="content-with-bg"><div class="paddingboth">
+<h1>Foreword</h1>
+
+<div class="marginp">The following is the history of osu! since the beginning.  Special thanks to Sinistro for helping compile this content.  Make sure you click around because there's a lot of video links hidden throughout ;).  If you feel we have missed something important, send out a PM to peppy.</div>
+
+<h1>2007</h1>
+
+<h3>July</h3>
+<div class="marginp">osu! begins as a proof-of-concept named "ouentest".  The first version was released on the 1st of July to a small group of peppy's close friends and featured a very basic edit and play mode.  The editor had no seeking or snapping functions, but allowed making simple beatmaps.  There were no sliders or spinners at this point, but basic scoring/combo counters were present.  The first release took approximately 16 hours of coding time and was done in a single all-nighter.  You can view video footage <a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/osufirstversion.flv">here</a>.  pUpdater was introduced (now known as osume) to handle updating to the latest version.</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200707-01.jpg"><img src="./history_files/200707-01s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200707-02.jpg"><img src="./history_files/200707-02s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200707-03.jpg"><img src="./history_files/200707-03s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200707-04.jpg"><img src="./history_files/200707-04s.jpg"></a>
+</div>
+
+<div class="marginp">By the end of July, the menu system was changed to add a bit of style to the game.  An initial implementation of sliders was completed, with a non-animated orange slider ball and some relatively ugly curves.  Beat snapping was added to the editor, as was a timeline and a more robust editor interface (quite similar to what you see in Compose view today).</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200707-05.jpg"><img src="./history_files/200707-05s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200707-06.jpg"><img src="./history_files/200707-06s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200707-07.jpg"><img src="./history_files/200707-07s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200707-08.jpg"><img src="./history_files/200707-08s.jpg"></a>
+</div>
+
+<h3>August</h3>
+
+<div class="marginp">The main menu is updated with a new look, and the editor has received a lot of new functionality, including copy/paste support.  The windows menubar and cursor are now present, making editor features a lot more accessible than before.  Sliders are more extensively supported, with ticks present and disappearing as you pass them.  Stacking of hitcircles is also present.  Local high scores are a lot better supported.  The .osu file format is revised and completely revamped, but includes conversion of older files to the new format.</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200708-01.jpg"><img src="./history_files/200708-01s.jpg"></a><br>
+<img src="./history_files/200708-02.jpg">
+</div>
+
+<div class="marginp">Gameplay is enhanced with the debut of combo fire, the HP bar, mouse trails, and better looking sliders.  By this point, we have a humble collection of around 10 baetmaps made by the testing team of around 5 people.</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200708-03.jpg"><img src="./history_files/200708-03s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200708-04.jpg"><img src="./history_files/200708-04s.jpg"></a>
+</div>
+
+
+<h3>September</h3>
+<div class="marginp">The birth of osu! as far as the public is concerned.  The forums as we know them today were established, and hosted from peppy's home server.  Attention was gained via a news announcement on bemanistyle, which drew quite a few interested souls with previous rhythm game experience.</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200709-01.jpg"><img src="./history_files/200709-01s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200709-02.jpg"><img src="./history_files/200709-02s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200709-03.jpg"><img src="./history_files/200709-03s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200709-04.jpg"><img src="./history_files/200709-04s.jpg"></a>
+</div>
+
+<div class="marginp">
+Quickly after the public release, the first play mods were added, as well as break sections (which up until now had been ignored and missing). A large number of changes quickly made osu! look more and more like a commercial rhythm game.</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/forum/viewtopic.php?f=9&amp;t=68"><img src="./history_files/osupb.png"></a>
+</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/forum/viewtopic.php?f=9&amp;t=68">public release announcement</a> |
+<a href="https://web.archive.org/web/20120501082514/http://www.bemanistyle.com/s/news/osu-ouendan-elite-beat-agents-simulator-483">osu! on bemanistyle</a>
+</div>
+
+<h3>October</h3>
+
+<div class="marginp">
+October 1st was the day when <b>online rankings</b> were made available publicly.  This also saw the launch of the .osz packaging method, and online beatmap database with an early web-based submission system.  Online rankings were added to the in-game interface and also displayed on the website.
+</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://pc.joystiq.com/2007/10/18/free-pc-ouendan-eba-emulator-hits-public-beta/"><img src="./history_files/200710-01.jpg"></a>
+</div>
+
+<div class="marginp">
+The song selection screen saw improvements, with grouping of difficulties and more intuitive song wheel movement.  The soft sample set, keyboard-based controls, in-game searching all originate in this month. Players could make universal skins and per-beatmap skins for the first time and full TabletPC support was implemented.
+</div>
+
+<div class="historyp">
+<img src="./history_files/200710-02.png">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200710-03.jpg"><img src="./history_files/200710-03s.jpg"></a>
+</div>
+
+<div class="marginp">
+pUpdater (osume) version 2 was released, supporting optional package downloads.  This included making the first user-made skins available to all players via the updater.  The editor saw the addition of distance based snapping, bookmark support, multiple slider curvetypes, custom colours, play-testing, lead-in time and much more.
+</div>
+
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://pc.joystiq.com/2007/10/18/free-pc-ouendan-eba-emulator-hits-public-beta/">osu! on joystiq</a>
+</div>
+
+<h3>November</h3>
+
+<div class="marginp">
+A new SS rank was added to the ranking system, replacing S rank in cases where perfection was achieved.  The No Video and Hidden mods were introduced, and the SH and SSH ranks to go with it. For the first time, players could skin and assign normal and soft sample sets per timing section.  .osz files could now be loaded by double-clicking them, or dragging them onto the osu! icon.
+</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200711-01.jpg"><img src="./history_files/200711-01s.jpg"></a>
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200711-02.jpg"><img src="./history_files/200711-02s.jpg"></a>
+</div>
+
+<div class="marginp">
+The beatmap submission system (bss) was made public, allowing users to easily upload and share their creations.  This introduced the status of pending and ranked maps and helped organise the rapidly growing collection of user-submitted beatmaps.  In-game chat was added, as an IRC client built from scratch and connected to a standard ircd (no bancho yet).  Extended chat was visible, and avatars and basic stats were displayed in game (using an http-based communication).
+</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200711-03.jpg"><img src="./history_files/200711-03s.jpg"></a>
+</div>
+
+<div class="marginp">
+Audio controls were added to the main menu, which also now plays a random song on startup.  Replays could be watched for both local scores and online plays.  Players could spectate other players (and spectator data was sent raw over irc!).
+</div>
+
+<h3>December</h3>
+
+<div class="marginp">
+Songs can be edited by dragging them into the osu! window.  Tooltips are now present explaining all the various buttons in the osu! menus and editor interface.  Many new quality skins were submitted by early skinners (Holiday by LuigiHann, WindWaker by awp).  New sorting methods were added to the song selection screen.  peppy could now send universal announcements to all osu! players.  Minor tweaks are made to gameplay, such as non-active circle dimming.
+</div>
+
+<div class="historyp">
+<a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/images/history/200712-01.jpg"><img src="./history_files/200712-01s.jpg"></a>
+</div>
+
+<h1>2008</h1>
+
+<h3>January</h3>
+<div class="marginp">
+peppy was MIA in Japan 2007-12-17 until 1008-01-20.  He somehow managed to draw himself away from the osu! codebase for a full month, and therefore there were no major updates (and the community was quite stagnant during this time).
+</div>
+
+<div class="historyp">
+<img src="./history_files/200801-01.png">
+</div>
+
+
+
+<h3>February</h3>
+<div class="marginp">
+Players received extra challenges in the form of the Hard Rock, Sudden Death and Double Time mods. Gameplay experience was enhanced considerably with the addition of countdown images and sounds, custom number and colours of combos, O/X section rankings, countdown intros, background colour scripting, volume control per timing section and, perhaps most importantly, the introduction of storyboarding script support.
+</div>
+
+<div class="marginp">
+An attempt was made to move osu! over to the XNAv2 framework, but peppy decided the new version was useless and reduced overall performance.  XNA1.1 is used from this point forward, which is shaped according to osu!'s needs with thousands of rewritten lines and hacks to make osu! what it is.
+</div>
+
+<div class="marginp">
+A new text rendering engine is implemented, allowing for very crisp font display at any font size.  This makes it possible to display some more editor information and make the game look a lot better overall.  Countdowns
+</div>
+
+<h3>March</h3>
+<div class="marginp">
+To counterbalance February's new mods, the Relax and Half Time mods arrived to make life easier for players this month. Users became able to take screenshots, import and export replays. Animations could be storyboarded for the first time, and the skin selection screen was added.
+</div>
+
+<div class="marginp">
+Performance optimisations see a decrease in 82% for loading the song selection screen (via a new format for the local beatmap database).  Various other performance tweaks were made, including the introduction of the frame limit toggle and a number of other graphical options.
+</div>
+
+<div class="marginp">
+Project Bancho was started on 2008-03-24.  The idea was to create a server component for the osu! family, which handles communications between users and removes the irc dependency.
+</div>
+
+<h3>April</h3>
+<div class="marginp">
+No joke, Bancho went live this month, and so did the user panels of Extended Chat as you know them today.  Users are now able to see what other users are doing in their user panels, as well as interact with them by clicking to spectate.  The automatic error submission system debuted, Xfire compatibility was implemented, and the main menu and editor interface received makeovers (with new icons by LuigiHann).
+</div>
+
+<div class="marginp">
+The chat interface got some love, with the "show chat" button, tab completion and nickname highlight alerts.  The ranking screen now shows points required to reach the next rank.
+</div>
+
+<h3>May</h3>
+<div class="marginp">
+The Taiko Mode first saw the light of day in this month, as well as another major addition, .osb storyboarding script support. Multipart sliders and private messaging in chat were also made available.
+</div>
+
+<h3>June</h3>
+<div class="marginp">
+A major milestone in osu history was reached with the addition of multiplayer game mode. Skinning options were expanded further regarding both graphics and sounds, and multi-channel chat was possible for the first time.
+</div>
+
+<h3>July</h3>
+<div class="marginp">
+The editor, multiplayer, storyboarding, graphics, chat console all received numerous improvements in this month. The options screen received a new layout, and custom key bindings were introduced.
+</div>
+
+<h3>August</h3>
+<div class="marginp">
+Continuing the trend set by July, one would be hard pressed to find an aspect of osu! that wasn't improved or optimised in this month. In the realm of brand new additions, tags were added to beatmaps and multiple monitor support was implemented on an experimental level.  A new method of unpausing gameplay was constructed to stop people abusing the pause function (you now need to align your cursor to where it was before you paused in order to continue).
+</div>
+
+<div class="marginp">
+Personal online best scores were added to song selection, fulfilling a long-time request.  This required some fairly hefty database optimisation.  Graphical improvements were made to the ranking screen, and various elements of the default skin, in an aim to make it feel more clean and crisp than before.  The display of slider tick score sprites (10/30) was implmented.  Improvements were seen in the multiplayer match setup, allowing host control to be transferred.  Many new chat commands were added for user convenience.
+</div>
+
+<div class="marginp">
+A new ranked status "Approved" was added for maps which are of great quality but exceed ranking length or difficulty (or other) limits in some way.  Maps in this status don't add to player's scores, but have scoreboards and otherwise act like a ranked map.
+</div>
+
+<h3>September</h3>
+<div class="marginp">
+A slew of new mods were unveiled this month: Flashlight, Spun Out and Auto.  Autoplay scripts an AI player that completed (almost) any beatmap with perfect accuracy, and can also be accessed via the editor test mode.  The limits of beatmap design were pushed farther with the addition of more skinnable elements (including combo burst images), the clap sound sample, the ability to assign sound samples to individual slider endpoints and inherited timing sections. The song selection screen also received an overhaul.
+</div>
+
+<h3>October</h3>
+<div class="marginp">
+Progress was made on OpenGL implementation and the upcoming game mode debut, in a private testing environment.  A lot of the internals of osu! were rewritten, equalling over 4,000 lines of totally revamped code in order to make play modes more modular, so future modes can be added more easily.  Due to these large changes, there was no public release this month.
+</div>
+
+<h3>November</h3>
+<div class="marginp">
+November saw the introduction of a brand new play mode, "Catch the Beat". OpenGL support debuted, thus allowing osu! to run on most any system. Other new features in this update packed month included in game friend list support, private chat tabs, a new tutorial/offset wizard and osu!direct, an in-game beatmap downloader for supporters.
+</div>
+
+<div class="marginp">
+Due to people with large numbers of beatmaps complaining about the load time of osu!, peppy spent countless days optimising anything that could be, resulting in a performance increase almost unmeasurable on a scale (lets just say somewhere over 9,000).  Load times of over one minute reduced to just milliseconds.
+</div>
+
+<h3>December</h3>
+<div class="marginp">
+The last month of 2008 had plenty in store for osu! development. By osu!'s second Christmas, the first version of the Storyboarding Editor was implemented, making storyboarding much more accessible to users. A second multiplayer mode was added- Tag Play, a cooperative mode where players take turns playing a beatmap. Another addition to multiplayer was Accuracy as a victory condition. MSN and Yahoo status were integrated, and users could fully customize key bindings and chat highlight trigger words.
+</div>
+
+<div class="marginp">
+Thumbnail and audible previews were added to the online beatmap listing, making browsing for a beatmap you'd like to play a much easier task.  The first version of this page was also written this month!
+</div>
+
+<h1>The Future</h1>
+<div class="marginp">Think big, and expect big.</div>
+</div>
+
+				<div class="clear"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <table width="100%">
+			<tbody><tr>
+			<td width="33%"></td>
+			<td width="33%" align="middle">osu! is © peppy 2007-2012</td>
+			<td width="34%" align="right"><a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/terms">Terms of Service</a> | <a href="https://web.archive.org/web/20120501082514/http://osu.ppy.sh/p/copyright">Copyright</a></td>
+			</tr>
+			</tbody></table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./history_files/brand"></script>
+
+
+<!--
+     FILE ARCHIVED ON 08:25:14 May 01, 2012 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 17:10:24 Dec 16, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 3772.607
+  exclusion.robots: 1827.79
+  exclusion.robots.policy: 1827.773
+  xauthn.identify: 427.501
+  xauthn.chkprivs: 1399.9
+  RedisCDXSource: 516.101
+  esindex: 0.012
+  LoadShardBlock: 1409.354 (3)
+  PetaboxLoader3.datanode: 1377.514 (4)
+  CDXLines.iter: 16.56 (3)
+  load_resource: 588.084
+  PetaboxLoader3.resolve: 218.723
+--></div><div class="igtranslator-main-div" style="display: none; width: 0px; height: 0px;"><iframe src="./history_files/saved_resource.html" class="igtranslator-iframe" scrolling="no" frameborder="0"></iframe></div><div class="igtranslator-activator-icon bounceIn" style="background-image: url(&quot;chrome-extension://jgnebchahhepphmokjeohhoebakpfggp/data/icons/home.png&quot;); display: none;" title="Click to Show Translation"></div><div>
+    <div id="twoseven-ext-tab-media-modal" class="twoseven-ext-tab-media-modal" style="display: none;">
+      <!-- Modal content -->
+      <div class="twoseven-ext-tab-media-modal-content">
+        <div class="iframe-container" style="height: 100%; width: 100%;">
+          <span class="close">×</span>
+        </div>
+      </div>
+    </div></div></body><style type="text/css" id="igtranslator-color"></style></html>

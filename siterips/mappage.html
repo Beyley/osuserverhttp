@@ -1,0 +1,1278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!-- saved from url=(0068)https://web.archive.org/web/20120503083539/http://osu.ppy.sh/s/38394 -->
+<html><div id="twoseven-scripts" data-info="Scripts added by TwoSeven extension" style="display: none !important; position: static !important; top: 0px !important; left: 0px !important; width: 0px !important; height: 0px !important;"><script type="text/javascript" async="" src="./mappage_files/ga.js.download"></script><script type="text/javascript" id="__tmpScript-635416799" data-added-by-two-seven="1">(function() {
+    window.twoseven = {};
+  })();</script><script type="text/javascript" id="__tmpScript-244654742" data-added-by-two-seven="1">(function() {
+    window.twoseven.waitForDOMNode = async function waitForDOMNode(e,t=document){e=e||{};const{type:n,value:o}=e;if(!n||!o)throw new Error("Must specify identifier");let s=o;switch(n){case"tag":s=o.toUpperCase()}if("check"!==n){const e=await i({type:"selector",value:s},[],t);if(e)return new Promise(t=>t(e))}async function i({type:e,value:t},n,o){let s;switch(e){case"tag":s=n.find(e=>e.tagName===t);break;case"selector":s=o.querySelector(t);break;case"check":for(const e of n){if(await t(e))return e}}return s}return new Promise((e,o)=>{const r=new MutationObserver(async o=>{for(const a of o)if("childList"===a.type){const o=Array.from(a.addedNodes),c=await i({type:n,value:s},o,t);if(c)return r.disconnect(),e(c)}});r.observe(t,{childList:!0,subtree:!0})})};
+  })();</script><script type="text/javascript" id="__tmpScript-273651224" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.reportError = function reportError(e,t,n){"string"==typeof(n=n||{})&&(n={message:n});const{message:o,stack:s}=t;Object.assign(n,{tag:e,error:{message:o,stack:s}}),window.tsExtGetPostToParent()({name:name,tag:e,action:"report-error",json:n}),console.error(JSON.stringify(n.error))}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-804186190" data-added-by-two-seven="1">(function() {
+    
+  window.twosevenHmsToSecondsOnly = function(str) {
+      var p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+
+      return s;
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-102096506" data-added-by-two-seven="1">(function() {
+    window.twosevenExtLog = function twosevenExtLog(e,o,c){o||(o=e,e=void 0);let n=c||"black";if(c)switch(c){case"success":n="Green";break;case"info":n="DodgerBlue";break;case"error":n="Red";break;case"warning":n="Orange";break;default:n=c}e?console.log("%c"+e+": "+o,`color:${n}`):console.log("%c"+o,`color:${n}`)};
+  })();</script><script type="text/javascript" id="__tmpScript-199019777" data-added-by-two-seven="1">(function() {
+    
+  document.twosevenGET = function(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          callback(null, xmlhttp.responseText);
+        } else {
+          callback('something else other than 200 was returned', '');
+        }
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  };
+;
+  })();</script><script type="text/javascript" id="__tmpScript-708446099" data-added-by-two-seven="1">(function() {
+    
+  window.triggerEvent = function(e,t,n,o=!1){let s;o?(n&&"string"!=typeof n&&(n=JSON.stringify(n)),s=n):s={data:n},window.twosevenScriptsDiv&&n&&"object"==typeof n&&(console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(n)}`),console.error((new Error).stack));var i=new CustomEvent(t,{bubbles:!0,composed:!0,detail:s});e.dispatchEvent(i)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-116523337" data-added-by-two-seven="1">(function() {
+    window.twoseven.postTo = async function postTo(e,t,n=!1){let o;return t.name=t.name||name,o=n?new Promise(e=>{const n=`ack-${t.action}-${1e9*Math.random()|0}`;t.ack={event:n};window.debug&&["play","pause","currentTime"].some(e=>t.action.includes(e)),window.addEventListener("message",function t({data:o={}}){o.action===n&&(window.removeEventListener("message",t),e(o.json))})}):new Promise(e=>e()),e.postMessage(t,"*"),o};
+  })();</script><script type="text/javascript" id="__tmpScript-261804213" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostTo = function tsExtGetPostTo(){return window.twoseven&&window.twoseven.postTo||window.postTo};
+  })();</script><script type="text/javascript" id="__tmpScript-646398661" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostToParent = function tsExtGetPostToParent(){return window.twoseven&&window.twoseven.postToParent||window.postToParent};
+  })();</script><script type="text/javascript" id="__tmpScript-261759358" data-added-by-two-seven="1">(function() {
+    window.twoseven.postResponse = async function postResponse(e,t){const{source:n,data:{ack:{event:o}}}=e;window.tsExtGetPostTo()(n,{action:o,json:t})};
+  })();</script><script type="text/javascript" id="__tmpScript-578518324" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToParent = async function postToParent(e,t=!1){return window.tsExtGetPostTo()(window.parent,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-912103801" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToTop = async function postToTop(e,t=!1){return window.tsExtGetPostTo()(window.top,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-980456415" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.getFromStorage = e=>new Promise((t,n)=>{const o="get-from-storage-"+(1e9*Math.random()|0);window.addEventListener(o,e=>{window.removeEventListener(o,this);const{detail:{data:{value:n}}}=e;t(n)}),triggerEvent(window,"get-from-storage",{key:e,evt:o})})
+  window.twoseven.saveToStorage = e=>{triggerEvent(window,"save-to-storage",e)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-339020880" data-added-by-two-seven="1">(function() {
+    
+  function attachHistoryListeners(){var e=history.pushState;history.pushState=function(t,n,o){return"function"==typeof history.onpushstate&&history.onpushstate({state:t}),triggerEvent(window,"pushstate",{uri:o}),e.apply(history,arguments)};var t=history.replaceState;history.replaceState=function(e){return"function"==typeof history.onreplacestate&&history.onreplacestate({state:e}),t.apply(history,arguments)}}
+  attachHistoryListeners()
+;
+  })();</script><script type="text/javascript" id="__tmpScript-596938515" data-added-by-two-seven="1">(function() {
+    window.twoseven.once = function once(e,t,n){e.addEventListener(t,function o(s){e.removeEventListener(t,o),n(s)})};
+  })();</script><script type="text/javascript" id="__tmpScript-732763583" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isOnTwoSevenTab = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'is-on-twoseven-tab' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-393522772" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isPaused = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'twoseven:pause-state' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-953730126" data-added-by-two-seven="1">(function() {
+    
+      const modal = document.querySelector('.twoseven-ext-tab-media-modal')
+      const modalCloseBtn = modal.querySelector('.close')
+      function closeModal () {
+        modal.style.display = 'none'
+        const frame = document.querySelector('#twoseven-ext-tab-media-iframe').contentWindow
+        frame.postMessage({
+          __evt_name: 'modal-hide'
+        }, '*')
+      }
+      modalCloseBtn.onclick = closeModal
+
+      window.onmessage = function (e) {
+        if (e.data.__evt_name === 'modal-hide') {
+          closeModal()
+        }
+      }
+
+      window.twoseven.closeTabMediaModal = closeModal
+
+      window.onclick = function (e) {
+        if (e.target.id === 'twoseven-ext-tab-media-modal' && modal.style.display === 'block') {
+            closeModal()
+        }
+      }
+    ;
+  })();</script></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./mappage_files/analytics.js.download" type="text/javascript"></script>
+<script type="text/javascript">window.addEventListener('DOMContentLoaded',function(){var v=archive_analytics.values;v.service='wb';v.server_name='wwwb-app202.us.archive.org';v.server_ms=2898;archive_analytics.send_pageview({});});</script><script type="text/javascript" src="./mappage_files/playback.bundle.js.download" charset="utf-8"></script>
+<script type="text/javascript" src="./mappage_files/wombat.js.download" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://osu.ppy.sh/s/38394","20120503083539","https://web.archive.org/","web","/_static/",
+	      "1336034139");
+</script>
+<link rel="stylesheet" type="text/css" href="./mappage_files/banner-styles.css">
+<link rel="stylesheet" type="text/css" href="./mappage_files/iconochive.css">
+<!-- End Wayback Rewrite JS Include -->
+
+<link rel="shortcut icon" href="https://web.archive.org/web/20120503083539im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="https://web.archive.org/web/20120503083539im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+
+<meta name="description" content="osu! - Rhythm is just a *click* away!  With Ouendan/EBA, Taiko and original gameplay modes, as well as a fully functional level editor.">
+<meta name="keywords" content="osu, peppy, ouendan, elite, beat, agents, ds, windows, game, taiko, tatsujin, simulator, sim, xna, ddr, beatmania, osu!, osume">
+
+<link rel="stylesheet" type="text/css" href="./mappage_files/style.css" media="all">
+
+<script type="text/javascript" src="./mappage_files/jquery.min.js.download"></script>
+<script type="text/javascript" src="./mappage_files/main.js.download"></script>
+<title>osu! - KOKIA - EXEC_COSMOFLIPS/.</title>
+
+<meta name="viewport" content="width=864, user-scalable=yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4774947-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://web.archive.org/web/20120503083539/https://ssl' : 'https://web.archive.org/web/20120503083539/http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<link href="chrome-extension://cjdnfmjmdligcpfcekfmenlhiopehjkd/web_resources/modal/modal.css" rel="stylesheet" id="__tmpStyle"></head>
+<body data-new-gr-c-s-check-loaded="14.987.0" data-gr-ext-installed=""><!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  /*min-width:800px !important;*/
+}
+</style>
+<script>__wm.rw(0);</script>
+<div id="wm-ipp-base" lang="en" style="display: block; direction: ltr;">
+</div><div id="donato" style="position:relative;width:100%;">
+  <div id="donato-base">
+    <iframe id="donato-if" src="./mappage_files/donate.html" scrolling="no" frameborder="0" style="width:100%; height:100%">
+    </iframe>
+  </div>
+</div><script type="text/javascript">
+__wm.bt(625,27,25,2,"web","http://osu.ppy.sh/s/38394","20120503083539",1996,"/_static/",["/_static/css/banner-styles.css?v=bsmaklHF","/_static/css/iconochive.css?v=qtvMKcIJ"]);
+  __wm.rw(1);
+</script>
+<!-- END WAYBACK TOOLBAR INSERT --><a name="top"></a>
+
+
+<div class="bodytopbg">
+    <div class="mainbody"><div class="mainbody2">
+		<div id="coolheader" style="background-image: url(&#39;https://web.archive.org/web/20120503083539im_/http://s.ppy.sh/images/right-j.jpg&#39;);"></div>
+		<div id="donation" style="width:140px">
+			<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/support"><img src="./mappage_files/paypal.gif"></a>&nbsp;&nbsp;
+			<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/twitter"><img src="./mappage_files/twitter.gif"></a>
+		</div>
+		<div class="main-osu-logo"><img src="./mappage_files/head-logo.png"></div>
+         <div class="header clickable-cell">
+			<a class="hidden" href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/">home</a>
+			<div id="playstats">
+                <b>1,340,305</b> users, <b>3,335</b> online now.<br>
+                A total of <b><span id="playcount">785.98m</span></b> ranked plays!
+            </div>
+        <div class="menu">
+            <ul class="sf-menu sf-js-enabled sf-shadow">
+                <li>
+                    <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/about" class="sf-with-ul">Info<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/changelog">Changelog</a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/history">The Game (PC)</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/iphone">The Game (iPhone)</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/team">The Team</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/screenshots">Screenshots</a></li>
+
+
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/download">Download</a></li>
+                <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/wiki/">Wiki</a></li>
+                <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/faq" class="sf-with-ul">Help!<span class="sf-sub-indicator"> »</span></a>
+					<ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/faq">FAQ</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/formatpost&amp;id=21575">Terms Glossary</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/forum/viewtopic.php?f=13&amp;t=3815">Video Tutorials</a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/forum/viewtopic.php?f=5&amp;t=576">Report a Bug</a></li>
+                    </ul>
+				</li>
+                <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist" class="sf-with-ul">Beatmaps<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=0">Ranked</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=6">Approved</a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist&amp;s=7&amp;r=2">Pending</a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/packlist">Beatmap Packs</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/pp" class="sf-with-ul">Rankings<span class="sf-sub-indicator"> »</span></a>
+                    <ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/pp">Performance <span style="color:#eca1dd; vertical-align: super">beta</span></a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/chart">Charts</a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/playerranking">Score</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/countryranking">Countries</a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/mapperranking">Mappers</a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/modranking">BAT</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/kudosu">Kudosu</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/forum/" class="sf-with-ul">Community<span class="sf-sub-indicator"> »</span></a>
+					<ul style="display: none; visibility: hidden;">
+                        <li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/forum/">Forums</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/support">Supporting osu!</a></li>
+                        <li><a href="https://web.archive.org/web/20120503083539/http://www.cafepress.com/osume" target="_blank">Goodies</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://www.youtube.com/user/VideosuTV/videos?sort=da&amp;view=1" target="_blank">Videos</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/chat">Web Chat</a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/gallery?g=fanart">Fanart</a></li>
+                    </ul>
+				</li>
+            </ul>
+        </div>
+        </div>
+                <div class="content">
+                <div class="content-infoline">
+				<form class="inline-form" action="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/search" id="cse-search-box">
+				  <div>
+					<input type="hidden" name="cx" value="007714945049801807819:fwdivvi5sik">
+					<input type="hidden" name="cof" value="FORID:10">
+					<input type="hidden" name="ie" value="UTF-8">
+					<input type="text" name="q" size="15" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url(&quot;https://web.archive.org/web/20120503083539if_/http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif&quot;) left center no-repeat rgb(255, 255, 255);">
+				  </div>
+				<input name="siteurl" type="hidden" value="osu.ppy.sh/s/38394"><input name="ref" type="hidden" value=""></form>
+				<form class="inline-form" onsubmit="return userSearch()">
+					<input type="text" class="default form-text form-default-value-processed" name="user-search" id="user-search" size="10" value="User" style="color: rgb(185, 186, 181);">
+				</form>
+				<form class="inline-form" onsubmit="return beatmapSearch()">
+					<input type="text" class="default form-text form-default-value-processed" name="beatmap-search" id="beatmap-search" size="10" value="Beatmap" style="color: rgb(185, 186, 181);">
+				</form>
+									<form action="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/forum/ucp.php?mode=login" method="post">
+						user:
+						<input class="post" type="text" name="username" size="15" maxlength="40" value="" tabindex="0">
+						pass:
+						<input class="post" type="password" name="password" size="15" maxlength="100" tabindex="0">
+						<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/forgot" title="Forgot Password">?</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/forum/ucp.php?mode=register" title="Register New Account">register</a>
+						<input type="checkbox" class="radio" name="autologin" id="autologin"> <label for="autologin">save</label>
+						<input type="hidden" name="redirect" value="/s/38394">
+						<input type="hidden" name="sid" value="9a604388ac4dd71ee22c39900e893c26">
+						<input type="submit" name="login" value="login" tabindex="5">
+					</form>
+				                </div>
+                <div class="content-with-bg">
+<script type="text/javascript" language="javascript">
+function updatebms()
+{
+	$("#updatestatus").html("updating...");
+	$.get("/pages/include/beatmap-update.php?s=38394&o=" + $("#offset").attr("value") + "&t=" + urlencode($("#disptitle").attr("value")) + "&g=" + $('#genres').val() + "&l=" + $('#languages').val() + "&tags=" + $('#tags').val(), null, function(text){
+		$("#updatestatus").html(text);
+	});
+}
+	var myListener = new Object();
+	var isPlaying = false;
+	myListener.onInit = function()
+	{
+		this.position = 0;
+	};
+	myListener.onUpdate = function()
+	{
+		isPlaying = (this.isPlaying == "true");
+	};
+
+	function getFlashObject()
+	{
+		return document.getElementById("myFlash");
+	}
+	var playingid = -1;
+	function play(id)
+	{
+		stop();
+
+		if (id != playingid || !isPlaying)
+		{
+			setVolume(45);
+			getFlashObject().SetVariable("method:setUrl", "https://web.archive.org/web/20120503083539/http://s.ppy.sh/mp3/preview/" + id + ".mp3");
+			getFlashObject().SetVariable("method:play", "");
+			getFlashObject().SetVariable("enabled", "true");
+			playingid = id;
+		}
+
+		return false;
+	}
+	function stop()
+	{
+		getFlashObject().SetVariable("method:stop", "");
+	}
+	function setVolume(volume)
+	{
+		getFlashObject().SetVariable("method:setVolume", volume);
+	}
+
+	function load(id)
+	{
+		document.location="/s/"+id;
+	}
+
+	function report(score_id)
+	{
+		check('/b/123472&action=report&score=' + score_id + '&m=0&sid=9a604388ac4dd71ee22c39900e893c26','report this score for foul play. False reports will be punished')
+	}
+</script>
+<!--[if IE]>
+<script type="text/javascript" event="FSCommand(command,args)" for="myFlash">
+eval(args);
+</script>
+<![endif]-->
+
+
+<object class="playerpreview" id="myFlash" type="application/x-shockwave-flash" data="./mappage_files/mp3.swf.download" width="1" height="1">
+	<param name="movie" value="/mp3/mp3.swf">
+	<param name="AllowScriptAccess" value="always">
+	<param name="FlashVars" value="listener=myListener&amp;interval=500">
+</object>
+
+
+
+	<h1><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist">Beatmap Listing</a> » KOKIA - EXEC_COSMOFLIPS/.</h1>
+
+	<div id="tablist">
+		<ul>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/b/123474&amp;m=0"><span style="background-image:url(/web/20120503083539im_/http://osu.ppy.sh/images/easy.png); background-position: center left; background-repeat: no-repeat; padding-left: 20px; display:inline-block; vertical-align:middle;">Saki</span></a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/b/125570&amp;m=0"><span style="background-image:url(/web/20120503083539im_/http://osu.ppy.sh/images/normal.png); background-position: center left; background-repeat: no-repeat; padding-left: 20px; display:inline-block; vertical-align:middle;">Tiria</span></a></li>
+						<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/b/123473&amp;m=0"><span style="background-image:url(/web/20120503083539im_/http://osu.ppy.sh/images/hard.png); background-position: center left; background-repeat: no-repeat; padding-left: 20px; display:inline-block; vertical-align:middle;">Finnel</span></a></li>
+						<li><a class="active" href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/b/123472&amp;m=0"><span style="background-image:url(/web/20120503083539im_/http://osu.ppy.sh/images/insane.png); background-position: center left; background-repeat: no-repeat; padding-left: 20px; display:inline-block; vertical-align:middle;">Aoto</span></a></li>
+					</ul>
+	</div>
+	<div>
+		<table id="songinfo" width="100%" cellspacing="0">
+		<tbody><tr>
+			<td width="0%">Artist:</td><td width="23%" class="colour"><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=KOKIA">KOKIA</a></td>
+			<td width="0%">Circle Size:</td><td width="23%" class="colour"><div class="starfield" style="width:140px"><div class="active" style="width:56px"></div></div></td>
+			<td width="0%">Star Difficulty:</td><td width="23%" class="colour"><div class="starfield" style="width:70px"><div class="active" style="width:68.38272px"></div></div> (4.88)</td>
+		</tr>
+		<tr>
+			<td width="0%">Title:</td><td class="colour"><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=EXEC_COSMOFLIPS/.">EXEC_COSMOFLIPS/.</a></td>
+			<td width="0%">HP Drain:</td><td class="colour"><div class="starfield" style="width:140px"><div class="active" style="width:98px"></div></div></td>
+			<td width="0%">Total Time:</td><td class="colour">3:24</td>
+		</tr>
+		<tr>
+			<td width="0%">Creator:</td><td class="colour"><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/171021">Beren</a><a></a></td>
+			<td width="0%">Accuracy:</td><td class="colour"><div class="starfield" style="width:140px"><div class="active" style="width:98px"></div></div></td>
+			<td width="0%">Draining Time:</td><td class="colour">3:00</td>
+		</tr>
+		<tr>
+			<td width="0%">Source:</td><td class="colour"><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=Ar%20tonelico%20III">Ar tonelico III</a></td>
+			<td width="0%">Genre:</td><td class="colour"><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a> (<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?la=1">Other</a>)</td>
+			<td width="0%">BPM:</td><td class="colour">152</td>
+		</tr>
+		<tr>
+			<td width="0%">Tags:</td><td class="colour"><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=pieces">pieces</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=qoga">qoga</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=knell">knell</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=of">of</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=ar">ar</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=ciel">ciel</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=tyria">tyria</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=kiiwa">kiiwa</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=vivicat">vivicat</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=bless">bless</a> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmaplist?q=darkringsystem">darkringsystem</a> </td>
+
+			<td width="0%">User Rating:</td><td class="colour">
+				<table width="100%" height="20px" style="color:#fff;">
+					<tbody><tr>
+						<td style="background-color:#BC2036;text-align:right;border:solid 1px #82000B;" width="3.82352941176">12</td>
+						<td style="background-color:#78AB23;text-align:left;border:solid 1px #718F0A;" width="96.7647058824">328</td>
+					</tr>
+				</tbody></table>
+			</td><td width="0%" rowspan="2" valign="top">
+				Success Rate:<br>
+				Points of Failure:<br>
+				<span style="font-size:80%">(graph is accumulative, based on % at fail/retry)</span></td>
+			<td class="colour" rowspan="2">
+							<b>16.5%</b> (1629 of 9891 plays)<br>
+				<img width="200" height="60" src="./mappage_files/beatmap-fail-graph.php">
+						</td>
+		</tr>
+		<tr>
+			<td width="0%">
+				Submitted:<br>
+							Ranked:
+						</td>
+			<td class="colour">
+				Oct 21, 2011<br>
+							May  1, 2012
+									</td>
+
+			<td>Rating Spread:</td>
+		<td class="colour">
+			<img width="200" height="40" src="./mappage_files/beatmap-rating-graph.php">
+		</td>
+
+
+		</tr>
+		<tr>
+			<td colspan="4">
+				<div><b>Favourited 34 times</b> in total</div>
+														Users that love this map:
+										<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/102152">terametis</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/276786">Blove</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/999750">SakuraTwin</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/509316">Chibi_Fox</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/234988">sorisque</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/1568668">gengaozo</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/393318">wowshakhov</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/38805">The World</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/436239">Rumia_S</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/408142">Aidesa</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/567322">Alkaeid</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/311979">Kira Katsuki</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/702726">k0yot</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/585838">qszwdr</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/686460">Haruka</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/496202">umai12</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/1572641">luana conte</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/898716">-Amu-</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/501547">Smooky</a>, 														<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/958474">IGame0verxI</a>								 and <b>many more</b>!			</td>
+			<td width="0%">Options:</td><td class="colour"><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/forum/t/64900">This Beatmap's Thread</a>
+						</td><td class="colour"></td>
+		</tr>
+		
+				</tbody></table>
+	</div>
+	<br>
+	<div class="paddingboth">
+	<h2>Creator's Words</h2>
+	<div class="paddingboth">
+					<div class="beatmapDownloadButton">
+				<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/forum/ucp.php?mode=login"><img src="./mappage_files/osu-download-login.png"></a>
+			</div>
+		
+		<div class="posttext">
+			<a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/s/38394#"><img class="bmt" src="./mappage_files/38394l"></a>
+			アルトネリコ3 世界终焉の引鉄は少女の诗が弾く<br><br>Saki - Beren<br><br>Tiria - DarkRingSystem<br><br>Finnel - vivicat ＆ Bless<br><br>Aoto - Beren ＆ Kiiwa
+		</div>
+	</div>
+	<h1>Song Ranking</h1>
+
+	<div id="tablist">
+		<ul>
+			<li><a class="active" href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmap?b=123472&amp;m=0">osu! Standard</a></li>
+			<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmap?b=123472&amp;m=1">Taiko</a></li>
+			<li><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmap?b=123472&amp;m=2">Catch The Beat</a></li>
+		</ul>
+	</div>
+			<div class="paddingall">
+			<h2>Current Leader</h2>
+			<table class="scoreLeader" cellpadding="0" cellspacing="0">
+			<tbody><tr><td class="title" colspan="3"><img class="flag" src="./mappage_files/it.gif"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/617323">Chewin</a> is in the lead! (1 day ago and counting)</td></tr>
+			<tr class="row1p">
+				<td><strong>Score</strong></td><td>7,507,403 (98.85%)</td>
+				<td class="rank" width="120px" align="center" colspan="1" rowspan="7"><img src="./mappage_files/SH.png"></td>
+			</tr>
+			<tr class="row2p"><td><strong>Max Combo</strong></td><td>617</td></tr>
+			<tr class="row1p"><td><strong>300 / 100 / 50</strong></td><td>400 / 7 / 0</td></tr>
+			<tr class="row2p"><td><strong>Misses</strong></td><td>0</td></tr>
+			<tr class="row1p"><td><strong>Geki (Elite Beat!)</strong></td><td>104</td></tr>
+			<tr class="row2p"><td><strong>Katu (Beat!)</strong></td><td>6</td></tr>
+			<tr class="row1p"><td><strong>Mods</strong></td><td>Hidden,DoubleTime</td></tr>
+			</tbody></table>
+		</div>
+				</div>
+
+		<a name="scores"></a>
+		<h2>Top 50 Scoreboard</h2>
+		<div>
+			<form method="GET" action="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/beatmap#scores">
+				<input type="hidden" name="b" value="123472">
+				<input type="hidden" name="m" value="0">
+				<input id="nm" type="checkbox" onchange="this.form.submit()" name="nm" value="1"> <label for="nm">Show no-mod plays only</label>
+			</form>
+		</div>
+
+		<div class="beatmapListing">
+			<table width="100%" cellspacing="0">
+			<tbody><tr class="titlerow"><th></th><th><strong>Rank</strong></th><th><strong>Score</strong></th><th><strong>Accuracy</strong></th><th><strong>Player</strong></th><th><strong>Max Combo</strong></th><th><strong>300 / 100 / 50</strong></th><th><strong>Geki</strong></th><th><strong>Katu</strong></th><th><strong>Misses</strong></th><th><strong>Mods</strong></th><th></th></tr>
+						<tr class="row1p">
+					<td>#1</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td><b>7,507,403</b></td>
+					<td>98.85%</td>
+					<td><img class="flag" src="./mappage_files/it.gif" title="Italy"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/617323">Chewin</a></td>
+					<td>617</td>
+					<td>400&nbsp;&nbsp;/&nbsp;&nbsp;7&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>104</td>
+					<td>6</td>
+					<td>0</td>
+					<td>Hidden,DoubleTime</td>
+					<td><a onclick="report(684318139);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#2</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>7,199,798</td>
+					<td>99.84%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/572523">Vizrock</a></td>
+					<td>617</td>
+					<td>406&nbsp;&nbsp;/&nbsp;&nbsp;1&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>109</td>
+					<td>1</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684171359);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#3</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>7,154,064</td>
+					<td>99.51%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/360552">Karuta</a></td>
+					<td>617</td>
+					<td>404&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>107</td>
+					<td>3</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(685206258);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#4</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>7,063,019</td>
+					<td>98.03%</td>
+					<td><img class="flag" src="./mappage_files/ua.gif" title="Ukraine"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/384003">rockleejkooo</a></td>
+					<td>617</td>
+					<td>395&nbsp;&nbsp;/&nbsp;&nbsp;12&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>101</td>
+					<td>9</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684738810);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#5</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>7,061,332</td>
+					<td>98.69%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/296448">Supi</a></td>
+					<td>616</td>
+					<td>399&nbsp;&nbsp;/&nbsp;&nbsp;8&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>102</td>
+					<td>8</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684310453);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#6</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>7,035,448</td>
+					<td>97.54%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/525262">kogumano-putaro</a></td>
+					<td>617</td>
+					<td>392&nbsp;&nbsp;/&nbsp;&nbsp;15&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>97</td>
+					<td>13</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(685169738);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#7</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>7,012,201</td>
+					<td>98.03%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/694114">N a n o</a></td>
+					<td>617</td>
+					<td>395&nbsp;&nbsp;/&nbsp;&nbsp;12&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>100</td>
+					<td>10</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684386549);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#8</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td>6,990,858</td>
+					<td>96.85%</td>
+					<td><img class="flag" src="./mappage_files/ru.gif" title="Russian Federation"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/803766">cr1m</a></td>
+					<td>617</td>
+					<td>388&nbsp;&nbsp;/&nbsp;&nbsp;18&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
+					<td>93</td>
+					<td>16</td>
+					<td>0</td>
+					<td>Hidden,HardRock</td>
+					<td><a onclick="report(684289459);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#9</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,984,914</td>
+					<td>98.77%</td>
+					<td><img class="flag" src="./mappage_files/ca.gif" title="Canada"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/905124">shaNk</a></td>
+					<td>611</td>
+					<td>401&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>106</td>
+					<td>2</td>
+					<td>3</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(685924470);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#10</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,945,647</td>
+					<td>97.75%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/181057">5231_Kinoko</a></td>
+					<td>612</td>
+					<td>394&nbsp;&nbsp;/&nbsp;&nbsp;11&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
+					<td>98</td>
+					<td>10</td>
+					<td>1</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(686361482);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#11</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,916,964</td>
+					<td>98.53%</td>
+					<td><img class="flag" src="./mappage_files/ru.gif" title="Russian Federation"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/490568">Rost94</a></td>
+					<td>611</td>
+					<td>399&nbsp;&nbsp;/&nbsp;&nbsp;6&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>102</td>
+					<td>6</td>
+					<td>2</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684724553);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#12</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,905,587</td>
+					<td>96.40%</td>
+					<td><img class="flag" src="./mappage_files/au.gif" title="Australia"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/635030">damiaanzx</a></td>
+					<td>617</td>
+					<td>385&nbsp;&nbsp;/&nbsp;&nbsp;22&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>92</td>
+					<td>18</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684390536);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#13</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,892,904</td>
+					<td>96.19%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/970637">-Megpoid GUMI-</a></td>
+					<td>617</td>
+					<td>384&nbsp;&nbsp;/&nbsp;&nbsp;22&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
+					<td>91</td>
+					<td>18</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(685768094);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#14</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,887,345</td>
+					<td>96.07%</td>
+					<td><img class="flag" src="./mappage_files/tw.gif" title="Taiwan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/952751">k0982854972</a></td>
+					<td>616</td>
+					<td>383&nbsp;&nbsp;/&nbsp;&nbsp;24&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>90</td>
+					<td>20</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684313163);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#15</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,876,837</td>
+					<td>97.05%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/235580">Moyaso</a></td>
+					<td>617</td>
+					<td>389&nbsp;&nbsp;/&nbsp;&nbsp;18&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>98</td>
+					<td>12</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684537345);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#16</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,863,426</td>
+					<td>95.74%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/868231">F TUBE</a></td>
+					<td>616</td>
+					<td>381&nbsp;&nbsp;/&nbsp;&nbsp;26&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>92</td>
+					<td>18</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(685151666);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#17</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,863,239</td>
+					<td>97.38%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/315646">Avengersepia</a></td>
+					<td>612</td>
+					<td>392&nbsp;&nbsp;/&nbsp;&nbsp;13&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>101</td>
+					<td>7</td>
+					<td>2</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684128811);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#18</td>
+					<td><img src="./mappage_files/XH_small.png"></td>
+					<td>6,833,436</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/kr.gif" title="Korea, Republic of"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/70730">ykcarrot</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>Hidden</td>
+					<td><a onclick="report(686351391);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#19</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td>6,830,378</td>
+					<td>99.84%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/818259">Deuth</a></td>
+					<td>617</td>
+					<td>406&nbsp;&nbsp;/&nbsp;&nbsp;1&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>109</td>
+					<td>1</td>
+					<td>0</td>
+					<td>Hidden</td>
+					<td><a onclick="report(684300867);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#20</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td>6,786,875</td>
+					<td>99.67%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/91742">lxy</a></td>
+					<td>617</td>
+					<td>405&nbsp;&nbsp;/&nbsp;&nbsp;2&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>108</td>
+					<td>2</td>
+					<td>0</td>
+					<td>Hidden</td>
+					<td><a onclick="report(684329699);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#21</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td>6,740,130</td>
+					<td>99.18%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/270347">Shirakawa Kotori</a></td>
+					<td>615</td>
+					<td>402&nbsp;&nbsp;/&nbsp;&nbsp;5&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>105</td>
+					<td>5</td>
+					<td>0</td>
+					<td>Hidden</td>
+					<td><a onclick="report(684110970);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#22</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td>6,734,781</td>
+					<td>98.85%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/691463">orsola</a></td>
+					<td>617</td>
+					<td>400&nbsp;&nbsp;/&nbsp;&nbsp;7&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>103</td>
+					<td>7</td>
+					<td>0</td>
+					<td>Hidden</td>
+					<td><a onclick="report(686178230);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#23</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,726,652</td>
+					<td>96.68%</td>
+					<td><img class="flag" src="./mappage_files/kr.gif" title="Korea, Republic of"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/719125">bn6931</a></td>
+					<td>609</td>
+					<td>388&nbsp;&nbsp;/&nbsp;&nbsp;16&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
+					<td>97</td>
+					<td>10</td>
+					<td>2</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684281713);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#24</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,716,443</td>
+					<td>97.62%</td>
+					<td><img class="flag" src="./mappage_files/tw.gif" title="Taiwan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/944197">Saya-Honmei</a></td>
+					<td>607</td>
+					<td>394&nbsp;&nbsp;/&nbsp;&nbsp;9&nbsp;&nbsp;/&nbsp;&nbsp;2</td>
+					<td>100</td>
+					<td>7</td>
+					<td>2</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(685554026);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#25</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,699,597</td>
+					<td>96.68%</td>
+					<td><img class="flag" src="./mappage_files/kr.gif" title="Korea, Republic of"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/878138">L o u i s e</a></td>
+					<td>608</td>
+					<td>388&nbsp;&nbsp;/&nbsp;&nbsp;16&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
+					<td>93</td>
+					<td>14</td>
+					<td>2</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684322495);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#26</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td>6,675,697</td>
+					<td>98.20%</td>
+					<td><img class="flag" src="./mappage_files/tw.gif" title="Taiwan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/914149">Zaio</a></td>
+					<td>616</td>
+					<td>396&nbsp;&nbsp;/&nbsp;&nbsp;11&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>100</td>
+					<td>10</td>
+					<td>0</td>
+					<td>Hidden</td>
+					<td><a onclick="report(684374564);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#27</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,644,093</td>
+					<td>92.18%</td>
+					<td><img class="flag" src="./mappage_files/tw.gif" title="Taiwan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/578988">abc81825</a></td>
+					<td>616</td>
+					<td>360&nbsp;&nbsp;/&nbsp;&nbsp;44&nbsp;&nbsp;/&nbsp;&nbsp;3</td>
+					<td>78</td>
+					<td>30</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(684191127);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#28</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,641,195</td>
+					<td>97.13%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/172788">Sora</a></td>
+					<td>607</td>
+					<td>390&nbsp;&nbsp;/&nbsp;&nbsp;16&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>96</td>
+					<td>13</td>
+					<td>1</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(685536895);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#29</td>
+					<td><img src="./mappage_files/A_small.png"></td>
+					<td>6,636,982</td>
+					<td>94.51%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/1198799">Minacle</a></td>
+					<td>617</td>
+					<td>375&nbsp;&nbsp;/&nbsp;&nbsp;26&nbsp;&nbsp;/&nbsp;&nbsp;6</td>
+					<td>90</td>
+					<td>14</td>
+					<td>0</td>
+					<td>DoubleTime</td>
+					<td><a onclick="report(685380542);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#30</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td>6,537,862</td>
+					<td>96.85%</td>
+					<td><img class="flag" src="./mappage_files/kr.gif" title="Korea, Republic of"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/548250">[ Len ]</a></td>
+					<td>617</td>
+					<td>388&nbsp;&nbsp;/&nbsp;&nbsp;18&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
+					<td>95</td>
+					<td>14</td>
+					<td>0</td>
+					<td>Hidden</td>
+					<td><a onclick="report(684566496);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#31</td>
+					<td><img src="./mappage_files/SH_small.png"></td>
+					<td>6,524,080</td>
+					<td>96.23%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/998764">FortissimoEXS</a></td>
+					<td>617</td>
+					<td>384&nbsp;&nbsp;/&nbsp;&nbsp;23&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>93</td>
+					<td>17</td>
+					<td>0</td>
+					<td>Hidden</td>
+					<td><a onclick="report(685098962);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#32</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,480,320</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/91738">Guy</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684173886);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#33</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,477,120</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/us.gif" title="United States"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/671747">NixXSkate</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(685077191);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#34</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,469,120</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/690454">RistyL</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684223176);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#35</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,468,020</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/ap.gif" title="Asia/Pacific Region"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/673214">Roro Rosset</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684622627);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#36</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,466,620</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/no.gif" title="Norway"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/333241">kriers</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(685758487);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#37</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,464,520</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/192145">AisamaDX</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684167271);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#38</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,462,692</td>
+					<td>99.84%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/476954">rorineko</a></td>
+					<td>617</td>
+					<td>406&nbsp;&nbsp;/&nbsp;&nbsp;1&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>109</td>
+					<td>1</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684131769);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#39</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,461,320</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/uy.gif" title="Uruguay"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/58710">H1ko</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684312677);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#40</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,460,220</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/1563111">saitoukun</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684104371);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#41</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,455,620</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/717873">Rizzo</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684101567);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#42</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,455,420</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/229654">Bless</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(685398652);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#43</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,453,844</td>
+					<td>99.84%</td>
+					<td><img class="flag" src="./mappage_files/pl.gif" title="Poland"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/1418460">Tesivonius</a></td>
+					<td>617</td>
+					<td>406&nbsp;&nbsp;/&nbsp;&nbsp;1&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>109</td>
+					<td>1</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(685956504);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#44</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,450,072</td>
+					<td>99.84%</td>
+					<td><img class="flag" src="./mappage_files/ru.gif" title="Russian Federation"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/297889">Hitsugaya936</a></td>
+					<td>617</td>
+					<td>406&nbsp;&nbsp;/&nbsp;&nbsp;1&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>109</td>
+					<td>1</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684113981);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#45</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,449,820</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/445907">R a r e</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(685366079);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#46</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,448,828</td>
+					<td>99.84%</td>
+					<td><img class="flag" src="./mappage_files/cn.gif" title="China"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/456482">Arthfalanor</a></td>
+					<td>617</td>
+					<td>406&nbsp;&nbsp;/&nbsp;&nbsp;1&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>109</td>
+					<td>1</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(685754943);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#47</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,446,520</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/112408">Lilium</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(685159237);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#48</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,444,220</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/hk.gif" title="Hong Kong"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/220939">ertyukjh010</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684104101);">Report</a></td>
+				</tr>
+			
+						<tr class="row1p">
+					<td>#49</td>
+					<td><img src="./mappage_files/S_small.png"></td>
+					<td>6,443,188</td>
+					<td>99.84%</td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/152069">K o h a k u</a></td>
+					<td>617</td>
+					<td>406&nbsp;&nbsp;/&nbsp;&nbsp;1&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>109</td>
+					<td>1</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(686006765);">Report</a></td>
+				</tr>
+			
+						<tr class="row2p">
+					<td>#50</td>
+					<td><img src="./mappage_files/X_small.png"></td>
+					<td>6,443,120</td>
+					<td><b>100.00%</b></td>
+					<td><img class="flag" src="./mappage_files/jp.gif" title="Japan"> <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/u/824639">Fergie</a></td>
+					<td>617</td>
+					<td>407&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
+					<td>110</td>
+					<td>0</td>
+					<td>0</td>
+					<td>None</td>
+					<td><a onclick="report(684708273);">Report</a></td>
+				</tr>
+			
+						</tbody></table>
+		</div>
+	
+				<div class="clear"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <table width="100%">
+			<tbody><tr>
+			<td width="33%"></td>
+			<td width="33%" align="middle">osu! is © peppy 2007-2012</td>
+			<td width="34%" align="right"><a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/terms">Terms of Service</a> | <a href="https://web.archive.org/web/20120503083539/http://osu.ppy.sh/p/copyright">Copyright</a></td>
+			</tr>
+			</tbody></table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./mappage_files/brand"></script>
+
+
+<!--
+     FILE ARCHIVED ON 08:35:39 May 03, 2012 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 17:27:48 Dec 16, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 2168.585
+  exclusion.robots: 594.841
+  exclusion.robots.policy: 594.835
+  xauthn.identify: 216.86
+  xauthn.chkprivs: 377.733
+  RedisCDXSource: 691.39
+  esindex: 0.014
+  LoadShardBlock: 861.682 (3)
+  PetaboxLoader3.datanode: 706.323 (4)
+  CDXLines.iter: 17.237 (3)
+  load_resource: 708.084
+  PetaboxLoader3.resolve: 423.604
+--></div><div class="igtranslator-main-div" style="display: none; width: 0px; height: 0px;"><iframe src="./mappage_files/saved_resource.html" class="igtranslator-iframe" scrolling="no" frameborder="0"></iframe></div><div class="igtranslator-activator-icon bounceIn" style="background-image: url(&quot;chrome-extension://jgnebchahhepphmokjeohhoebakpfggp/data/icons/home.png&quot;); display: none;" title="Click to Show Translation"></div><div>
+    <div id="twoseven-ext-tab-media-modal" class="twoseven-ext-tab-media-modal" style="display: none;">
+      <!-- Modal content -->
+      <div class="twoseven-ext-tab-media-modal-content">
+        <div class="iframe-container" style="height: 100%; width: 100%;">
+          <span class="close">×</span>
+        </div>
+      </div>
+    </div></div></body><style type="text/css" id="igtranslator-color"></style></html>
