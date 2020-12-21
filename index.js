@@ -23,7 +23,9 @@ app.set('view engine', 'ejs');
 
 const port = 999;
 
-var sql = new Sql(config.host, config.name, config.password, config.database);
+console.log(config)
+
+var sql = new Sql(config.host, config.name, config.password, config.database, config.port);
 
 app.get('/u/:id', async (req, res) => {
     try {

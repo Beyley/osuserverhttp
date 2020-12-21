@@ -4,14 +4,14 @@ var { Score } = require("./score.js");
 var { Map } = require("./map.js");
 
 class Sql {
-    constructor(hostname, username, password, database) {
+    constructor(hostname, username, password, database, port) {
         this.connection = mysql.createPool({
             host: hostname,
             user: username,
             password: password,
             database: database,
-            insecureAuth: true
-        });
+            port: port
+	});
     }
 
     getAllUsers() {
