@@ -97,8 +97,8 @@ for (var i = 0; i < s.length; i++) {
 
 }
 /*
-     FILE ARCHIVED ON 11:20:07 May 17, 2012 AND RETRIEVED FROM THE
-     INTERNET ARCHIVE ON 23:30:37 Dec 22, 2020.
+     FILE ARCHIVED ON 22:18:30 Jun 14, 2012 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 03:27:33 Dec 23, 2020.
      JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
 
      ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
@@ -106,15 +106,15 @@ for (var i = 0; i < s.length; i++) {
 */
 /*
 playback timings (ms):
-  exclusion.robots: 141.32
-  exclusion.robots.policy: 141.311
-  xauthn.identify: 67.819
-  xauthn.chkprivs: 73.294
-  RedisCDXSource: 40.686
-  esindex: 0.009
-  LoadShardBlock: 246.127 (6)
-  PetaboxLoader3.datanode: 157.728 (8)
-  CDXLines.iter: 131.57 (3)
-  load_resource: 155.41 (2)
-  PetaboxLoader3.resolve: 78.826 (2)
+  esindex: 0.015
+  CDXLines.iter: 171.654 (3)
+  exclusion.robots: 152.02
+  PetaboxLoader3.datanode: 289.842 (7)
+  exclusion.robots.policy: 152.0
+  xauthn.chkprivs: 44.023
+  load_resource: 119.006
+  PetaboxLoader3.resolve: 85.466
+  RedisCDXSource: 1.834
+  LoadShardBlock: 298.304 (6)
+  xauthn.identify: 107.41
 */

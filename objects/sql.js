@@ -2,6 +2,8 @@ var mysql = require('mysql');
 var { Player } = require("./player.js");
 var { Score } = require("./score.js");
 var { Map } = require("./map.js");
+var { Post } = require('./post.js');
+const { Message } = require('./message.js');
 
 /**
  * The object that handles all database functions
@@ -35,6 +37,44 @@ class Sql {
                 });
 
                 resolve(players);
+            });
+        });
+    }
+
+    /**
+     * Gets the latest 11 messages from chat
+     */
+    getChat() {
+        return new Promise((resolve, reject) => {
+            var messages = [];
+
+            this.connection.query('SELECT * FROM osu_chat WHERE target = \'#osu\' ORDER BY `time` DESC LIMIT 11', (err, allMessages, fields) => {
+                if (err) throw err;
+
+                allMessages.forEach(message => {
+                    messages.push(new Message(message.sender, message.content, message.target, message.time));
+                });
+
+                resolve(messages);
+            });
+        });
+    }
+
+    /**
+     * Gets the 3 latest posts from the database
+     */
+    getLatestPosts() {
+        return new Promise((resolve, reject) => {
+            var posts = [];
+
+            this.connection.query('SELECT * FROM osu_announcements ORDER BY posttime DESC LIMIT 3', (err, allPosts, fields) => {
+                if (err) throw err;
+
+                allPosts.forEach(post => {
+                    posts.push(new Post(post.title, post.creator, post.content, post.posttime.getFullYear().toString().substr(2) + "." + (post.posttime.getMonth() + 1) + "." + post.posttime.getDate()));
+                });
+
+                resolve(posts);
             });
         });
     }

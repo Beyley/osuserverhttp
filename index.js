@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 const md5 = require('crypto-js/md5.js');
 const config = require("./config/default.json");
 var { Sql } = require("./objects/sql.js");
+var { StringBuilder } = require("./objects/stringbuilder");
 
 const app = express();
 
@@ -25,11 +26,11 @@ const port = 999;
 
 var sql = new Sql(config.host, config.name, config.password, config.database);
 
-var totalUsers = await sql.getNumberOfUsers();
+var totalUsers = 0;
 var onlineUsers = "N/I";
-var amountOfRankedPlays = await sql.getNumberOfScores();
+var amountOfRankedPlays = 0;
 
-function updateHeaderValues() {
+async function updateHeaderValues() {
     totalUsers = await sql.getNumberOfUsers();
     onlineUsers = "N/I";
     amountOfRankedPlays = await sql.getNumberOfScores();
@@ -57,13 +58,45 @@ app.get('/u/:id', async (req, res) => {
 
 app.get('/p/', async (req, res) => {
     try {
-        updateHeaderValues();
+        await updateHeaderValues();
+        var posts = await sql.getLatestPosts();
 
         res.render('pages/index.ejs', {
             totalUsers: totalUsers,
             onlineUsers: onlineUsers,
-            amountOfRankedPlays: amountOfRankedPlays
+            amountOfRankedPlays: amountOfRankedPlays,
+            posts: posts
         });
+    } catch (err) {
+        console.log(err);
+    }
+})
+
+app.post('/p/chat', async (req, res) => {
+    try {
+        var finalString = new StringBuilder();
+
+        finalString.append('<table style="font - size: 8pt" width="100%" cellspacing="1">');
+
+        var messages = [];
+        messages = await sql.getChat();
+        messages = messages.reverse();
+
+        var num = 1;
+        messages.forEach(message => {
+            if (num % 2 == 0) {
+                finalString.append(`<tr class="row1"><td class="chattime">${message.time.getHours()}:${message.time.getMinutes()}</td > <td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);
+            } else {
+                finalString.append(`<tr class= "row2" ><td class="chattime">${message.time.getHours()}:${message.time.getMinutes()}</td><td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);
+            }
+
+            num++;
+        })
+
+        finalString.append("</table>");
+
+        // joins the string
+        res.send(finalString.toString());
     } catch (err) {
         console.log(err);
     }
