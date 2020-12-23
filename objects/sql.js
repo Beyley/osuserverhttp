@@ -3,17 +3,24 @@ var { Player } = require("./player.js");
 var { Score } = require("./score.js");
 var { Map } = require("./map.js");
 
+/**
+ * The object that handles all database functions
+ */
 class Sql {
-    constructor(hostname, username, password, database, port) {
+    constructor(hostname, username, password, database) {
         this.connection = mysql.createPool({
             host: hostname,
             user: username,
             password: password,
             database: database,
-            port: port
-	});
+            insecureAuth: true
+        });
     }
 
+    /**
+     * Gets all users registered in the database sorted by ranked score
+     * @returns {Player[]} The array of all players
+     */
     getAllUsers() {
         return new Promise((resolve, reject) => {
             var players = [];
@@ -32,6 +39,11 @@ class Sql {
         });
     }
 
+    /**
+     * Gets a user from the database
+     * @param {string} username The username of the user
+     * @returns {Player} The player retrived
+     */
     getUser(username) {
         return new Promise((resolve, reject) => {
             var player = null;
@@ -52,6 +64,12 @@ class Sql {
         });
     }
 
+    /**
+     * Adds a user to the database
+     * @param {string} email The email of the user
+     * @param {string} username The username of the user
+     * @param {string} password The password of the user
+     */
     addUser(email, username, password) {
         return new Promise((resolve, reject) => {
             this.connection.query('INSERT INTO osu_users (email, username, password, playcount, totalscore, rankedscore, accuracy, s300, s100, s50, s0) VALUES (?, ?, ?, 0, 0, 0, 0, 0, 0, 0, 0)', [email, username, password], function (err, results, fields) {
@@ -73,6 +91,44 @@ class Sql {
         });
     }
 
+    /**
+     * Gets a count of all ranked users
+     */
+    getNumberOfUsers() {
+        return new Promise((resolve, reject) => {
+            this.connection.query('SELECT count(*) FROM osu_users', function (err, results, fields) {
+                var userCount = 0;
+
+                results.forEach(result => {
+                    userCount = result["count(*)"];
+                });
+
+                resolve(userCount);
+            });
+        });
+    }
+
+    /**
+     * Gets a count of all ranked scores
+     */
+    getNumberOfScores() {
+        return new Promise((resolve, reject) => {
+            this.connection.query('SELECT count(*) FROM `osu_scores`', function (err, results, fields) {
+                var scoreCount = 0;
+
+                results.forEach(result => {
+                    scoreCount = result["count(*)"];
+                });
+
+                resolve(scoreCount);
+            });
+        });
+    }
+
+    /**
+     * Gets all scores of a specific user
+     * @param {string} username The username of the user to get all scores from
+     */
     getAllUsersScores(username) {
         return new Promise((resolve, reject) => {
             var scores = [];
@@ -80,22 +136,24 @@ class Sql {
 
             this.connection.query('SELECT * FROM osu_scores WHERE username = ? and pass = True ORDER BY score DESC', username, (err, usersScores, fields) => {
                 if (err) throw err;
-                this.connection.query('SELECT * FROM osu_maps WHERE ranking = 2;', (err, allRankedMaps, fields) => {
+                this.connection.query('SELECT * FROM osu_maps WHERE approved = 2;', (err, allRankedMaps, fields) => {
                     allRankedMaps.forEach(map => {
-                        var mapName = map.name.split("|");
-
-                        maps.push(new Map(map.md5, mapName[0], mapName[1], mapName[2], map.setid));
+                        maps.push(new Map(map.file_md5, map.artist, map.title, map.version, map.beatmapset_id));
                     });
-
-
 
                     usersScores.forEach(userScore => {
                         var hashIndex = maps.findIndex(function (map) {
                             return map.md5 == userScore.osuhash;
                         });
 
-                        if (hashIndex != -1) {
-                            scores.push(new Score(userScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId));
+                        var scoreExist = scores.findIndex(function (score) {
+                            return (score.md5 == userScore.osuhash);
+                        });
+
+                        if (scoreExist == -1) {
+                            if (hashIndex != -1) {
+                                scores.push(new Score(userScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId, maps[hashIndex].md5));
+                            }
                         }
                     });
 

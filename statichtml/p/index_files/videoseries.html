@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!-- saved from url=(0119)https://web.archive.org/web/20120518061045if_/http://www.youtube.com/embed/videoseries?list=PL0EC33B912EB629F2&hl=en_GB -->
+<html lang="en" dir="ltr"><div id="twoseven-scripts" data-info="Scripts added by TwoSeven extension" style="display: none !important; position: static !important; top: 0px !important; left: 0px !important; width: 0px !important; height: 0px !important;"><script type="text/javascript" id="__tmpScript-925203574" data-added-by-two-seven="1">(function() {
+    window.twoseven = {};
+  })();</script><script type="text/javascript" id="__tmpScript-769223294" data-added-by-two-seven="1">(function() {
+    window.twoseven.waitForDOMNode = async function waitForDOMNode(e,t=document){e=e||{};const{type:n,value:o}=e;if(!n||!o)throw new Error("Must specify identifier");let s=o;switch(n){case"tag":s=o.toUpperCase()}if("check"!==n){const e=await i({type:"selector",value:s},[],t);if(e)return new Promise(t=>t(e))}async function i({type:e,value:t},n,o){let s;switch(e){case"tag":s=n.find(e=>e.tagName===t);break;case"selector":s=o.querySelector(t);break;case"check":for(const e of n){if(await t(e))return e}}return s}return new Promise((e,o)=>{const r=new MutationObserver(async o=>{for(const a of o)if("childList"===a.type){const o=Array.from(a.addedNodes),c=await i({type:n,value:s},o,t);if(c)return r.disconnect(),e(c)}});r.observe(t,{childList:!0,subtree:!0})})};
+  })();</script><script type="text/javascript" id="__tmpScript-521527132" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.reportError = function reportError(e,t,n){"string"==typeof(n=n||{})&&(n={message:n});const{message:o,stack:s}=t;Object.assign(n,{tag:e,error:{message:o,stack:s}}),window.tsExtGetPostToParent()({name:name,tag:e,action:"report-error",json:n}),console.error(JSON.stringify(n.error))}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-842349480" data-added-by-two-seven="1">(function() {
+    
+  window.twosevenHmsToSecondsOnly = function(str) {
+      var p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+
+      return s;
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-329111459" data-added-by-two-seven="1">(function() {
+    window.twosevenExtLog = function twosevenExtLog(e,o,c){o||(o=e,e=void 0);let n=c||"black";if(c)switch(c){case"success":n="Green";break;case"info":n="DodgerBlue";break;case"error":n="Red";break;case"warning":n="Orange";break;default:n=c}e?console.log("%c"+e+": "+o,`color:${n}`):console.log("%c"+o,`color:${n}`)};
+  })();</script><script type="text/javascript" id="__tmpScript-208874429" data-added-by-two-seven="1">(function() {
+    
+  document.twosevenGET = function(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          callback(null, xmlhttp.responseText);
+        } else {
+          callback('something else other than 200 was returned', '');
+        }
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  };
+;
+  })();</script><script type="text/javascript" id="__tmpScript-269414323" data-added-by-two-seven="1">(function() {
+    
+  window.triggerEvent = function(e,t,n,o=!1){let s;o?(n&&"string"!=typeof n&&(n=JSON.stringify(n)),s=n):s={data:n},window.twosevenScriptsDiv&&n&&"object"==typeof n&&(console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(n)}`),console.error((new Error).stack));var i=new CustomEvent(t,{bubbles:!0,composed:!0,detail:s});e.dispatchEvent(i)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-110386065" data-added-by-two-seven="1">(function() {
+    window.twoseven.postTo = async function postTo(e,t,n=!1){let o;return t.name=t.name||name,o=n?new Promise(e=>{const n=`ack-${t.action}-${1e9*Math.random()|0}`;t.ack={event:n};window.debug&&["play","pause","currentTime"].some(e=>t.action.includes(e)),window.addEventListener("message",function t({data:o={}}){o.action===n&&(window.removeEventListener("message",t),e(o.json))})}):new Promise(e=>e()),e.postMessage(t,"*"),o};
+  })();</script><script type="text/javascript" id="__tmpScript-103667170" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostTo = function tsExtGetPostTo(){return window.twoseven&&window.twoseven.postTo||window.postTo};
+  })();</script><script type="text/javascript" id="__tmpScript-324847022" data-added-by-two-seven="1">(function() {
+    window.tsExtGetPostToParent = function tsExtGetPostToParent(){return window.twoseven&&window.twoseven.postToParent||window.postToParent};
+  })();</script><script type="text/javascript" id="__tmpScript-474577688" data-added-by-two-seven="1">(function() {
+    window.twoseven.postResponse = async function postResponse(e,t){const{source:n,data:{ack:{event:o}}}=e;window.tsExtGetPostTo()(n,{action:o,json:t})};
+  })();</script><script type="text/javascript" id="__tmpScript-331075608" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToParent = async function postToParent(e,t=!1){return window.tsExtGetPostTo()(window.parent,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-824590443" data-added-by-two-seven="1">(function() {
+    window.twoseven.postToTop = async function postToTop(e,t=!1){return window.tsExtGetPostTo()(window.top,e,t)};
+  })();</script><script type="text/javascript" id="__tmpScript-271741" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.getFromStorage = e=>new Promise((t,n)=>{const o="get-from-storage-"+(1e9*Math.random()|0);window.addEventListener(o,e=>{window.removeEventListener(o,this);const{detail:{data:{value:n}}}=e;t(n)}),triggerEvent(window,"get-from-storage",{key:e,evt:o})})
+  window.twoseven.saveToStorage = e=>{triggerEvent(window,"save-to-storage",e)}
+;
+  })();</script><script type="text/javascript" id="__tmpScript-383597337" data-added-by-two-seven="1">(function() {
+    
+  function attachHistoryListeners(){var e=history.pushState;history.pushState=function(t,n,o){return"function"==typeof history.onpushstate&&history.onpushstate({state:t}),triggerEvent(window,"pushstate",{uri:o}),e.apply(history,arguments)};var t=history.replaceState;history.replaceState=function(e){return"function"==typeof history.onreplacestate&&history.onreplacestate({state:e}),t.apply(history,arguments)}}
+  attachHistoryListeners()
+;
+  })();</script><script type="text/javascript" id="__tmpScript-265609637" data-added-by-two-seven="1">(function() {
+    window.twoseven.once = function once(e,t,n){e.addEventListener(t,function o(s){e.removeEventListener(t,o),n(s)})};
+  })();</script><script type="text/javascript" id="__tmpScript-288045335" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isOnTwoSevenTab = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'is-on-twoseven-tab' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-732034169" data-added-by-two-seven="1">(function() {
+    
+  window.twoseven.isPaused = async () => {
+    const result = await window.twoseven.postTo(window, { action: 'twoseven:pause-state' }, true)
+    return result
+  }
+;
+  })();</script><script type="text/javascript" id="__tmpScript-168765765" data-added-by-two-seven="1">(function() {
+    
+    const roomInfo = {
+      roomOwner: undefined,
+      roomType: undefined,
+      roomController: undefined,
+      roomProperties: undefined
+    }
+    window.twoseven.roomInfo = roomInfo
+
+    window.addEventListener('message', ({ data = {} }) => {
+      const { action } = data
+      if (action !== 'room-updated') {
+        return
+      }
+      const { data: { key, value } } = data
+      roomInfo[key] = value
+    })
+  ;
+  })();</script></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./analytics.js(4).download" type="text/javascript"></script>
+<script type="text/javascript">window.addEventListener('DOMContentLoaded',function(){var v=archive_analytics.values;v.service='wb';v.server_name='wwwb-app56.us.archive.org';v.server_ms=351;archive_analytics.send_pageview({});});</script><script type="text/javascript" src="./playback.bundle.js.download" charset="utf-8"></script>
+<script type="text/javascript" src="./wombat.js.download" charset="utf-8"></script>
+<script type="text/javascript">
+  __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://www.youtube.com/embed/videoseries?list=PL0EC33B912EB629F2&hl=en_GB","20120518061045","https://web.archive.org/","web","/_static/",
+	      "1337321445");
+</script>
+<link rel="stylesheet" type="text/css" href="./banner-styles.css">
+<link rel="stylesheet" type="text/css" href="./iconochive.css">
+<!-- Start Wayback Rewrite JS Include -->
+<script type="text/javascript" src="./jwplayer.js.download" charset="utf-8"></script>
+<script type="text/javascript" src="./video-embed-rewriter.js.download" charset="utf-8"></script>
+<script type="text/javascript">
+_wmVideos_.init("/web");
+</script>
+<!-- End Wayback Rewrite JS Include -->
+
+    <title>osu! ~ NicoNico Chorus - Rolling Girl [Insane] - YouTube</title>
+
+    <link rel="stylesheet" href="./www-embed-vflhxwnn3.css">
+
+
+    <link rel="canonical" href="https://web.archive.org/web/20120518061045/http://www.youtube.com/watch?v=MHprd4a2_wE">
+
+  <style>
+    @-o-viewport { width: device-width; }
+    @-moz-viewport { width: device-width; }
+    @-ms-viewport { width: device-width; }
+    @-webkit-viewport { width: device-width; }
+    @viewport { width: device-width; }
+  </style>
+
+  
+</head>
+  <body id="" class="date-20120517 en_GB ltr   ytg-old-clearfix " dir="ltr" data-new-gr-c-s-check-loaded="14.988.0" data-gr-ext-installed="">
+
+
+<div id="watch-longform-ad" class="hid">
+  <div id="watch-longform-text">
+Advertisement
+  </div>
+  <div id="watch-longform-ad-placeholder"><img src="./pixel-vfl3z5WfW.gif" height="60" width="300"></div>
+</div>
+
+
+
+  <div id="player" class="full-frame wm-videoplayer player-root" style="width: 100%; height: 100%; overflow: hidden;"><div style="position:absolute;top:0;background:#000000c0;z-index:9999;padding:20px;left:10%;right:10%;text-align:center;height:10%;color:#fff;border-bottom-left-radius:20px;border-bottom-right-radius:20px;border:solid 4px #ffffff;border-top:none;font-size:12pt;">Sorry, the Wayback Machine does not have this video (MHprd4a2_wE) archived (or not indexed yet).</div><div class="player-container"><embed width="100%" id="video-player-flash" height="100%" type="application/x-shockwave-flash" src="http://s.ytimg.com/yt/swfbin/watch_as3-vflLhAgwl.swf" allowscriptaccess="always" allowfullscreen="true" bgcolor="#000000" flashvars="el=embedded&amp;fexp=912002%2C914045%2C906049%2C918004%2C901100%2C907217%2C907335%2C921602%2C919306%2C919316%2C904455%2C919324%2C904452&amp;playlist_length=186&amp;is_html5_mobile_device=false&amp;list=PL0EC33B912EB629F2&amp;allow_ratings=1&amp;allow_embed=1&amp;tabsb=1&amp;sendtmp=1&amp;hl=en_GB&amp;tsp_buffer=10&amp;playlist_title=Videosu!%20Home&amp;iurl=https%3A%2F%2Fweb.archive.org%2Fweb%2F20120518061045%2Fhttp%3A%2F%2Fi2.ytimg.com%2Fvi%2FMHprd4a2_wE%2Fhqdefault.jpg&amp;view_count=1094&amp;tspto=12000&amp;title=osu!%20~%20NicoNico%20Chorus%20-%20Rolling%20Girl%20%5BInsane%5D&amp;eurl=http%3A%2F%2Fosu.ppy.sh%2F&amp;avg_rating=5&amp;video_id=MHprd4a2_wE&amp;length_seconds=207&amp;tsp_dvrloop=50&amp;iurlmaxres=https%3A%2F%2Fweb.archive.org%2Fweb%2F20120518061045%2Fhttp%3A%2F%2Fi2.ytimg.com%2Fvi%2FMHprd4a2_wE%2Fmaxresdefault.jpg&amp;enablejsapi=1&amp;sk=FyZG0TD_XGoJlcfsrfxYnGrQMB-b6QVDC&amp;rel=1&amp;playlist_module=https%3A%2F%2Fweb.archive.org%2Fweb%2F20120518061045%2Fhttp%3A%2F%2Fs.ytimg.com%2Fyt%2Fswfbin%2Fplaylist_module-vfldE3-Q0.swf&amp;watch_xlb=https%3A%2F%2Fweb.archive.org%2Fweb%2F20120518061045%2Fhttp%3A%2F%2Fs.ytimg.com%2Fyt%2Fxlb%2Fwatch%2Fstrings-en_GB-vflm2Nl5T.xlb&amp;iurlsd=https%3A%2F%2Fweb.archive.org%2Fweb%2F20120518061045%2Fhttp%3A%2F%2Fi2.ytimg.com%2Fvi%2FMHprd4a2_wE%2Fsddefault.jpg&amp;jsapicallback=ytPlayerOnYouTubePlayerReady&amp;playerapiid=player1&amp;framer=http%3A%2F%2Fosu.ppy.sh%2F"></div><div class="player-actions-container"><div class="player-actions-share"></div><div class="player-actions-close"><div class="player-actions-close-button"></div></div></div></div>
+
+        
+    <script src="./www-embed_core_module-vfl-Eutfo.js.download"></script>
+
+
+  <script>
+    yt.setConfig({
+      'EMBED_BINARY_URL': '//web.archive.org/web/20120518061045/http://s.ytimg.com/yt/jsbin/www-embed_core_module-vfl-Eutfo.js',
+      'ORIGIN': "*",
+      'IS_OPERA_MINI': false
+    });
+    yt.setMsg({
+      'FLASH_UPGRADE': '<div class=\"yt-alert yt-alert-default yt-alert-error  yt-alert-player\"><div class=\"yt-alert-icon\"><img src=\"\/\/s.ytimg.com\/yt\/img\/pixel-vfl3z5WfW.gif\" class=\"icon master-sprite\" alt=\"Alert icon\"><\/div><div class=\"yt-alert-buttons\"><\/div><div class=\"yt-alert-content\">    <span class=\"yt-alert-vertical-trick\"><\/span>\n    <div class=\"yt-alert-message\">\n            You need to upgrade your Adobe Flash Player to watch this video. <br> <a href=\"http:\/\/get.adobe.com\/flashplayer\/\">Download it from Adobe.<\/a>\n    <\/div>\n<\/div><\/div>'
+    });
+      yt.setConfig({
+      'PLAYER_CONFIG': {"assets": {"html": "\/html5_player_template", "css": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/s.ytimg.com\/yt\/cssbin\/www-player-vflW5bdN6.css", "js": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/s.ytimg.com\/yt\/jsbin\/html5player-vfl-1NYeC.js"}, "url": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/s.ytimg.com\/yt\/swfbin\/watch_as3-vflLhAgwl.swf", "min_version": "8.0.0", "args": {"el": "embedded", "fexp": "912002,914045,906049,918004,901100,907217,907335,921602,919306,919316,904455,919324,904452", "playlist_length": 186, "is_html5_mobile_device": false, "list": "PL0EC33B912EB629F2", "allow_ratings": 1, "allow_embed": 1, "tabsb": "1", "sendtmp": "1", "hl": "en_GB", "tsp_buffer": 10, "playlist_title": "Videosu! Home", "iurl": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/i2.ytimg.com\/vi\/MHprd4a2_wE\/hqdefault.jpg", "view_count": 1094, "tspto": 12000, "title": "osu! ~ NicoNico Chorus - Rolling Girl [Insane]", "eurl": "", "avg_rating": 5.0, "video_id": "MHprd4a2_wE", "length_seconds": 207, "tsp_dvrloop": 50, "iurlmaxres": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/i2.ytimg.com\/vi\/MHprd4a2_wE\/maxresdefault.jpg", "enablejsapi": "0", "sk": "FyZG0TD_XGoJlcfsrfxYnGrQMB-b6QVDC", "rel": "1", "playlist_module": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/s.ytimg.com\/yt\/swfbin\/playlist_module-vfldE3-Q0.swf", "watch_xlb": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/s.ytimg.com\/yt\/xlb\/watch\/strings-en_GB-vflm2Nl5T.xlb", "iurlsd": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/i2.ytimg.com\/vi\/MHprd4a2_wE\/sddefault.jpg"}, "url_v9as2": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/s.ytimg.com\/yt\/swfbin\/cps-vfla-j3JE.swf", "params": {"allowscriptaccess": "always", "allowfullscreen": "true", "bgcolor": "#000000"}, "attrs": {"width": "100%", "id": "video-player", "height": "100%"}, "url_v8": "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/s.ytimg.com\/yt\/swfbin\/cps-vfla-j3JE.swf", "html5": false},
+    'EMBED_HTML_TEMPLATE': "\u003ciframe width=\"__width__\" height=\"__height__\" src=\"__url__\" frameborder=\"0\" allowfullscreen\u003e\u003c\/iframe\u003e",
+    'EMBED_HTML_URL': "https:\/\/web.archive.org\/web\/20120518061045\/http:\/\/www.youtube.com\/embed\/__videoid__"
+  });
+    yt.setMsg('HTML5_DEFAULT_FALLBACK', "This video is currently unavailable.");
+  yt.setMsg('FLASH_UPGRADE', "\u003cdiv class=\"yt-alert yt-alert-default yt-alert-error  yt-alert-player\"\u003e\u003cdiv class=\"yt-alert-icon\"\u003e\u003cimg s\u0072c=\"\/\/s.ytimg.com\/yt\/img\/pixel-vfl3z5WfW.gif\" class=\"icon master-sprite\" alt=\"Alert icon\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-buttons\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-content\"\u003e    \u003cspan class=\"yt-alert-vertical-trick\"\u003e\u003c\/span\u003e\n    \u003cdiv class=\"yt-alert-message\"\u003e\n            You need to upgrade your Adobe Flash Player to watch this video. \u003cbr\u003e \u003ca href=\"http:\/\/get.adobe.com\/flashplayer\/\"\u003eDownload it from Adobe.\u003c\/a\u003e\n    \u003c\/div\u003e\n\u003c\/div\u003e\u003c\/div\u003e");
+  yt.setMsg('HTML5_NO_AVAILABLE_FORMATS_FALLBACK', "Your browser does not currently recognise any of the video formats available.\u003cbr\u003e\u003ca href=\"\/html5\"\u003eClick here to visit our frequently asked questions about HTML5 video.\u003c\/a\u003e");
+  yt.setMsg('PLAYER_FALLBACK', "\u003cdiv class=\"yt-alert yt-alert-default yt-alert-error  yt-alert-player\"\u003e\u003cdiv class=\"yt-alert-icon\"\u003e\u003cimg s\u0072c=\"\/\/s.ytimg.com\/yt\/img\/pixel-vfl3z5WfW.gif\" class=\"icon master-sprite\" alt=\"Alert icon\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-buttons\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-content\"\u003e    \u003cspan class=\"yt-alert-vertical-trick\"\u003e\u003c\/span\u003e\n    \u003cdiv class=\"yt-alert-message\"\u003e\n            The Adobe Flash Player or an HTML5 supported browser is required for video playback. \u003cbr\u003e \u003ca href=\"http:\/\/get.adobe.com\/flashplayer\/\"\u003eGet the latest Flash Player\u003c\/a\u003e \u003cbr\u003e \u003ca href=\"\/html5\"\u003eLearn more about upgrading to an HTML5 browser\u003c\/a\u003e\n    \u003c\/div\u003e\n\u003c\/div\u003e\u003c\/div\u003e");
+  yt.setMsg('QUICKTIME_FALLBACK', "\u003cdiv class=\"yt-alert yt-alert-default yt-alert-error  yt-alert-player\"\u003e\u003cdiv class=\"yt-alert-icon\"\u003e\u003cimg s\u0072c=\"\/\/s.ytimg.com\/yt\/img\/pixel-vfl3z5WfW.gif\" class=\"icon master-sprite\" alt=\"Alert icon\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-buttons\"\u003e\u003c\/div\u003e\u003cdiv class=\"yt-alert-content\"\u003e    \u003cspan class=\"yt-alert-vertical-trick\"\u003e\u003c\/span\u003e\n    \u003cdiv class=\"yt-alert-message\"\u003e\n            The Adobe Flash Player or QuickTime is required for video playback. \u003cbr\u003e \u003ca href=\"http:\/\/get.adobe.com\/flashplayer\/\"\u003eGet the latest Flash Player\u003c\/a\u003e \u003cbr\u003e \u003ca href=\"http:\/\/www.apple.com\/quicktime\/download\/\"\u003eGet the latest version of QuickTime\u003c\/a\u003e\n    \u003c\/div\u003e\n\u003c\/div\u003e\u003c\/div\u003e");
+
+  yt.setMsg('HTML5_SPEED_NORMAL', "Normal");
+  yt.setMsg('HTML5_QUALITY_SETTING', "quality");
+  yt.setMsg('HTML5_SPEED_SETTING', "speed");
+  yt.setMsg('HTML5_VOLUME_SETTING', "volume");
+  yt.setMsg('HTML5_VOLUME_MUTED', "muted");
+  yt.setMsg('HTML5_VOLUME_MUTE', "mute");
+  yt.setMsg('HTML5_VOLUME_UNMUTE', "unmute");
+  yt.setMsg('HTML5_CONTROL_TOGGLE', "toggle");
+
+  yt.setMsg('HTML5_SUBS_TRANSCRIBED', "transcribed");
+  yt.setMsg('VISIT_ADVERTISERS_SITE', "Visit advertiser's site");
+  yt.setMsg('FRESCA_COMPLETE_MESSAGE', "Thanks for watching!");
+  yt.setMsg('FRESCA_STAND_BY_MESSAGE', "Please stand by.");
+
+
+
+      yt.embed.writeEmbed();
+  </script>
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 06:10:45 May 18, 2012 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 23:30:39 Dec 22, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  exclusion.robots.policy: 129.17
+  RedisCDXSource: 11.117
+  exclusion.robots: 129.2
+  xauthn.chkprivs: 49.86
+  load_resource: 78.931
+  xauthn.identify: 78.647
+  PetaboxLoader3.datanode: 89.056 (4)
+  captures_list: 261.984
+  PetaboxLoader3.resolve: 30.767
+  esindex: 0.016
+  LoadShardBlock: 67.835 (3)
+  CDXLines.iter: 40.295 (3)
+--></body></html>

@@ -23,9 +23,17 @@ app.set('view engine', 'ejs');
 
 const port = 999;
 
-console.log(config)
+var sql = new Sql(config.host, config.name, config.password, config.database);
 
-var sql = new Sql(config.host, config.name, config.password, config.database, config.port);
+var totalUsers = await sql.getNumberOfUsers();
+var onlineUsers = "N/I";
+var amountOfRankedPlays = await sql.getNumberOfScores();
+
+function updateHeaderValues() {
+    totalUsers = await sql.getNumberOfUsers();
+    onlineUsers = "N/I";
+    amountOfRankedPlays = await sql.getNumberOfScores();
+}
 
 app.get('/u/:id', async (req, res) => {
     try {
@@ -41,6 +49,20 @@ app.get('/u/:id', async (req, res) => {
         res.render('pages/user.ejs', {
             player: player,
             scores: scores
+        });
+    } catch (err) {
+        console.log(err);
+    }
+})
+
+app.get('/p/', async (req, res) => {
+    try {
+        updateHeaderValues();
+
+        res.render('pages/index.ejs', {
+            totalUsers: totalUsers,
+            onlineUsers: onlineUsers,
+            amountOfRankedPlays: amountOfRankedPlays
         });
     } catch (err) {
         console.log(err);

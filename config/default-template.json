@@ -1,0 +1,6 @@
+{
+    "host": "MYSQLADDRESS",
+    "name": "MYSQLNAME",
+    "password": "MYSQLPASS",
+    "database": "server2008"
+}
