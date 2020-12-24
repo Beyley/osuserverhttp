@@ -22,17 +22,17 @@ app.use(bodyParser.json());
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
 
-const port = 999;
+const port = config.port;
 
 var sql = new Sql(config.host, config.name, config.password, config.database);
 
 var totalUsers = 0;
-var onlineUsers = "N/I";
+var onlineUsers = 0;
 var amountOfRankedPlays = 0;
 
 async function updateHeaderValues() {
     totalUsers = await sql.getNumberOfUsers();
-    onlineUsers = "N/I";
+    onlineUsers = await sql.getNumberOfOnlinePlayers();
     amountOfRankedPlays = await sql.getNumberOfScores();
 }
 
@@ -56,7 +56,7 @@ app.get('/u/:id', async (req, res) => {
     }
 })
 
-app.get('/p/', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         await updateHeaderValues();
         var posts = await sql.getLatestPosts();
@@ -82,15 +82,15 @@ app.post('/p/chat', async (req, res) => {
         messages = await sql.getChat();
         messages = messages.reverse();
 
-        var num = 1;
+        var isEven = 1;
         messages.forEach(message => {
-            if (num % 2 == 0) {
+            if (isEven % 2 == 0) {
                 finalString.append(`<tr class="row1"><td class="chattime">${message.time.getHours()}:${message.time.getMinutes()}</td > <td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);
             } else {
                 finalString.append(`<tr class= "row2" ><td class="chattime">${message.time.getHours()}:${message.time.getMinutes()}</td><td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);
             }
 
-            num++;
+            isEven++;
         })
 
         finalString.append("</table>");

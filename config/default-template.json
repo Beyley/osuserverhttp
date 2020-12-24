@@ -2,5 +2,6 @@
     "host": "MYSQLADDRESS",
     "name": "MYSQLNAME",
     "password": "MYSQLPASS",
-    "database": "server2008"
+    "database": "server2008",
+    "port": 999
 }

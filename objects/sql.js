@@ -149,6 +149,23 @@ class Sql {
     }
 
     /**
+     * Gets a count of all ranked users
+     */
+    getNumberOfOnlinePlayers() {
+        return new Promise((resolve, reject) => {
+            this.connection.query('SELECT count(*) FROM osu_users WHERE `online` = true', function (err, results, fields) {
+                var userCount = 0;
+
+                results.forEach(result => {
+                    userCount = result["count(*)"];
+                });
+
+                resolve(userCount);
+            });
+        });
+    }
+
+    /**
      * Gets a count of all ranked scores
      */
     getNumberOfScores() {
