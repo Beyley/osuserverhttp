@@ -49,6 +49,9 @@
                                 $("#chat").load("/p/chat", {
                                     limit: 25
                                 }, function() {
+                                    $("#onlineusers").load("/p/onlineusercount", {
+                                        limit: 25
+                                    });
                                     setTimeout(updateChat, 10000);
                                 });
                             }

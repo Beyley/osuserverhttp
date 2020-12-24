@@ -72,6 +72,17 @@ app.get('/', async (req, res) => {
     }
 })
 
+app.post('/p/onlineusercount', async (req, res) => {
+    try {
+        var userCount = 0;
+        userCount = await sql.getNumberOfOnlinePlayers();
+
+        res.send(userCount.toString());
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 app.post('/p/chat', async (req, res) => {
     try {
         var finalString = new StringBuilder();

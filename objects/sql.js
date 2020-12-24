@@ -137,11 +137,7 @@ class Sql {
     getNumberOfUsers() {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM osu_users', function (err, results, fields) {
-                var userCount = 0;
-
-                results.forEach(result => {
-                    userCount = result["count(*)"];
-                });
+                var userCount = results[0]["count(*)"];
 
                 resolve(userCount);
             });
@@ -154,11 +150,7 @@ class Sql {
     getNumberOfOnlinePlayers() {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM osu_users WHERE `online` = true', function (err, results, fields) {
-                var userCount = 0;
-
-                results.forEach(result => {
-                    userCount = result["count(*)"];
-                });
+                var userCount = results[0]["count(*)"];
 
                 resolve(userCount);
             });
@@ -171,11 +163,7 @@ class Sql {
     getNumberOfScores() {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM `osu_scores`', function (err, results, fields) {
-                var scoreCount = 0;
-
-                results.forEach(result => {
-                    scoreCount = result["count(*)"];
-                });
+                var scoreCount = results[0]["count(*)"];
 
                 resolve(scoreCount);
             });
