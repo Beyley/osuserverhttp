@@ -221,6 +221,8 @@ class Sql {
             this.connection.query('SELECT * FROM osu_scores WHERE username = ? and pass = True ORDER BY score DESC', username, (err, usersScores, fields) => {
                 if (err) throw err;
                 this.connection.query('SELECT * FROM osu_maps WHERE approved = 2;', (err, allRankedMaps, fields) => {
+                    if (err) throw err;
+
                     allRankedMaps.forEach(map => {
                         maps.push(new Map(map.file_md5, map.artist, map.title, map.version, map.beatmapset_id));
                     });
