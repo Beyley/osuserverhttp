@@ -2,8 +2,8 @@
 
 <div class="header">
     <div id="playstats">
-        <b><%= totalUsers %></b> users, <b><span id="onlineusers"><%= onlineUsers %></span></b> online now.
-        <br> A total of <b><span id="playcount"><%= amountOfRankedPlays %></span></b> ranked plays!
+        <b><%= headerCounts.totalUsers %></b> users, <b><span id="onlineusers"><%= headerCounts.onlineUsers %></span></b> online now.
+        <br> A total of <b><span id="playcount"><%= headerCounts.amountOfRankedPlays %></span></b> ranked plays!
     </div>
 
     <div class="menu">
@@ -36,7 +36,7 @@
                     <li><a href="/p/packlist">Beatmap Packs</a></li>
                 </ul>
             </li>
-            <li><a href="/p/pp" class="sf-with-ul">Rankings<span class="sf-sub-indicator"> »</span></a>
+            <li><a href="/p/playerranking" class="sf-with-ul">Rankings<span class="sf-sub-indicator"> »</span></a>
                 <ul style="display: none; visibility: hidden;">
                     <li><a href="/p/pp">Performance <span style="color:#eca1dd; vertical-align: super">beta</span></a></li>
                     <li><a href="/p/chart">Charts</a></li>

@@ -26,14 +26,12 @@ const port = config.port;
 
 var sql = new Sql(config.host, config.name, config.password, config.database);
 
-var totalUsers = 0;
-var onlineUsers = 0;
-var amountOfRankedPlays = 0;
+var headerCounts = [];
 
 async function updateHeaderValues() {
-    totalUsers = await sql.getNumberOfUsers();
-    onlineUsers = await sql.getNumberOfOnlinePlayers();
-    amountOfRankedPlays = await sql.getNumberOfScores();
+    headerCounts.totalUsers = await sql.getNumberOfUsers();
+    headerCounts.onlineUsers = await sql.getNumberOfOnlinePlayers();
+    headerCounts.amountOfRankedPlays = await sql.getNumberOfScores();
 }
 
 app.get('/u/:id', async (req, res) => {
@@ -62,14 +60,57 @@ app.get('/', async (req, res) => {
         var posts = await sql.getLatestPosts();
 
         res.render('pages/index.ejs', {
-            totalUsers: totalUsers,
-            onlineUsers: onlineUsers,
-            amountOfRankedPlays: amountOfRankedPlays,
+            headerCounts: headerCounts,
+            pageName: "rhythm is just a click away",
             posts: posts
         });
     } catch (err) {
         console.log(err);
     }
+})
+
+app.get('/p/playerranking', async (req, res) => {
+    await updateHeaderValues();
+
+    try {
+        var players = await sql.getAllUsers();
+
+        var leaderboard = new StringBuilder();
+
+        players.forEach(function () {
+
+        })
+
+        var rank = 1;
+        for (const player of players) {
+            if ((rank - 1) % 2 == 0) {
+                leaderboard.append(`<tr class="row1p" onclick="setDocumentLocation(/u/${player.username});">`);
+            } else {
+                leaderboard.append(`<tr class="row2p" onclick="setDocumentLocation(/u/${player.username});">`);
+            }
+
+            leaderboard.append(`<td><b>#${rank}</b></td>`);
+            leaderboard.append(`<td><a href="/u/${player.username}">${player.username}</a></td>`);
+            leaderboard.append(`<td>${player.accuracy}%</td>`);
+            leaderboard.append(`<td><span>${player.playCount}</span></td>`);
+            leaderboard.append(`<td><span>${player.totalScore}</span></td>`);
+            leaderboard.append(`<td><span style="font-weight:bold">${player.rankedScore}</span></td>`);
+            leaderboard.append(`<td><span>${await sql.getUserXCount(player.username)}</span></td>`);
+            leaderboard.append(`<td><span>${await sql.getUserSCount(player.username)}</span></td>`);
+            leaderboard.append(`<td><span>${await sql.getUserACount(player.username)}</span></td>`);
+
+            leaderboard.append("</tr>");
+
+            rank++;
+        }
+
+        res.render('pages/ranking.ejs', {
+            headerCounts: headerCounts,
+            pageName: "Player Ranking",
+            leaderboard: leaderboard.toString(),
+            players: players
+        });
+    } catch (err) { }
 })
 
 app.post('/p/onlineusercount', async (req, res) => {
@@ -93,15 +134,21 @@ app.post('/p/chat', async (req, res) => {
         messages = await sql.getChat();
         messages = messages.reverse();
 
-        var isEven = 1;
+        var messageIndex = 1;
         messages.forEach(message => {
-            if (isEven % 2 == 0) {
-                finalString.append(`<tr class="row1"><td class="chattime">${message.time.getHours()}:${message.time.getMinutes()}</td > <td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);
+            var timestamp = new StringBuilder();
+
+            timestamp.append(message.time.getHours().toString());
+            timestamp.append(':');
+            timestamp.append(message.time.getMinutes().toString());
+
+            if (messageIndex % 2 == 0) {
+                finalString.append(`<tr class="row1"><td class="chattime">${timestamp.toString()}</td > <td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);
             } else {
-                finalString.append(`<tr class= "row2" ><td class="chattime">${message.time.getHours()}:${message.time.getMinutes()}</td><td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);
+                finalString.append(`<tr class= "row2" ><td class="chattime">${timestamp.toString()}</td><td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);
             }
 
-            isEven++;
+            messageIndex++;
         })
 
         finalString.append("</table>");
@@ -113,15 +160,7 @@ app.post('/p/chat', async (req, res) => {
     }
 })
 
-app.get('/ranking', async (req, res) => {
-    try {
-        var players = await sql.getAllUsers();
 
-        res.render('pages/ranking.ejs', {
-            players: players
-        });
-    } catch (err) { }
-})
 
 app.get('/register', (req, res) => {
     res.render('pages/register.ejs', {});

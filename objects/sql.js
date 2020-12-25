@@ -29,14 +29,53 @@ class Sql {
 
             this.connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
                 if (err) throw err;
+
                 var rank = 1;
 
                 allUsers.forEach(user => {
-                    players.push(new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount));
+                    var tempPlayer = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount);
+
+                    players.push(tempPlayer);
                     rank++;
                 });
 
                 resolve(players);
+            });
+        });
+    }
+
+    getUserXCount(username) {
+        return new Promise((resolve, reject) => {
+            this.connection.query('SELECT count(*) FROM osu_scores WHERE (grade = \'X\' OR grade = \'XH\') AND username = ?', [username], (err, results, fields) => {
+                if (err) throw err;
+
+                var xCount = results[0]["count(*)"];
+
+                resolve(xCount);
+            });
+        });
+    }
+
+    getUserSCount(username) {
+        return new Promise((resolve, reject) => {
+            this.connection.query('SELECT count(*) FROM osu_scores WHERE (grade = \'S\' OR grade = \'SH\') AND username = ?', [username], (err, results, fields) => {
+                if (err) throw err;
+
+                var sCount = results[0]["count(*)"];
+
+                resolve(sCount);
+            });
+        });
+    }
+
+    getUserACount(username) {
+        return new Promise((resolve, reject) => {
+            this.connection.query('SELECT count(*) FROM osu_scores WHERE grade = \'A\' AND username = ?', [username], (err, results, fields) => {
+                if (err) throw err;
+
+                var aCount = results[0]["count(*)"];
+
+                resolve(aCount);
             });
         });
     }

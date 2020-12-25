@@ -7,6 +7,10 @@ class Player {
         this.rank = rank;
 
         this.playCount = playCount;
+
+        this.gradeXCount = 0;
+        this.gradeSCount = 0;
+        this.gradeACount = 0;
     }
 }
 
