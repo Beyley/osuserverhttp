@@ -1,45 +1,1363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<%- include('../../partials/global/htmlhead.ejs') %>
+
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="/style/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/style/starter-template.css" rel="stylesheet">
+<body data-new-gr-c-s-check-loaded="14.988.0" data-gr-ext-installed="">
+    <!-- <a name="top"></a> -->
+    <div class="bodytopbg">
+        <div class="mainbody">
+            <div class="mainbody2">
+                <div id="coolheader" style="background-image: url(&#39;/style/images/right-j.jpg&#39;);"></div>
+                <!-- <a id="top_support" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/support"> </a>
+                <a id="top_follow" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/twitter"> </a> -->
+                
+                <%- include('../../partials/global/header.ejs') %>
+                
+                <div class="content">
+                    <%- include('../../partials/global/loginform.ejs') %>
 
-    <title><%= player.username%></title>
-</head>
+                    <div class="content-with-bg">
 
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">osu!2012</a></div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li> <a href="/register">Register</a></li>
-                    <li> <a href="/ranking">Rankings</a></li>
-                    <li></li>
-                </ul>
+                        <script>
+                            var userId = 39828;
+                            var activeTab = window.location.hash != "" ? window.location.hash.replace("#","").replace("_","") : "general";
+                            var activeGameMode = 0;
+                            
+                            $(document).ready(function(){
+                            	setGameMode(activeGameMode, true);
+                            			$("#userpage").load("/pages/include/profile-userpage.php?u=39828");
+                            	});
+                            
+                            $(window).load(function() {
+                            			$("#userpage").css("max-height", $(".userbox").height() + "px");
+                            	});
+                            
+                            function expandProfile(id, forceExpand)
+                            {
+                            	activeTab = id;
+                            	if (!($("#" + id).hasClass("expanded")) || forceExpand)
+                            	{
+                            		//$(".expanded").slideUp(200);
+                            		//$(".expanded").removeClass("expanded");
+                            
+                            		$("#" + id).addClass("expanded");
+                            		$("#" + id).slideDown(500);
+                            
+                            		if (forceExpand)
+                            			window.location.hash = "#_" + activeTab;
+                            		loadInCurrentTab("/pages/include/profile-" + id + ".php?u=" + userId + "&m=" + activeGameMode);
+                            	}
+                            	else
+                            	{
+                            		$("#" + id).slideUp(500);
+                            		$("#" + id).removeClass("expanded");
+                            	}
+                            }
+                            
+                            var activeRequest = null;
+                            
+                            function loadInCurrentTab(page)
+                            {
+                               if(activeRequest) {
+                                  activeRequest.abort();
+                               }
+                            
+                               activeRequest = $.get(page, null, function(text){
+                                     activeRequest = null;
+                            
+                                     $("#" + activeTab).html(text);
+                                     $("#" + activeTab).stop(true,true).fadeTo(50,1,function() {    $("#" + activeTab).css('filter', 'none'); });
+                                     $("#" + activeTab).addClass("loaded");
+                                  });
+                            }
+                            
+                            function setGameMode(mode, first)
+                            {
+                            	$(".profileGameModeButton").removeClass("active");
+                            	$("#gm-" + mode ).addClass("active");
+                            	activeGameMode = mode;
+                            
+                            	loadInCurrentTab("/pages/include/profile-" + activeTab + ".php?u=" + userId + "&m=" + activeGameMode);
+                            }
+                        </script>
+
+                        <div class="prof-left paddingboth minimal" id="fixable">
+
+                            <div class="centrep userbox">
+                                <div class="row2p h1"><%= player.username %></div>
+                                <div class="row2p"><b></b></div>
+                                <div class="row1p"><img src="/a/<%= player.username %>" alt="User avatar"></div>
+
+                                <div class="row2p"><b>Rank #<%= player.rank %></b></div>
+
+                                <div class="row2p">
+                                    <center>
+                                        <a href="/forum/ucp.php?i=pm&amp;mode=compose&amp;u=39828"><img src="/style/images/icon_contact_pm.png" alt="Send private message" title="Send private message"></a>
+                                    </center>
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <center>
+                                    <a href="http://osu.ppy.sh/p/profile?u=39828&amp;a=add" style="color:green;font-weight:bold;">Become Friends!</a>
+                                </center>
+                            </div>
+
+                            <table cellpadding="2" cellspacing="1">
+                                <tbody>
+                                    <tr>
+                                        <td align="right"><b>Age:</b></td>
+                                        <td>N/A</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><b>Occupation:</b></td>
+                                        <td>N/A</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><b>Interests:</b></td>
+                                        <td>N/A</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="background: #E7E4FC; height: 1px; padding: 0;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="right"><b>Arrived:</b></td>
+                                        <td><%= player.registerTime.toDateString() %></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><b>Last Active:</b></td>
+                                        <td><%= player.lastLoginTime.toDateString() %></td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td align="right"><b>Posts:</b></td>
+                                        <td><a href="http://osu.ppy.sh/forum/search.php?author_id=39828&amp;sr=posts">154</a></td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="prof-right">
+
+                            <div class="userpage" id="userpage" style="max-height: 242px;"> <!--
+                                <link rel="stylesheet" type="text/css" href="/style/images/banner-styles.css">
+                                <link rel="stylesheet" type="text/css" href="/style/images/iconochive.css">
+                                <span style="color: #FF0000"><span style="font-weight: bold"><span class="fontsize150">30 apr 2012</span></span>
+                                </span><br><img src="/style/images/spZM" alt="Image"><br><br><span style="color: #FF0000"><span style="font-weight: bold"><span class="fontsize150">10 mar 2012</span></span>
+                                </span> <br><img src="/style/images/s8Km" alt="Image"> <br><br> <span style="color: #FF0000"><span style="font-weight: bold"><span class="fontsize150">3 dec 2011</span></span>
+                                </span> <br><img src="/style/images/s9hE" alt="Image"> <br> <br><img src="/style/images/s9hM" alt="Image"><br><br><img src="/style/images/s9in" alt="Image"><br>by <span style="font-weight: bold">Ibuki Suika</span> <br><br><span style="color: #0000FF"><span class="fontsize150">Łajt Łółv skin 1.1</span></span><br><a href="https://web.archive.org/web/20121228182616mp_/http://puu.sh/vW6h" class="postlink">http://puu.sh/vW6h</a><br><br><br>
+                                <a href="https://web.archive.org/web/20121228182616mp_/http://s09.flagcounter.com/more/u1Hd" class="postlink"><img src="/style/images/saved_resource" alt="Image"></a>
+                            --> </div>
+
+                            <div class="profileGameModes">
+                                <div><a class="profileGameModeButton active" id="gm-0" onclick="setGameMode(0)">osu!</a><!-- <a class="profileGameModeButton" id="gm-1" onclick="setGameMode(1)">Taiko</a><a class="profileGameModeButton" id="gm-2" onclick="setGameMode(2)">CatchTheBeat</a>--> </div> 
+                            </div>
+
+                            <table class="beatmapListing" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding:0px">
+                                            <table class="profile-tabs">
+                                                <tbody>
+                                                    <tr>
+                                                        <td onclick="expandProfile(&#39;general&#39;, true)">General</td>
+                                                        <td onclick="expandProfile(&#39;leader&#39;, true)">Top Ranks</td>
+                                                        <td onclick="expandProfile(&#39;history&#39;, true)">Historical</td>
+                                                        <td onclick="expandProfile(&#39;beatmaps&#39;, true)">Beatmaps</td>
+                                                        <td onclick="expandProfile(&#39;achievements&#39;, true)">Achievements</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr onclick="expandProfile(&#39;general&#39;)">
+                                        <td class="sectionHeading" id="_general">General</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sectionContents">
+                                            <div id="general" class="loaded expanded" style="opacity: 1; filter: none;">
+
+                                                <link rel="stylesheet" type="text/css" href="/style/images/banner-styles.css">
+                                                <link rel="stylesheet" type="text/css" href="/style/images/iconochive.css">
+                                                <!-- End Wayback Rewrite JS Include -->
+                                                <div class="profileStatLine" style="font-size:160%" title="Performance Points are earned by triumphing above others in the rankings. It aims to allow comparison of players based on their relative skill, rather than how much they play."><b>Global <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/wiki/Performance_Points">Performance</a> Rank: #N/A</b><br>
+                                                <b>Global Score Rank: #<%= player.rank %></b></div><br>
+                                                <div style="margin:5px;text-align:center"><img id="profimage" width="628" height="120" src="/style/images/profile-graphperformance.php"></div>
+                                                <div>Your <strong>raw pp</strong> is currently at <strong>N/A</strong>. To find out more about how this is calculated, visit <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/wiki/Performance_Points">the wiki page</a> explaining the formula behind it! Keep in mind this is a <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/forum/t/92185">constantly evolving system</a>, and you should focus on doing the best you can in order to improve it. If you think you should be higher than another player, try beating some of their high performance ranks!</div>
+                                                <div class="profileStatHeader">Recent Activity</div>
+
+                                                <!-- <div id="truncated">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="20%">1 hour ago</td>
+                                                                <td>
+                                                                    <div class="event epic2"><img src="/style/images/S_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #25</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/91156">qinche - Meltdown [Dai]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">1 hour ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/SH_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #8</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/84075">KOTOKO - I can't get over your best smile [MoonCarrot]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">1 hour ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/SH_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #6</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/78239">Asriel - Kegare Naki Yume [Yume]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">2 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/X_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #7</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/77769">Faylan - Last vision for last [Impossible]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div><a href="http://osu.ppy.sh/u/39828#" onclick="return expandPost()">Show me more...</a></div>
+                                                </div> -->
+                                                 
+                                                <!-- <div id="full" class="hidden">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="20%">1 hour ago</td>
+                                                                <td>
+                                                                    <div class="event epic2"><img src="/style/images/S_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #25</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/91156">qinche - Meltdown [Dai]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">1 hour ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/SH_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #8</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/84075">KOTOKO - I can't get over your best smile [MoonCarrot]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">1 hour ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/SH_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #6</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/78239">Asriel - Kegare Naki Yume [Yume]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">2 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/X_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #7</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/77769">Faylan - Last vision for last [Impossible]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">2 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic8"><img src="/style/images/SH_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #1</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/73454">Amane - Clearview -original mix- [Yeahteke]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">2 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/S_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #6</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/73454">Amane - Clearview -original mix- [Yeahteke]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">2 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/SH_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #4</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/74684">Demetori - Wind God Girl [Extra]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">3 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/A_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #5</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/74684">Demetori - Wind God Girl [Extra]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">3 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic2"><img src="/style/images/A_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #12</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/71080">Kitsune^2 - He Has No Mittens [BD's Mittens]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">3 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic2"><img src="/style/images/S_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #39</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/71087">Kitsune^2 - He Has No Mittens [Hard]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">3 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic1"><img src="/style/images/A_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved rank #313 on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/72402">DragonForce - Through The Fire And Flames [Hard]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">4 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/S_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #2</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/72403">DragonForce - Through The Fire And Flames [Medium]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">4 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic1"><img src="/style/images/A_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved rank #242 on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/70258">EastNewSound - I Wish You Would Die [Collab]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">4 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic4"><img src="/style/images/SH_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #4</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/68352">Shoji Meguro - Never More [Marathon]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="20%">4 hours ago</td>
+                                                                <td>
+                                                                    <div class="event epic2"><img src="/style/images/S_small.png"> <b><a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/u/39828">White Wolf</a></b> achieved <b>rank #11</b> on <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/b/72718">Otouto no Ane - Mirishira Romeo &amp; Cinderella [Sayonara Romeo]</a> (osu!)</div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> -->
+
+                                                <div class="profileStatHeader">Detailed Stats</div>
+                                                <font color="#0e3062">
+                                                    <div class="profileStatLine" title="Ranked Score is the main metric of osu!, which gives you your rank in the online score charts. It consists of the highest passing score you have achieved in each beatmap set. This means that if you play both Normal and Hard difficulties of the same beatmap set, only your highest scoring difficulty will be included."><b>Ranked Score</b>: <%= player.rankedScore %> (<b>#<%= player.rank %></b>)</div><br></font>
+                                                <div class="profileStatLine" title="Accuracy is calculated as an average of every beatmap you have achieved a passing score in, with each difficulty counting separately. Accuracy is calculated based on the hit score value - so a 50 is worth 1/6th of a 300 hit, and a miss is worth nothing."><b>Hit Accuracy</b>: <%= player.accuracy %>%</div><br>
+                                                <div class="profileStatLine" title="Total number of ranked beatmap plays. This includes both passes and fails."><b>Play Count</b>: <%= player.playCount %></div><br>
+                                                <div class="profileStatLine" title="Total points scored in all ranked beatmap plays. This includes both passes and fails."><b>Total Score</b>: <%= player.totalScore %></div>
+                                                <br>
+                                                <div class="profileStatLine" title="Your level is based on your total accumulated score. This includes any ranked score, be it a pass or fail. You will gradually increase your level just by playing osu!"><b>Current Level</b>: N/A</div><br>
+                                                <center>
+                                                    <table width="300px" height="20px" class="levelMetre" border="0" cellpadding="0" cellspacing="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="levelPercent" width="0px" align="right">0%</td>
+                                                                <td bgcolor="white">&nbsp;</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </center><br>
+                                                <div class="profileStatLine" title="Total notes hit."><b>Total Hits</b>: N/A</div><br>
+                                                <div class="profileStatLine" title="Highest combo achieved (hits in a row without a miss)."><b>Maximum Combo</b>: N/A</div><br>
+                                                <div class="profileStatLine" title="The total number of times this user&#39;s replays have been watched."><b>Replays Watched by Others</b>: N/A times</div><br>
+                                                <div class="profileStatLine"><strong>Ranks</strong></div>
+                                                <table align="center" width="60%" cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="42"><img height="42" src="/style/images/X.png"></td>
+                                                            <td width="50"><%= player.gradeXCount %></td>
+                                                            <td width="42"><img height="42" src="/style/images/S.png"></td>
+                                                            <td width="50"><%= player.gradeSCount %></td>
+                                                            <td width="42"><img height="42" src="/style/images/A.png"></td>
+                                                            <td width="50"><%= player.gradeACount %></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <br>For further information on stats and scoring, see the <a href="https://web.archive.org/web/20121228182616/http://osu.ppy.sh/wiki/FAQ#Scoring" target="_top">wiki</a>.<br>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr onclick="expandProfile(&#39;leader&#39;)">
+                                        <td class="sectionHeading" id="_leader">Top Ranks</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sectionContents">
+                                            <div id="leader" class="expanded loaded" style="opacity: 1; filter: none;">
+
+                                                <link rel="stylesheet" type="text/css" href="/style/images/banner-styles.css">
+                                                <link rel="stylesheet" type="text/css" href="/style/images/iconochive.css">
+                                                <!-- End Wayback Rewrite JS Include -->
+                                                <h2>Best <a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/wiki/Performance_Points">Performance</a></h2>
+                                                <div class="prof-beatmap" id="leader-84036">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/84036?m=0">Megpoid GUMI - Aitai [NTR]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-62161">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/62161?m=0">07th Expansion - dreamenddischarger [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-75781">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/75781?m=0">Cee Lo Green - Fuck You! [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-64909">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/64909?m=0">NicoNico Chorus &amp; Hatsune Miku - Melt [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        10 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-79018">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/79018?m=0">Liz Triangle - Who Killed U.N.Owen (Full Version) [Scarlet]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        3 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-63724">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/63724?m=0">Lia - Saya's Song Remix [Collab]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        3 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-49101">
+                                                    <div class="h">
+                                                        <img src="/style/images/S_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/49101?m=0">m-flo loves CHEMISTRY - Astrosexy [Sexy]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        3 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-73433">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/73433?m=0">EastNewSound - Hana wa Gensou no Hate Ni (Full Ver.) [Collab Flower View]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        3 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-109301">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/109301?m=0">Kagamine Rin - Black Rebel [0108 Rebel]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        10 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-53674">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/53674?m=0">Toyosaki Aki - GO!GO!MANIAC [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <h2>First Place Ranks</h2>
+                                                <div class="prof-beatmap" id="leader-38166">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/38166?m=0">David J. Franco - Scribblenauts Theme [Blue's Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-27335">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/27335?m=0">Dave Rodgers - Final Countdown [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-48690">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/48690?m=0">Dave Days - Fireflies (Ikea) [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-75095">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/75095?m=0">Paul K. Joyce - Can We Fix It? [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-116023">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/116023?m=0">Joe Inoue - CLOSER (TV Size) [Mo Wang]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-9904">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/9904?m=0">Hatsune Miku - Miku Miku ni shite ageru [Apollo Justice Special]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-179816">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/179816?m=0">PSY vs. Perfume - A Gangnam Style Hurly Burly [Hinsvar's EXTRA STYLE]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-92267">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/92267?m=0">Enrique Iglesias feat. Ludacris - Tonight (I'm Lovin' You) [Night]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-58037">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/58037?m=0">Avenged Sevenfold - A Little Piece of Heaven [Marathon]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-93240">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/93240?m=0">Rie Kugimiya, Eri Kitamura &amp; Yui Horie - Pre-Parade (TV Size) [Gladi's Taiga-Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-58997">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/58997?m=0">Kugimiya Rie - Pre-Parade -Postparade Mix- [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-53278">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/53278?m=0">Kugimiya Rie - Pre-Parade (Instrumental) [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-62161">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/62161?m=0">07th Expansion - dreamenddischarger [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-35910">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/35910?m=0">Inoue Joe - Closer [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-23717">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/23717?m=0">GigaScythe - Still Alive Rock Remix [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-29346">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/29346?m=0">Melody Chubak - bu bu poruche ~LocoRoco Yellow's Theme~ [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-83646">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/83646?m=0">Ken Nakagawa - Soul Boy [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-30799">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/30799?m=0">Pussycat Dolls feat. A.R. Rahman - Jay Ho! [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-34984">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/34984?m=0">Neople - Purgatory [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-166316">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/166316?m=0">incinerate - Purgatorium [Heaven]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-123824">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/123824?m=0">Shihoko Hirata - Signs of Love (Reincarnation ver.) [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-37379">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/37379?m=0">Jet - Are You Gonna Be My Girl [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-44653">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/44653?m=0">Dio ft. Jayh - Cool [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-17672">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/17672?m=0">Asian Kung-Fu Generation - World World World [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-84077">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/84077?m=0">Hatsune Miku - Sayounara [Holo]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-97976">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/97976?m=0">Edward Maya feat. Vika Jigulina - Stereo Love [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-20901">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/20901?m=0">Jon Bon Jovi - It's My Life [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-10817">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/10817?m=0">Des-ROW feat. TSUBOI for ALPHA - DAIKENKAI [Full]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-27713">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/27713?m=0">Nana Takahashi - No Life Queen [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-40185">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/40185?m=0">Snoop Dogg - Sensual Seduction [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-21600">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/21600?m=0">III: Sound Create Unit - Galaxy Fantasy [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-29704">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/29704?m=0">M.I.A - Paper Planes [Pineapple Express!!!]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-155879">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/155879?m=0">Maroon 5 ft. Wiz Khalifa - Payphone [Spare Change]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-368">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/368?m=0">Smash Mouth - All Star [Normal]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-75781">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/75781?m=0">Cee Lo Green - Fuck You! [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-73078">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/73078?m=0">My Chemical Romance - Teenagers [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-138549">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/138549?m=0">Yousei Teikoku - Kuusou Mesorogiwi (TV Size) [Deus Ex]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-96763">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/96763?m=0">Yousei Teikoku - Kokou no Sousei [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-84036">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/84036?m=0">Megpoid GUMI - Aitai [NTR]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        1 month ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-81283">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/81283?m=0">Astroline - Close My Eyes (Nightcore Mix) [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-62720">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/62720?m=0">Asriel - Tsuioku no Chikai [Rin]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-23738">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/23738?m=0">Asian Kung-Fu Generation - Loop &amp; Loop [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-44800">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/44800?m=0">Ashley Tisdale and Lucas Grabeel - What I've Been Looking For [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-28652">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/28652?m=0">Ashley Tisdale and Lucas Grabeel - I Want it All [You're A Superstar! (By Wojjan)]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-47828">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/47828?m=0">Ashley Tisdale - Be Good To Me [orion's Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-150788">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/150788?m=0">Koda Kumi - No Regret (TV Size) [Insane]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-57229">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/57229?m=0">Owl City - Vanilla Twilight [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-128882">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/128882?m=0">Owl City - The Christmas Song [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-43881">
+                                                    <div class="h">
+                                                        <img src="/style/images/SH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/43881?m=0">Owl City - Sunburn [Hard ROCK!]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div class="prof-beatmap" id="leader-28386">
+                                                    <div class="h">
+                                                        <img src="/style/images/XH_small.png">
+                                                        <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/b/28386?m=0">Dj Remo feat. Pearline - Taste Me All Day [Hard]</a></b>
+                                                    </div>
+                                                    <div class="c">
+                                                        2 months ago
+                                                    </div>
+                                                </div>
+                                                <div id="more-0">
+                                                    <div class="prof-beatmap">
+                                                        <div class="h">
+                                                            <a href="http://osu.ppy.sh/u/39828#" onclick="$(&quot;#more-0&quot;).html(&quot;Loading...&quot;);$(&quot;#more-0&quot;).load(&quot;/pages/include/profile-leader.php?u=39828&amp;m=0&amp;p=1&quot;); return false;"><b>Show me more!</b></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr onclick="expandProfile(&#39;history&#39;)">
+                                        <td class="sectionHeading" id="_history">Historical</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sectionContents">
+                                            <div id="history" class="expanded loaded" style="opacity: 1; filter: none;">
+
+                                                <link rel="stylesheet" type="text/css" href="/style/images/banner-styles.css">
+                                                <link rel="stylesheet" type="text/css" href="/style/images/iconochive.css">
+                                                <!-- End Wayback Rewrite JS Include -->
+                                                <div class="profileStatHeader">Play History</div>
+                                                <center><img src="/style/images/profile-graphactivity.php"></center>
+                                                <div class="profileStatHeader">Most Played Beatmaps</div>
+                                                <div style="font-size:180%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:174%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:168%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:162%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:156%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:150%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:144%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:138%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:132%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:126%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:120%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:114%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:108%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:102%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div style="font-size:96%">N/A plays - <a target="_top" href="http://osu.ppy.sh/b/0">ARTIST - SONG [DIFF]</a></div>
+                                                <div class="profileStatHeader">Replays Watched History</div>
+                                                <center><img src="/style/images/profile-graphreplays.php"></center>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr onclick="expandProfile(&#39;beatmaps&#39;)">
+                                        <td class="sectionHeading" id="_beatmaps">Beatmaps</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sectionContents">
+                                            <div id="beatmaps" class="expanded loaded" style="opacity: 1; filter: none;">
+                                                Click any of the following categories to expand them.
+                                                <div class="profileBeatmapHeader" onclick="$(&quot;#beatmapsFavourite&quot;).toggle()">Favourite Beatmaps (17)</div>
+                                                <div class="hidden" id="beatmapsFavourite" style="display: none;">
+                                                    <div class="prof-beatmap" id="fav-3678">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/3678">Tenacious D - Tribute</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/2650">awp</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 8.80
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-5958">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/5958">SHK - Imagination</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/57057">Gabi</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 8.96
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-6318">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/6318">Cobra Starship - The City Is At War</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/6794">Nharox</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 8.93
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-7104">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/7104">Yuu - U.N. Owen was Her?</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/27343">ignorethis</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.37
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-7691">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/7691">REDALiCE - Great Nano Desu</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/56917">fartownik</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.12
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-8340">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/8340">Haru - Lunatic Princess (Instrumental)</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/89619">tieff</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.15
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-12101">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/12101">Kamikaze - My Love Is You</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/104827">orioncomet</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.35
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-16349">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/16349">Renard - Banned Forever</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/19048">Blue Dragon</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.57
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-19554">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/19554">paraoka - monolithize phases</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/27767">happy30</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.68
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-21782">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/21782">t+pazolite - Kanon-Kanon</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/113027">TKiller</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 0.00
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-27291">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/27291">ICHIKO - I SAY YES (TV Size)</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/232601">Fight69</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.39
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-31333">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/31333">Renard - Blue Night</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/537084">DoKoLP</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.71
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-33367">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/33367">AU - Rochill Tarmination (9 voice edit)</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/93722">baba1994</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 0.00
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-34097">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/34097">Hatsune Miku - No,39</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/243917">val0108</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.66
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-46238">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/46238">DragonForce - Fallen World</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/579428">Jenny</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 9.28
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-46615">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/46615">Mutsuhiko Izumi ft. DarkStoorM - WWKatsugotoggoN Can Can</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/63829">Bass</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 0.00
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="fav-52465">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/52465">The Quick Brown Fox feat. WWolf - Who's afraid of the big white</a></b> by <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/u/56917">fartownik</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            User Rating 0.00
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="profileBeatmapHeader" onclick="$(&quot;#beatmapsGraveyard&quot;).toggle()">Graveyarded Beatmaps (5)</div>
+                                                <div class="hidden" id="beatmapsGraveyard" style="display: block;">
+                                                    <div class="prof-beatmap" id="graveyard-30762">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/30762">UKF Dubstep - August</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            Last updated <time class="timeago" datetime="2011-05-24T19:13:16Z">2011-05-24 19:13:16 UTC</time> | Star Priority 4 </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="graveyard-22747">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/22747">Renard - Let's Move</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            Last updated <time class="timeago" datetime="2011-01-24T19:15:47Z">2011-01-24 19:15:47 UTC</time> | Star Priority 16 </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="graveyard-11102">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/11102">Placido Domingo, Children's Choir - Love</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            Last updated <time class="timeago" datetime="2009-12-05T18:22:04Z">2009-12-05 18:22:04 UTC</time>
+                                                        </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="graveyard-8721">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/8721">The Ting Tings - Keep Your Head</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            Last updated <time class="timeago" datetime="2011-02-24T18:25:18Z">2011-02-24 18:25:18 UTC</time> | Star Priority 56 </div>
+                                                    </div>
+                                                    <div class="prof-beatmap" id="graveyard-8571">
+                                                        <div class="h">
+                                                            <b><a href="https://web.archive.org/web/20121228182616mp_/http://osu.ppy.sh/s/8571">Dj Remo - Eo Ea</a></b>
+                                                        </div>
+                                                        <div class="c">
+                                                            Last updated <time class="timeago" datetime="2009-08-11T13:18:22Z">2009-08-11 13:18:22 UTC</time> | Star Priority 2 </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr onclick="expandProfile(&#39;achievements&#39;)">
+                                        <td class="sectionHeading" id="_achievements">Achievements</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sectionContents">
+                                            <div id="achievements" class="expanded loaded" style="opacity: 1; filter: none;">
+                                                <!-- <div class="achievements-break">Beatmap Packs</div>
+                                                <div class="achievement"><img src="/style/images/gamer1.png"><br>
+                                                    <center><b>Video Game Pack vol.1</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/anime1.png"><br>
+                                                    <center><b>Anime Pack vol.1</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/lulz1.png"><br>
+                                                    <center><b>Internet! Pack vol.1</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/rhythm1.png"><br>
+                                                    <center><b>Rhythm Game Pack vol.1</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/gamer2.png"><br>
+                                                    <center><b>Video Game Pack vol.2</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/anime2.png"><br>
+                                                    <center><b>Anime Pack vol.2</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/lulz2.png"><br>
+                                                    <center><b>Internet! Pack vol.2</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/rhythm2.png"><br>
+                                                    <center><b>Rhythm Game Pack vol.2</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/gamer3.png"><br>
+                                                    <center><b>Video Game Pack vol.3</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/anime3.png"><br>
+                                                    <center><b>Anime Pack vol.3</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/lulz3.png"><br>
+                                                    <center><b>Internet! Pack vol.3</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/rhythm3.png"><br>
+                                                    <center><b>Rhythm Game Pack vol.3</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/gamer4.png"><br>
+                                                    <center><b>Video Game Pack vol.4</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/anime4.png"><br>
+                                                    <center><b>Anime Pack vol.4</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/lulz4.png"><br>
+                                                    <center><b>Internet! Pack vol.4</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/rhythm4.png"><br>
+                                                    <center><b>Rhythm Game Pack vol.4</b></center>
+                                                </div>
+                                                <div class="achievements-break">Combo</div>
+                                                <div class="achievement"><img src="/style/images/combo500.png"><br>
+                                                    <center><b>500 Combo (any song)</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/combo750.png"><br>
+                                                    <center><b>750 Combo (any song)</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/combo1000.png"><br>
+                                                    <center><b>1000 Combo (any song)</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/combo2000.png"><br>
+                                                    <center><b>2000 Combo (any song)</b></center>
+                                                </div>
+                                                <div class="achievements-break">Dedication</div>
+                                                <div class="achievement"><img src="/style/images/plays1.png"><br>
+                                                    <center><b>5,000 Plays (osu! mode)</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/plays2.png"><br>
+                                                    <center><b>15,000 Plays (osu! mode)</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/plays3.png"><br>
+                                                    <center><b>25,000 Plays (osu! mode)</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/plays4.png"><br>
+                                                    <center><b>50,000 Plays (osu! mode)</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/fruitsalad.png"><br>
+                                                    <center><b>Catch 20,000 fruits</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/fruitplatter.png"><br>
+                                                    <center><b>Catch 200,000 fruits</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>Catch 2,000,000 fruits</b></center>
+                                                </div>
+                                                <div class="achievement"><br>
+                                                    <center><b></b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/taiko1.png"><br>
+                                                    <center><b>30,000 Drum Hits</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/taiko2.png"><br>
+                                                    <center><b>300,000 Drum Hits</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>3,000,000 Drum Hits</b></center>
+                                                </div>
+                                                <div class="achievement"><br>
+                                                    <center><b></b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>40,000 Keys</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>400,000 Keys</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>4,000,000 Keys</b></center>
+                                                </div>
+                                                <div class="achievement"><br>
+                                                    <center><b></b></center>
+                                                </div>
+                                                <div class="achievements-break">Hush-Hush</div>
+                                                <div class="achievement"><img src="/style/images/bunny.png"><br>
+                                                    <center><b>Don't let the bunny distract you!</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/s-ranker.png"><br>
+                                                    <center><b>S-Ranker</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/improved.png"><br>
+                                                    <center><b>Most Improved</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/dancer.png"><br>
+                                                    <center><b>Non-stop Dancer</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/consolationprize.png"><br>
+                                                    <center><b>Consolation Prize</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/challengeaccepted.png"><br>
+                                                    <center><b>Challenge Accepted</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>Stumbler</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>Jackpot</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>Quick Draw</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/obsessed.png"><br>
+                                                    <center><b>Obsessed</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/nonstop.png"><br>
+                                                    <center><b>Nonstop</b></center>
+                                                </div>
+                                                <div class="achievement"><img src="/style/images/unknown.png"><br>
+                                                    <center><b>Jack of All Trades</b></center>
+                                                </div> -->
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="sectionHeading" style="background:#2f2f65;cursor:auto;">Account Standing</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: center; color: red; padding: 5px;">
+                                                White Wolf's account is not in good standing :(.<br>Their account <strong>could be</strong> permanently banned with 9 more infringements.<br>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="profileStatHeader">Recent Infringements</div>
+                                            <table class="nice" style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                        <th>Length</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2012-04-28 03:12:29</td>
+                                                        <td style="background:orange;color:white;">
+                                                            <center>SILENCE</center>
+                                                        </td>
+                                                        <td>
+                                                            5 minute(s) </td>
+
+                                                        <td>inappropriate language</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <%- include('../../partials/global/footer.ejs') %>
             </div>
         </div>
-    </nav>
-
-    <div class="container">        
-        <a style="white-space: pre-wrap" href="<%=player.username%>"> <%=player.username%> </a> (#<%=player.rank%>) 
-        <br>Ranked Score: <%=player.rankedScore%> | Total Score: <%=player.totalScore%> 
-        <br>Accuracy: <%=player.accuracy%>% 
-        <br>Playcount: <%=player.playcount%>
-
-        <div class="starter-template">
-            <p class="lead">Top scores</p>
-            <% for (var i = 0; i < scores.length; i++) { %>
-                <p style="white-space: pre-wrap">Score: <%=scores[i].score%> | | <a href="https://osu.ppy.sh/beatmapsets/<%=scores[i].setId%>"><%=scores[i].artist%> - <%=scores[i].title%> [<%=scores[i].diff%>]</a><br></p>
-            <%}%>
-        </div>
+        <script type="text/javascript" src="/style/images/brand"></script>
     </div>
-<script src="/style/assets/js/jquery.min.js"></script>
-<script src="/style/bootstrap/js/bootstrap.min.js"></script>
-<script src="/style/assets/js/ie10-viewport-bug-workaround.js"></script>
+    
 </body>
+
 </html>

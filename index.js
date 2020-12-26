@@ -36,6 +36,8 @@ async function updateHeaderValues() {
 
 app.get('/u/:id', async (req, res) => {
     try {
+        await updateHeaderValues();
+
         player = null;
 
         username = req.params.id;
@@ -43,9 +45,16 @@ app.get('/u/:id', async (req, res) => {
         scores = [];
 
         player = await sql.getUser(username);
+
+        player.gradeXCount = await sql.getUserXCount(username);
+        player.gradeSCount = await sql.getUserSCount(username);
+        player.gradeACount = await sql.getUserACount(username);
+
         scores = await sql.getAllUsersScores(username);
 
         res.render('pages/user.ejs', {
+            headerCounts: headerCounts,
+            pageName: username,
             player: player,
             scores: scores
         });
@@ -76,10 +85,6 @@ app.get('/p/playerranking', async (req, res) => {
         var players = await sql.getAllUsers();
 
         var leaderboard = new StringBuilder();
-
-        players.forEach(function () {
-
-        })
 
         var rank = 1;
         for (const player of players) {

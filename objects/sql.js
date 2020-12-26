@@ -18,6 +18,31 @@ class Sql {
             insecureAuth: true
         });
     }
+    getSecondsFixed(seconds) {
+        return new Promise((resolve, reject) => {
+            const year = 31540000;
+            const month = 2628000; // assume 30 days in a month
+            const day = 86400;
+            const hour = 3600;
+            const minute = 60;
+
+            const years = Math.floor(seconds / year);
+            const months = Math.floor((seconds - years * year) / month);
+            const days = Math.floor(((seconds - years * year) - months * month) / day);
+            const hours = Math.floor((((seconds - years * year) - months * month) - days * day) / hour);
+            const minutes = Math.floor(((((seconds - years * year) - months * month) - days * day) - hours * hour) / minute);
+            const seconds2 = Math.floor(((((seconds - years * year) - months * month) - days * day) - hours * hour) - minutes * minute);
+
+            let str = '';
+            if (years != 0) str += `${years} Year${years > 1 ? 's' : ''}, `;
+            if (months != 0) str += `${months} Month${months > 1 ? 's' : ''}, `;
+            if (days != 0) str += `${days} Day${days > 1 ? 's' : ''}, `;
+            if (hours != 0) str += `${hours} Hour${hours > 1 ? 's' : ''}, `;
+            if (minutes != 0) str += `${minutes} Minute${minutes > 1 ? 's' : ''}, `;
+            if (seconds2 != 0) str += `${seconds2} Second${seconds2 > 1 ? 's' : ''}, `;
+            resolve(str.substring(0, str.length - 2));
+        });
+    }
 
     /**
      * Gets all users registered in the database sorted by ranked score
@@ -33,7 +58,7 @@ class Sql {
                 var rank = 1;
 
                 allUsers.forEach(user => {
-                    var tempPlayer = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount);
+                    var tempPlayer = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime);
 
                     players.push(tempPlayer);
                     rank++;
@@ -44,6 +69,10 @@ class Sql {
         });
     }
 
+    /**
+     * Gets the amoung of SS's that a player has
+     * @param {String} username The username 
+     */
     getUserXCount(username) {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM osu_scores WHERE (grade = \'X\' OR grade = \'XH\') AND username = ?', [username], (err, results, fields) => {
@@ -56,6 +85,10 @@ class Sql {
         });
     }
 
+    /**
+     * Gets the amount of S's that a player has
+     * @param {String} username The username
+     */
     getUserSCount(username) {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM osu_scores WHERE (grade = \'S\' OR grade = \'SH\') AND username = ?', [username], (err, results, fields) => {
@@ -68,6 +101,10 @@ class Sql {
         });
     }
 
+    /**
+     * Gets the amount of A ranks that a player has
+     * @param {String} username The username
+     */
     getUserACount(username) {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM osu_scores WHERE grade = \'A\' AND username = ?', [username], (err, results, fields) => {
@@ -133,7 +170,7 @@ class Sql {
 
                 allUsers.forEach(user => {
                     if (username == user.username)
-                        player = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount);
+                        player = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime);
 
                     rank++;
                 });
