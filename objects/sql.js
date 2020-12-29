@@ -1,8 +1,8 @@
-var mysql = require('mysql');
-var { Player } = require("./player.js");
-var { Score } = require("./score.js");
-var { Map } = require("./map.js");
-var { Post } = require('./post.js');
+let mysql = require('mysql');
+let { Player } = require("./player.js");
+let { Score } = require("./score.js");
+let { Map } = require("./map.js");
+let { Post } = require('./post.js');
 const { Message } = require('./message.js');
 
 /**
@@ -50,15 +50,15 @@ class Sql {
      */
     getAllUsers() {
         return new Promise((resolve, reject) => {
-            var players = [];
+            let players = [];
 
             this.connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
                 if (err) throw err;
 
-                var rank = 1;
+                let rank = 1;
 
                 allUsers.forEach(user => {
-                    var tempPlayer = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime);
+                    let tempPlayer = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime);
 
                     players.push(tempPlayer);
                     rank++;
@@ -78,7 +78,7 @@ class Sql {
             this.connection.query('SELECT count(*) FROM osu_scores WHERE (grade = \'X\' OR grade = \'XH\') AND username = ?', [username], (err, results, fields) => {
                 if (err) throw err;
 
-                var xCount = results[0]["count(*)"];
+                let xCount = results[0]["count(*)"];
 
                 resolve(xCount);
             });
@@ -94,7 +94,7 @@ class Sql {
             this.connection.query('SELECT count(*) FROM osu_scores WHERE (grade = \'S\' OR grade = \'SH\') AND username = ?', [username], (err, results, fields) => {
                 if (err) throw err;
 
-                var sCount = results[0]["count(*)"];
+                let sCount = results[0]["count(*)"];
 
                 resolve(sCount);
             });
@@ -110,7 +110,7 @@ class Sql {
             this.connection.query('SELECT count(*) FROM osu_scores WHERE grade = \'A\' AND username = ?', [username], (err, results, fields) => {
                 if (err) throw err;
 
-                var aCount = results[0]["count(*)"];
+                let aCount = results[0]["count(*)"];
 
                 resolve(aCount);
             });
@@ -122,7 +122,7 @@ class Sql {
      */
     getChat() {
         return new Promise((resolve, reject) => {
-            var messages = [];
+            let messages = [];
 
             this.connection.query('SELECT * FROM osu_chat WHERE target = \'#osu\' ORDER BY `time` DESC LIMIT 11', (err, allMessages, fields) => {
                 if (err) throw err;
@@ -141,7 +141,7 @@ class Sql {
      */
     getLatestPosts() {
         return new Promise((resolve, reject) => {
-            var posts = [];
+            let posts = [];
 
             this.connection.query('SELECT * FROM osu_announcements ORDER BY posttime DESC LIMIT 3', (err, allPosts, fields) => {
                 if (err) throw err;
@@ -162,11 +162,11 @@ class Sql {
      */
     getUser(username) {
         return new Promise((resolve, reject) => {
-            var player = null;
+            let player = null;
 
             this.connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
                 if (err) throw err;
-                var rank = 1;
+                let rank = 1;
 
                 allUsers.forEach(user => {
                     if (username == user.username)
@@ -189,7 +189,7 @@ class Sql {
     addUser(email, username, password) {
         return new Promise((resolve, reject) => {
             this.connection.query('INSERT INTO osu_users (email, username, password, playcount, totalscore, rankedscore, accuracy, s300, s100, s50, s0) VALUES (?, ?, ?, 0, 0, 0, 0, 0, 0, 0, 0)', [email, username, password], function (err, results, fields) {
-                var message = "";
+                let message = "";
 
                 if (err) {
                     if (err.code == 'ER_DUP_ENTRY' || err.errno == 1062) {
@@ -213,7 +213,7 @@ class Sql {
     getNumberOfUsers() {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM osu_users', function (err, results, fields) {
-                var userCount = results[0]["count(*)"];
+                let userCount = results[0]["count(*)"];
 
                 resolve(userCount);
             });
@@ -226,7 +226,7 @@ class Sql {
     getNumberOfOnlinePlayers() {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM osu_users WHERE `online` = true', function (err, results, fields) {
-                var userCount = results[0]["count(*)"];
+                let userCount = results[0]["count(*)"];
 
                 resolve(userCount);
             });
@@ -239,7 +239,7 @@ class Sql {
     getNumberOfScores() {
         return new Promise((resolve, reject) => {
             this.connection.query('SELECT count(*) FROM `osu_scores`', function (err, results, fields) {
-                var scoreCount = results[0]["count(*)"];
+                let scoreCount = results[0]["count(*)"];
 
                 resolve(scoreCount);
             });
@@ -252,8 +252,8 @@ class Sql {
      */
     getAllUsersScores(username) {
         return new Promise((resolve, reject) => {
-            var scores = [];
-            var maps = [];
+            let scores = [];
+            let maps = [];
 
             this.connection.query('SELECT * FROM osu_scores WHERE username = ? and pass = True ORDER BY score DESC', username, (err, usersScores, fields) => {
                 if (err) throw err;
@@ -265,11 +265,11 @@ class Sql {
                     });
 
                     usersScores.forEach(userScore => {
-                        var hashIndex = maps.findIndex(function (map) {
+                        let hashIndex = maps.findIndex(function (map) {
                             return map.md5 == userScore.osuhash;
                         });
 
-                        var scoreExist = scores.findIndex(function (score) {
+                        let scoreExist = scores.findIndex(function (score) {
                             return (score.md5 == userScore.osuhash);
                         });
 

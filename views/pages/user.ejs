@@ -19,9 +19,9 @@
                     <div class="content-with-bg">
 
                         <script>
-                            var userId = 39828;
-                            var activeTab = window.location.hash != "" ? window.location.hash.replace("#","").replace("_","") : "general";
-                            var activeGameMode = 0;
+                            let userId = 39828;
+                            let activeTab = window.location.hash != "" ? window.location.hash.replace("#","").replace("_","") : "general";
+                            let activeGameMode = 0;
                             
                             $(document).ready(function(){
                             	setGameMode(activeGameMode, true);
@@ -54,7 +54,7 @@
                             	}
                             }
                             
-                            var activeRequest = null;
+                            let activeRequest = null;
                             
                             function loadInCurrentTab(page)
                             {

@@ -66,7 +66,7 @@ app.get('/u/:id', async (req, res) => {
 app.get('/', async (req, res) => {
     try {
         await updateHeaderValues();
-        var posts = await sql.getLatestPosts();
+        let posts = await sql.getLatestPosts();
 
         res.render('pages/index.ejs', {
             headerCounts: headerCounts,
@@ -82,11 +82,11 @@ app.get('/p/playerranking', async (req, res) => {
     await updateHeaderValues();
 
     try {
-        var players = await sql.getAllUsers();
+        let players = await sql.getAllUsers();
 
-        var leaderboard = new StringBuilder();
+        let leaderboard = new StringBuilder();
 
-        var rank = 1;
+        let rank = 1;
         for (const player of players) {
             if ((rank - 1) % 2 == 0) {
                 leaderboard.append(`<tr class="row1p" onclick="setDocumentLocation(/u/${player.username});">`);
@@ -120,7 +120,7 @@ app.get('/p/playerranking', async (req, res) => {
 
 app.post('/p/onlineusercount', async (req, res) => {
     try {
-        var userCount = 0;
+        let userCount = 0;
         userCount = await sql.getNumberOfOnlinePlayers();
 
         res.send(userCount.toString());
@@ -131,17 +131,17 @@ app.post('/p/onlineusercount', async (req, res) => {
 
 app.post('/p/chat', async (req, res) => {
     try {
-        var finalString = new StringBuilder();
+        let finalString = new StringBuilder();
 
         finalString.append('<table style="font - size: 8pt" width="100%" cellspacing="1">');
 
-        var messages = [];
+        let messages = [];
         messages = await sql.getChat();
         messages = messages.reverse();
 
-        var messageIndex = 1;
+        let messageIndex = 1;
         messages.forEach(message => {
-            var timestamp = new StringBuilder();
+            let timestamp = new StringBuilder();
 
             timestamp.append(message.time.getHours().toString());
             timestamp.append(':');
@@ -173,10 +173,10 @@ app.get('/register', (req, res) => {
 
 app.post('/registerauth', async (req, res) => {
     try {
-        var username = req.body.username;
-        var password = md5(req.body.password).toString();
-        var passwordConfirm = md5(req.body.passwordConfirm).toString();
-        var email = req.body.email;
+        let username = req.body.username;
+        let password = md5(req.body.password).toString();
+        let passwordConfirm = md5(req.body.passwordConfirm).toString();
+        let email = req.body.email;
 
         if (username && password && email && password == passwordConfirm) {
             res.send(await sql.addUser(email, username, password));
