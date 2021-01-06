@@ -155,7 +155,7 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/p/playerranking', async (req, res) => {
-    await updateHeaderValues();
+    updateHeaderValues();
 
     try {
         let players = await sql.getTop50();
