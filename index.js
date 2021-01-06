@@ -19,44 +19,120 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
 
+/**
+ * The port to host the server on
+ */
 const port = config.port;
 
+/**
+ * The MySQL handler used for communicating with the database
+ */
 var sql = new Sql(config.host, config.name, config.password, config.database);
 
+/**
+ * Variable that stores the values to display on the header 
+ * (Total user count, online user count, total ranked player count)
+ */
 var headerCounts = [];
 
+/**
+ * Updates the values on the header 
+ * (Total user count, online user count, total ranked player count)
+ */
 async function updateHeaderValues() {
     headerCounts.totalUsers = await sql.getNumberOfUsers();
     headerCounts.onlineUsers = await sql.getNumberOfOnlinePlayers();
     headerCounts.amountOfRankedPlays = await sql.getNumberOfScores();
 }
 
+function addTrailZero(num, digits) {
+    // addTrailZero() : add trailing zeroes to given number
+    // PARAM num : original number
+    //       digits : total number of decimal places required
+
+    var cString = num.toString(), // Convert to string
+        cLength = cString.indexOf("."); // Position of decimal point
+
+    // Is a whole number
+    if (cLength == -1) {
+        cLength = 0;
+        cString += ".";
+    }
+    // Is a decimal nummber 
+    else {
+        cLength = cString.substr(cLength + 1).length;
+    }
+
+    // Pad with zeroes
+    if (cLength < digits) {
+        for (let i = cLength; i < digits; i++) {
+            cString += "0";
+        }
+    }
+
+    // Return result
+    return cString;
+}
+
+function addLeadZero(num, digits) {
+    // addLeadZero() : add leading zeroes to given number
+    // PARAM num : original number
+    //       digits : total number of digits required
+
+    var cString = num.toString(), // Convert to string
+        cLength = cString.indexOf("."); // Position of decimal point
+
+    // Is a whole number
+    if (cLength == -1) {
+        cLength = cString.length;
+    }
+
+    // Pad with zeroes
+    if (cLength < digits) {
+        for (let i = cLength; i < digits; i++) {
+            cString = "0" + cString;
+        }
+    }
+
+    // Return result
+    return cString;
+}
+
 app.get('/u/:id', async (req, res) => {
     try {
-        await updateHeaderValues();
+        updateHeaderValues();
 
         player = null;
 
         username = req.params.id;
 
         scores = [];
+        firstPlaces = [];
 
         player = await sql.getUser(username);
+
+        if (!player) {
+            res.send("USER NOT FOUND");
+            return;
+        }
 
         player.gradeXCount = await sql.getUserXCount(username);
         player.gradeSCount = await sql.getUserSCount(username);
         player.gradeACount = await sql.getUserACount(username);
 
-        scores = await sql.getAllUsersScores(username);
+        scores = await sql.getUserTop50(username);
+        firstPlaces = await sql.getUserFirstPlaces(username);
 
         res.render('pages/user.ejs', {
             headerCounts: headerCounts,
             pageName: username,
             player: player,
-            scores: scores
+            scores: scores,
+            firstPlaces: firstPlaces
         });
     } catch (err) {
         console.log(err);
@@ -65,7 +141,7 @@ app.get('/u/:id', async (req, res) => {
 
 app.get('/', async (req, res) => {
     try {
-        await updateHeaderValues();
+        updateHeaderValues();
         let posts = await sql.getLatestPosts();
 
         res.render('pages/index.ejs', {
@@ -143,9 +219,9 @@ app.post('/p/chat', async (req, res) => {
         messages.forEach(message => {
             let timestamp = new StringBuilder();
 
-            timestamp.append(message.time.getHours().toString());
+            timestamp.append(addLeadZero(message.time.getHours(), 2));
             timestamp.append(':');
-            timestamp.append(message.time.getMinutes().toString());
+            timestamp.append(addLeadZero(message.time.getMinutes(), 2));
 
             if (messageIndex % 2 == 0) {
                 finalString.append(`<tr class="row1"><td class="chattime">${timestamp.toString()}</td > <td>&lt;${message.sender}&gt; ${message.content}</td></tr > `);

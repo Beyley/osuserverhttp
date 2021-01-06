@@ -1,3 +1,6 @@
+/**
+ * All the info related to a beatmap
+ */
 class Map {
     /**
      * Creates a map
