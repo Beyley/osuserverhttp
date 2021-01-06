@@ -4,7 +4,7 @@ var { Score } = require("./score.js");
 var { Map } = require("./map.js");
 var { Post } = require('./post.js');
 const { Message } = require('./message.js');
-var { StringBuilder } = require("./objects/stringbuilder");
+var { StringBuilder } = require("./stringbuilder.js");
 
 /**
      * Gets the time in plain text since the seconds
