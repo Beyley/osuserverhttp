@@ -1,3 +1,41 @@
+function getRequiredScoreForLevel(level) {
+    if (level <= 100) {
+        if (level > 1) {
+            return Math.floor(5000 / 3 * (4 * Math.pow(level, 3) - 3 * Math.pow(level, 2) - level) + Math.floor(1.25 * Math.pow(1.8, level - 60)));
+        }
+        return 1;
+    }
+    return 26931190829 + 100000000000 * (level - 100);
+}
+
+
+function calcLevel(score) {
+    var i = 1;
+    for (; ;) {
+        var lScore = getRequiredScoreForLevel(i);
+        if (score < lScore) {
+            return i - 1;
+        }
+        i++;
+    }
+}
+
+// GetLevelPrecise gets a precise level, meaning that decimal digits are
+// included. There isn't any maximum level.
+function calcLevelPrecise(score) {
+    var baseLevel = calcLevel(score);
+    var baseLevelScore = getRequiredScoreForLevel(baseLevel);
+    var scoreProgress = score - baseLevelScore;
+    var scoreLevelDifference = getRequiredScoreForLevel(baseLevel + 1) - baseLevelScore;
+    var res = scoreProgress / scoreLevelDifference + baseLevel;
+    if (!isFinite(res)) {
+        return 0;
+    }
+
+    return res;
+}
+
+
 /**
  * An object containing info about a player
  */
@@ -20,6 +58,10 @@ class Player {
         this.rankedScore = rankedScore;
         this.accuracy = accuracy;
         this.totalScore = totalScore;
+
+        this.level = calcLevel(this.totalScore);
+        this.levelPercentage = (calcLevelPrecise(this.totalScore) - calcLevel(this.totalScore)) * 100;
+
         this.rank = rank;
 
         this.playCount = playCount;

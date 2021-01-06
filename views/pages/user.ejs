@@ -330,13 +330,18 @@
                                                 <div class="profileStatLine" title="Total number of ranked beatmap plays. This includes both passes and fails."><b>Play Count</b>: <%= player.playCount %></div><br>
                                                 <div class="profileStatLine" title="Total points scored in all ranked beatmap plays. This includes both passes and fails."><b>Total Score</b>: <%= player.totalScore %></div>
                                                 <br>
-                                                <div class="profileStatLine" title="Your level is based on your total accumulated score. This includes any ranked score, be it a pass or fail. You will gradually increase your level just by playing osu!"><b>Current Level</b>: N/A</div><br>
+                                                <div class="profileStatLine" title="Your level is based on your total accumulated score. This includes any ranked score, be it a pass or fail. You will gradually increase your level just by playing osu!"><b>Current Level</b>: <%= player.level %></div><br>
                                                 <center>
                                                     <table width="300px" height="20px" class="levelMetre" border="0" cellpadding="0" cellspacing="0">
                                                         <tbody>
                                                             <tr>
-                                                                <td class="levelPercent" width="0px" align="right">0%</td>
-                                                                <td bgcolor="white">&nbsp;</td>
+                                                                <% if(player.levelPercentage >= 50) { %>
+                                                                    <td class="levelPercent" style="width: <%= player.levelPercentage.toFixed(0) %>%;" align="right"><%= player.levelPercentage.toFixed(2) %>%</td>
+                                                                    <td bgcolor="white">&nbsp;</td>
+                                                                <% } else { %>
+                                                                    <td class="levelPercent" style="width: <%= player.levelPercentage.toFixed(0) %>%;" align="right">&nbsp;</td>
+                                                                    <td bgcolor="white"><%= player.levelPercentage.toFixed(2) %>%</td>
+                                                                <% } %>
                                                             </tr>
                                                         </tbody>
                                                     </table>
