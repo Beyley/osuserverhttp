@@ -25,12 +25,14 @@ function getSecondsFixed(originTime) {
     const seconds = Math.floor(((((originTime - years * year) - months * month) - days * day) - hours * hour) - minutes * minute);
 
     let str = '';
+
     if (years != 0) str += `${years} Year${years > 1 ? 's' : ''}, `;
     if (months != 0) str += `${months} Month${months > 1 ? 's' : ''}, `;
     if (days != 0) str += `${days} Day${days > 1 ? 's' : ''}, `;
     if (days < 3 && hours != 0) str += `${hours} Hour${hours > 1 ? 's' : ''}, `;
     if (days < 3 && minutes != 0) str += `${minutes} Minute${minutes > 1 ? 's' : ''}, `;
     if (days < 3 && seconds != 0) str += `${seconds} Second${seconds > 1 ? 's' : ''}, `;
+
     return str.substring(0, str.length - 2);
 }
 
@@ -77,7 +79,7 @@ class Sql {
                 let rank = 1;
 
                 allUsers.forEach(user => {
-                    let tempPlayer = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime);
+                    let tempPlayer = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime, user.userid);
 
                     players.push(tempPlayer);
                     rank++;
@@ -189,7 +191,7 @@ class Sql {
 
                 allUsers.forEach(user => {
                     if (username == user.username)
-                        player = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime);
+                        player = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime, user.userid);
 
                     rank++;
                 });

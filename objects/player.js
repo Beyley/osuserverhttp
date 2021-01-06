@@ -12,8 +12,10 @@ class Player {
      * @param {Number} playCount The player's play count
      * @param {Date} registerTime The player's register time
      * @param {Date} lastLoginTime The player's last login time
+     * @param {Numebr} userId The users id
      */
-    constructor(username, rankedScore, accuracy, totalScore, rank, playCount, registerTime, lastLoginTime) {
+    constructor(username, rankedScore, accuracy, totalScore, rank, playCount, registerTime, lastLoginTime, userId) {
+        this.userId = userId;
         this.username = username;
         this.rankedScore = rankedScore;
         this.accuracy = accuracy;
