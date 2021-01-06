@@ -1,9 +1,10 @@
-let mysql = require('mysql');
-let { Player } = require("./player.js");
-let { Score } = require("./score.js");
-let { Map } = require("./map.js");
-let { Post } = require('./post.js');
+var mysql = require('mysql');
+var { Player } = require("./player.js");
+var { Score } = require("./score.js");
+var { Map } = require("./map.js");
+var { Post } = require('./post.js');
 const { Message } = require('./message.js');
+var { StringBuilder } = require("./objects/stringbuilder");
 
 /**
      * Gets the time in plain text since the seconds
@@ -24,16 +25,18 @@ function getSecondsFixed(originTime) {
     const minutes = Math.floor(((((originTime - years * year) - months * month) - days * day) - hours * hour) / minute);
     const seconds = Math.floor(((((originTime - years * year) - months * month) - days * day) - hours * hour) - minutes * minute);
 
-    let str = '';
+    let returnString = new StringBuilder();
 
-    if (years != 0) str += `${years} Year${years > 1 ? 's' : ''}, `;
-    if (months != 0) str += `${months} Month${months > 1 ? 's' : ''}, `;
-    if (days != 0) str += `${days} Day${days > 1 ? 's' : ''}, `;
-    if (days < 3 && hours != 0) str += `${hours} Hour${hours > 1 ? 's' : ''}, `;
-    if (days < 3 && minutes != 0) str += `${minutes} Minute${minutes > 1 ? 's' : ''}, `;
-    if (days < 3 && seconds != 0) str += `${seconds} Second${seconds > 1 ? 's' : ''}, `;
+    if (years != 0) returnString.append(`${years} Year${years > 1 ? 's' : ''}, `);
+    if (months != 0) returnString.append(`${months} Month${months > 1 ? 's' : ''}, `);
+    if (days != 0) returnString.append(`${days} Day${days > 1 ? 's' : ''}, `);
+    if (days < 3 && hours != 0) returnString.append(`${hours} Hour${hours > 1 ? 's' : ''}, `);
+    if (days < 3 && minutes != 0) returnString.append(`${minutes} Minute${minutes > 1 ? 's' : ''}, `);
+    if (days < 3 && seconds != 0) returnString.append(`${seconds} Second${seconds > 1 ? 's' : ''}, `);
 
-    return str.substring(0, str.length - 2);
+    returnString = returnString.toString();
+
+    return returnString.substring(0, returnString.length - 2);
 }
 
 function getSecondsFixedSinceToday(time) {
