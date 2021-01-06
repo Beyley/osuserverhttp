@@ -377,7 +377,7 @@
                                                             <b><a href="https://osu.ppy.sh/beatmapsets/<%= thisScore.setId %>"><%= thisScore.artist %> - <%= thisScore.title %> [<%= thisScore.diff %>]</a></b>
                                                         </div>
                                                         <div class="c">
-                                                            <%= thisScore.fancySubmitTime %> | Score: <%= thisScore.score %>
+                                                            <%= thisScore.fancySubmitTime %> | Score: <%= thisScore.score.toLocaleString('en') %>
                                                         </div>
                                                     </div>
                                                 <% } %>
