@@ -158,7 +158,7 @@ app.get('/p/playerranking', async (req, res) => {
     await updateHeaderValues();
 
     try {
-        let players = await sql.getAllUsers();
+        let players = await sql.getTop50();
 
         let leaderboard = new StringBuilder();
 

@@ -69,11 +69,11 @@ class Sql {
      * Gets all users registered in the database sorted by ranked score
      * @returns {Player[]} The array of all players
      */
-    getAllUsers() {
+    getTop50() {
         return new Promise((resolve, reject) => {
             let players = [];
 
-            this.connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
+            this.connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC LIMIT 50', (err, allUsers, fields) => {
                 if (err) throw err;
 
                 let rank = 1;
