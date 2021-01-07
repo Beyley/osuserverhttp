@@ -110,8 +110,9 @@ app.get('/u/:id', async (req, res) => {
 
         username = req.params.id;
 
-        scores = [];
-        firstPlaces = [];
+        let scores = [];
+        let firstPlaces = [];
+        let mostPlayed = [];
 
         player = await sql.getUser(username);
 
@@ -126,13 +127,35 @@ app.get('/u/:id', async (req, res) => {
 
         scores = await sql.getUserTop50(username);
         firstPlaces = await sql.getUserFirstPlaces(username);
+        mostPlayed = await sql.getUsersMostPlayed(username);
+
+        let mostPlayedToDisplay = new StringBuilder();
+
+        let rank = 0;
+        for (const played of mostPlayed) {
+            let mapInMostPlayed = played.score;
+            let playedAmount = played.amount;
+
+            if (playedAmount == 0) continue;
+
+            mostPlayedToDisplay.append(`<div style="font-size:${180 - (rank * 6)}%">`);
+
+            mostPlayedToDisplay.append(`${playedAmount} plays - <a target="_top" href="https://osu.ppy.sh/beatmapsets/${mapInMostPlayed}.setId">${mapInMostPlayed.artist} - ${mapInMostPlayed.title} [${mapInMostPlayed.diff}]</a>`);
+
+            mostPlayedToDisplay.append("</div>");
+
+            rank++;
+
+            if (rank >= 15) break;
+        }
 
         res.render('pages/user.ejs', {
             headerCounts: headerCounts,
             pageName: username,
             player: player,
             scores: scores,
-            firstPlaces: firstPlaces
+            firstPlaces: firstPlaces,
+            mostPlayed: mostPlayedToDisplay.toString(),
         });
     } catch (err) {
         console.log(err);

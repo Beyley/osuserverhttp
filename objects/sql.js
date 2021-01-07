@@ -379,6 +379,62 @@ class Sql {
             });
         });
     }
+
+    /**
+     * Gets the most played beatmaps of a user
+     * @param {string} username The username of the user to get all scores from
+     * @returns An array of all the users most played 
+     */
+    getUsersMostPlayed(username) {
+        return new Promise((resolve, reject) => {
+            let scores = [];
+            let maps = [];
+
+            this.connection.query('SELECT * FROM osu_scores WHERE username = ?', username, (err, allScores, fields) => {
+                if (err) throw err;
+                this.connection.query('SELECT * FROM osu_maps WHERE approved = 2;', (err, allRankedMaps, fields) => {
+                    if (err) throw err;
+
+                    allRankedMaps.forEach(map => {
+                        maps.push(new Map(map.file_md5, map.artist, map.title, map.version, map.beatmapset_id));
+                    });
+
+                    allScores.forEach(currentScore => {
+                        let hashIndex = maps.findIndex(function (map) {
+                            return map.md5 == currentScore.osuhash;
+                        });
+
+                        let scoreExist = scores.findIndex(function (score) {
+                            return score.score.md5 == currentScore.osuhash;
+                        });
+
+                        if (hashIndex != -1) {
+                            if (scoreExist == -1) {
+                                let tempScore = new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime));
+                                scores.push({ amount: 1, score: tempScore });
+                            } else {
+                                let tempScore = new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime));
+                                scores[scoreExist] = { amount: (Number(scores[scoreExist].amount) + 1), score: tempScore }
+                            }
+                        }
+
+                        /*
+                        if (scoreExist != -1) {
+                            if (hashIndex != -1) {
+                                let tempScore = new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime));
+                                scores.push({ amount: 2, score: tempScore });
+                            }
+                        }
+                        */
+                    });
+
+                    scores = scores.sort(function (a, b) { return b.amount - a.amount });
+
+                    resolve(scores);
+                });
+            });
+        });
+    }
 }
 
 exports.Sql = Sql;
