@@ -189,13 +189,12 @@ class Sql {
             let player = null;
 
             this.connection.query('SELECT * FROM osu_users ORDER BY rankedscore DESC', (err, allUsers, fields) => {
+                this.connection.query('SELECT * FROM osu_scores WHERE username = ?', username, (err, usersScores, fields) => {
+                    if (err) throw err;
+                    let rank = 1;
 
-                if (err) throw err;
-                let rank = 1;
-
-                allUsers.forEach(user => {
-                    if (username == user.username) {
-                        this.connection.query('SELECT * FROM osu_scores WHERE username = ?', user.username, (err, usersScores, fields) => {
+                    allUsers.forEach(user => {
+                        if (username == user.username) {
                             var totalHits = 0;
                             var maxCombo = 0;
 
@@ -207,11 +206,13 @@ class Sql {
                             });
 
                             player = new Player(user.username, user.rankedscore, user.accuracy, user.totalscore, rank, user.playcount, user.registertime, user.lastlogintime, user.userid, totalHits, maxCombo);
-                            resolve(player);
-                        });
-                    }
 
-                    rank++;
+                        }
+
+                        rank++;
+                    });
+
+                    resolve(player);
                 });
             });
         });
