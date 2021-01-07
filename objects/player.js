@@ -56,7 +56,17 @@ class Player {
         this.userId = userId;
         this.username = username;
         this.rankedScore = rankedScore;
-        this.accuracy = accuracy;
+
+        /**
+        * Rounds a number to x digits
+        * @param {Number} num The number to round
+        * @param {Number} n The amount of digits to round to
+        */
+        function roundN(num, n) {
+            return parseFloat(Math.round(num * Math.pow(10, n)) / Math.pow(10, n)).toFixed(n);
+        }
+
+        this.accuracy = roundN(accuracy, 2);
         this.totalScore = totalScore;
 
         this.level = calcLevel(this.totalScore);

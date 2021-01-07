@@ -172,7 +172,7 @@ app.get('/p/playerranking', async (req, res) => {
 
             leaderboard.append(`<td><b>#${rank.toLocaleString('en')}</b></td>`);
             leaderboard.append(`<td><a href="/u/${player.username}">${player.username}</a></td>`);
-            leaderboard.append(`<td>${player.accuracy.toFixed(2)}%</td>`);
+            leaderboard.append(`<td>${player.accuracy}%</td>`);
             leaderboard.append(`<td><span>${player.playCount.toLocaleString('en')}</span></td>`);
             leaderboard.append(`<td><span>${player.totalScore.toLocaleString('en')}</span></td>`);
             leaderboard.append(`<td><span style="font-weight:bold">${player.rankedScore.toLocaleString('en')}</span></td>`);
