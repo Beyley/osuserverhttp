@@ -52,7 +52,7 @@ class Player {
      * @param {Date} lastLoginTime The player's last login time
      * @param {Numebr} userId The users id
      */
-    constructor(username, rankedScore, accuracy, totalScore, rank, playCount, registerTime, lastLoginTime, userId) {
+    constructor(username, rankedScore, accuracy, totalScore, rank, playCount, registerTime, lastLoginTime, userId, totalHits, maxCombo) {
         this.userId = userId;
         this.username = username;
         this.rankedScore = rankedScore;
@@ -78,6 +78,9 @@ class Player {
 
         this.registerTime = registerTime;
         this.lastLoginTime = lastLoginTime;
+
+        this.totalHits = totalHits;
+        this.maxCombo = maxCombo;
 
         /**
          * The amount of SS and Silver SS ranks the player has
