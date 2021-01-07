@@ -140,7 +140,7 @@ app.get('/u/:id', async (req, res) => {
 
             mostPlayedToDisplay.append(`<div style="font-size:${180 - (rank * 6)}%">`);
 
-            mostPlayedToDisplay.append(`${playedAmount} plays - <a target="_top" href="https://osu.ppy.sh/beatmapsets/${mapInMostPlayed}.setId">${mapInMostPlayed.artist} - ${mapInMostPlayed.title} [${mapInMostPlayed.diff}]</a>`);
+            mostPlayedToDisplay.append(`${playedAmount} plays - <a target="_top" href="https://osu.ppy.sh/beatmapsets/${mapInMostPlayed.setId}">${mapInMostPlayed.artist} - ${mapInMostPlayed.title} [${mapInMostPlayed.diff}]</a>`);
 
             mostPlayedToDisplay.append("</div>");
 
