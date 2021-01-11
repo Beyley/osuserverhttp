@@ -1,8 +1,10 @@
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+const formidableMiddleware = require('express-formidable');
 const md5 = require('crypto-js/md5.js');
 const config = require("./config/default.json");
+const fs = require('fs');
 var { Sql } = require("./objects/sql.js");
 var { StringBuilder } = require("./objects/stringbuilder");
 
@@ -17,6 +19,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use(formidableMiddleware());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -47,35 +50,6 @@ async function updateHeaderValues() {
     headerCounts.totalUsers = await sql.getNumberOfUsers();
     headerCounts.onlineUsers = await sql.getNumberOfOnlinePlayers();
     headerCounts.amountOfRankedPlays = await sql.getNumberOfScores();
-}
-
-function addTrailZero(num, digits) {
-    // addTrailZero() : add trailing zeroes to given number
-    // PARAM num : original number
-    //       digits : total number of decimal places required
-
-    var cString = num.toString(), // Convert to string
-        cLength = cString.indexOf("."); // Position of decimal point
-
-    // Is a whole number
-    if (cLength == -1) {
-        cLength = 0;
-        cString += ".";
-    }
-    // Is a decimal nummber 
-    else {
-        cLength = cString.substr(cLength + 1).length;
-    }
-
-    // Pad with zeroes
-    if (cLength < digits) {
-        for (let i = cLength; i < digits; i++) {
-            cString += "0";
-        }
-    }
-
-    // Return result
-    return cString;
 }
 
 function addLeadZero(num, digits) {
@@ -174,6 +148,39 @@ app.get('/', async (req, res) => {
         });
     } catch (err) {
         console.log(err);
+    }
+})
+
+//http://osu.ppy.sh/forum/ucp.php?i=profile&mode=avatar
+
+app.get('/forum/ucp.php', async (req, res) => {
+    if (req.query.mode == "avatar") {
+        res.redirect('/p/avatar');
+    }
+});
+
+app.get('/p/avatar', async (req, res) => {
+    updateHeaderValues();
+
+    res.render('pages/avatar.ejs', {
+        headerCounts: headerCounts,
+        pageName: "avatar change",
+    });
+});
+
+app.post('/p/changeavatar', async (req, res) => {
+    let avatarFile = req.files.file;
+
+    let username = req.fields.user;
+    let password = req.fields.pass.toString().toLowerCase();
+
+    let userId = await sql.getUserId(username, password);
+
+    if (userId != -1) {
+        fs.copyFile(avatarFile.path, config.avatarlocation + userId + "_000.png", (err) => {
+            if (err) throw err;
+            //console.log(avatarFile.path + " was copied to " + config.avatarlocation + userId + "_000.png");
+        });
     }
 })
 

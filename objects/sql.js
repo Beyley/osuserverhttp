@@ -94,6 +94,29 @@ class Sql {
     }
 
     /**
+     * Gets the user id of a user
+     * @param {String} username The users username
+     * @param {String} password The users password
+     * 
+     * @returns {Number} The user id (-1 if not exist)
+     */
+    getUserId(username, password) {
+        return new Promise((resolve, reject) => {
+            let exist = -1;
+
+            this.connection.query('SELECT * FROM osu_users WHERE username = ? AND password = ?', [username, password], (err, results, fields) => {
+                if (err) throw err;
+
+                if (results.length > 0) {
+                    exist = results[0].userid;
+                }
+
+                resolve(exist);
+            });
+        });
+    }
+
+    /**
      * Gets the amoung of SS's that a player has
      * @param {String} username The username 
      */

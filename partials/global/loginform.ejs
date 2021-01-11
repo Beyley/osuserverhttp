@@ -1,10 +1,10 @@
 <div class="content-infoline">
-    <form class="inline-form" action="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/search" id="cse-search-box">
+    <form class="inline-form" action="/p/search" id="cse-search-box">
         <div>
             <input type="hidden" name="cx" value="007714945049801807819:fwdivvi5sik">
             <input type="hidden" name="cof" value="FORID:10">
             <input type="hidden" name="ie" value="UTF-8">
-            <input type="text" name="q" size="15" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url();https://web.archive.org/web/20120501080429if_/http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif);) left center no-repeat rgb(255, 255, 255);">
+            <input type="text" name="q" size="15" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url();http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif);) left center no-repeat rgb(255, 255, 255);">
         </div>
         <input name="siteurl" type="hidden" value="osu.ppy.sh/p/playerranking"><input name="ref" type="hidden" value=""></form>
     <form class="inline-form" onsubmit="return userSearch()">
@@ -13,11 +13,12 @@
     <form class="inline-form" onsubmit="return beatmapSearch()">
         <input type="text" class="default form-text form-default-value-processed" name="beatmap-search" id="beatmap-search" size="10" value="Beatmap" style="color: rgb(185, 186, 181);">
     </form>
-    <form action="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/forum/ucp.php?mode=login" method="post">
+    <form action="/forum/ucp.php?mode=login" method="post">
         user:
-        <input class="post" type="text" name="username" size="15" maxlength="40" value="" tabindex="0"> pass:
-        <input class="post" type="password" name="password" size="15" maxlength="100" tabindex="0">
-        <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/forgot" title="Forgot Password">?</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/forum/ucp.php?mode=register" title="Register New Account">register</a>
+        <input class="post" id="user" type="text" name="username" size="15" maxlength="40" value="" tabindex="0"> 
+        pass:
+        <input class="post" id="pass" type="password" name="password" size="15" maxlength="100" tabindex="0">
+        <a href="/p/forgot" title="Forgot Password">?</a> <a href="/forum/ucp.php?mode=register" title="Register New Account">register</a>
         <input type="checkbox" class="radio" name="autologin" id="autologin"> <label for="autologin">save</label>
         <input type="hidden" name="redirect" value="/p/playerranking">
         <input type="hidden" name="sid" value="8c43da3712822413d10515813175ea21">
