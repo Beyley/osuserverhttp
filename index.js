@@ -226,7 +226,7 @@ app.get('/p/playerranking', async (req, res) => {
     } catch (err) { }
 })
 
-app.post('/p/onlineusercount', async (req, res) => {
+app.all('/p/onlineusercount', async (req, res) => {
     try {
         let userCount = 0;
         userCount = await sql.getNumberOfOnlinePlayers();
@@ -237,7 +237,7 @@ app.post('/p/onlineusercount', async (req, res) => {
     }
 })
 
-app.post('/p/chat', async (req, res) => {
+app.all('/p/chat', async (req, res) => {
     try {
         let finalString = new StringBuilder();
 
@@ -273,10 +273,11 @@ app.post('/p/chat', async (req, res) => {
     }
 })
 
-
-
-app.get('/register', (req, res) => {
-    res.render('pages/register.ejs', {});
+app.get('/p/register', (req, res) => {
+    res.render('pages/register.ejs', {
+        headerCounts: headerCounts,
+        pageName: "Register",
+    });
 })
 
 app.post('/registerauth', async (req, res) => {

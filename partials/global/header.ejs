@@ -6,6 +6,16 @@
         <br> A total of <b><span id="playcount"><%= headerCounts.amountOfRankedPlays %></span></b> ranked plays!
     </div>
 
+    <script>
+        async function updateOnlineUsers() {
+            document.getElementById("onlineusers").innerHTML = await (await fetch("/p/onlineusercount")).text();
+
+            setTimeout(updateOnlineUsers, 30000);
+        }
+
+        setTimeout(updateOnlineUsers, 1000);
+    </script>
+
     <div class="menu">
         <ul class="sf-menu sf-js-enabled sf-shadow">
             <li class="">

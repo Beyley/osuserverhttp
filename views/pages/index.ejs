@@ -18,18 +18,13 @@
                     
                     <div class="content-with-bg">
                         <script>
-                            function updateChat() {
-                                $("#chat").load("/p/chat", {
-                                    limit: 25
-                                }, function() {
-                                    $("#onlineusers").load("/p/onlineusercount", {
-                                        limit: 25
-                                    });
-                                    setTimeout(updateChat, 10000);
-                                });
+                            async function updateChat() {
+                                document.getElementById("chat").innerHTML = await (await fetch("/p/chat")).text();
+
+                                setTimeout(updateChat, 10000);
                             }
 
-                            setTimeout(updateChat, 0);
+                            setTimeout(updateChat, 1000);
                         </script>
 
                         <div class="main-right main-column">
