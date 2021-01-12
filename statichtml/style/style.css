@@ -2161,6 +2161,7 @@ h2.inline {
     position: absolute;
     pointer-events: none;
     left: -112px;
+    z-index: 99 !important;
 }
 
 @media screen and (max-width: 1100px) {

@@ -42,6 +42,10 @@ var sql = new Sql(config.host, config.name, config.password, config.database);
  */
 var headerCounts = [];
 
+headerCounts.totalUsers = "?";
+headerCounts.onlineUsers = "?";
+headerCounts.amountOfRankedPlays = "?";
+
 /**
  * Updates the values on the header 
  * (Total user count, online user count, total ranked player count)
@@ -165,6 +169,24 @@ app.get('/p/avatar', async (req, res) => {
     res.render('pages/avatar.ejs', {
         headerCounts: headerCounts,
         pageName: "avatar change",
+    });
+});
+
+app.get('/p/about', async (req, res) => {
+    updateHeaderValues();
+
+    res.render('pages/about.ejs', {
+        headerCounts: headerCounts,
+        pageName: "About",
+    });
+});
+
+app.get('/p/history', async (req, res) => {
+    updateHeaderValues();
+
+    res.render('pages/history.ejs', {
+        headerCounts: headerCounts,
+        pageName: "History",
     });
 });
 
