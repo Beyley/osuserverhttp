@@ -640,7 +640,7 @@ p {
 
 .loading {
     height: 30px;
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/working.gif') 50% 50% no-repeat;
+    background: url('/style/images/working.gif') 50% 50% no-repeat;
 }
 
 .unit-rating {
@@ -649,7 +649,7 @@ p {
     padding: 0;
     height: 14px;
     position: relative;
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/starrating.gif') top left repeat-x;
+    background: url('/style/images/starrating.gif') top left repeat-x;
 }
 
 .unit-rating li {
@@ -672,7 +672,7 @@ p {
 }
 
 .unit-rating li a:hover {
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/starrating.gif') left center;
+    background: url('/style/images/starrating.gif') left center;
     z-index: 2;
     left: 0;
 }
@@ -758,7 +758,7 @@ p {
 }
 
 .unit-rating li.current-rating {
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/starrating.gif') left bottom;
+    background: url('/style/images/starrating.gif') left bottom;
     position: absolute;
     height: 14px;
     display: block;
@@ -991,13 +991,13 @@ p {
 
 .starfield {
     height: 14px;
-    background: url("/web/20120517155233im_/http://s.ppy.sh/images/starn.png");
+    background: url("/style/images/starn.png");
     background-repeat: repeat-x;
 }
 
 .starfield>.active {
     height: 14px;
-    background: url("/web/20120517155233im_/http://s.ppy.sh/images/star.png");
+    background: url("/style/images/star.png");
     background-repeat: repeat-x;
 }
 
@@ -1065,7 +1065,7 @@ p {
 .profileSupporter {
     width: 100%!important;
     height: 12px;
-    background: url("/web/20120517155233im_/http://s.ppy.sh/images/supporter.png");
+    background: url("/style/images/supporter.png");
     background-position: top center;
     padding: 0 0 5px 0;
     margin-top: 5px;
@@ -1373,7 +1373,7 @@ ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
     height: 10px;
     text-indent: -999em;
     overflow: hidden;
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/arrows-ffffff.png') no-repeat -10px -100px;
+    background: url('/style/images/arrows-ffffff.png') no-repeat -10px -100px;
 }
 
 a>.sf-sub-indicator {
@@ -1450,13 +1450,13 @@ td.profile {
     color: #fff;
     height: 28px;
     background-color: #5a5399;
-    background-image: url('/web/20120517155233im_/http://s.ppy.sh/images/tableheader.png');
+    background-image: url('/style/images/tableheader.png');
 }
 
 .rtl .catdiv {
     color: #fff;
     background-color: #5a5399;
-    background-image: url('/web/20120517155233im_/http://s.ppy.sh/images/tableheader.png');
+    background-image: url('/style/images/tableheader.png');
 }
 
 .catdiv a {
@@ -1518,7 +1518,7 @@ span.lightbar {
 
 .cat h4 {
     background-color: #5a5399;
-    background-image: url('/web/20120517155233im_/http://s.ppy.sh/images/tableheader.png');
+    background-image: url('/style/images/tableheader.png');
     font-size: 150%;
     color: #fff;
     margin: 0;
@@ -1788,22 +1788,22 @@ h2.inline {
 }
 
 .user, .kudos {
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/star-user.png');
+    background: url('/style/images/star-user.png');
     background-repeat: no-repeat;
 }
 
 .bat {
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/star-bat.png');
+    background: url('/style/images/star-bat.png');
     background-repeat: no-repeat;
 }
 
 .mat, .supporter {
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/star-kudos.png');
+    background: url('/style/images/star-kudos.png');
     background-repeat: no-repeat;
 }
 
 .star-icon {
-    background: url('/web/20120517155233im_/http://s.ppy.sh/images/star-pack.png');
+    background: url('/style/images/star-pack.png');
     text-align: left;
     font-weight: bold;
     vertical-align: top;
@@ -2179,7 +2179,3 @@ h2.inline {
         display: block;
     }
 }
-
-/* FILE ARCHIVED ON 15:52:33 May 17, 2012 AND RETRIEVED FROM THE INTERNET ARCHIVE ON 23:47:07 Dec 22, 2020. JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE. ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C. SECTION 108(a)(3)). */
-
-/* playback timings (ms): exclusion.robots.policy: 0.346 CDXLines.iter: 20.393 (3) esindex: 0.016 PetaboxLoader3.resolve: 85.754 exclusion.robots: 0.363 PetaboxLoader3.datanode: 121.789 (4) LoadShardBlock: 100.55 (3) load_resource: 129.429 captures_list: 156.998 RedisCDXSource: 31.206 */

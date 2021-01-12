@@ -117,6 +117,28 @@ class Sql {
     }
 
     /**
+     * Gets the set id of a map
+     * @param {Number} setId The id of the set
+     * 
+     * @returns {Map} Map (null if not exist)
+     */
+    getMapFromId(setId) {
+        return new Promise((resolve, reject) => {
+            let map = null;
+
+            this.connection.query('SELECT * FROM osu_maps WHERE beatmapset_id = ?', [setId], (err, matchingMaps, fields) => {
+                if (err) throw err;
+
+                matchingMaps.forEach((mapToCheck) => {
+                    map = new Map(mapToCheck);
+                });
+
+                resolve(map);
+            });
+        });
+    }
+
+    /**
      * Gets the amoung of SS's that a player has
      * @param {String} username The username 
      */
@@ -323,7 +345,7 @@ class Sql {
                     if (err) throw err;
 
                     allRankedMaps.forEach(map => {
-                        maps.push(new Map(map.file_md5, map.artist, map.title, map.version, map.beatmapset_id));
+                        maps.push(new Map(map));
                     });
 
                     usersScores.forEach(userScore => {
@@ -365,7 +387,7 @@ class Sql {
                     if (err) throw err;
 
                     allRankedMaps.forEach(map => {
-                        maps.push(new Map(map.file_md5, map.artist, map.title, map.version, map.beatmapset_id));
+                        maps.push(new Map(map));
                     });
 
                     allScores.forEach(currentScore => {
@@ -419,7 +441,7 @@ class Sql {
                     if (err) throw err;
 
                     allRankedMaps.forEach(map => {
-                        maps.push(new Map(map.file_md5, map.artist, map.title, map.version, map.beatmapset_id));
+                        maps.push(new Map(map));
                     });
 
                     allScores.forEach(currentScore => {

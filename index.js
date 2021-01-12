@@ -140,6 +140,27 @@ app.get('/u/:id', async (req, res) => {
     }
 })
 
+app.get('/s/:id', async (req, res) => {
+    updateHeaderValues();
+
+    let mapId = req.params.id;
+
+    let map = await sql.getMapFromId(mapId);
+
+    let leaderboard = [];
+
+    if (map == null) {
+        res.send("MAP NOT FOUND");
+        return;
+    }
+
+    res.render('pages/mappage.ejs', {
+        headerCounts: headerCounts,
+        pageName: `${map.artist} - ${map.title}`,
+        map: map,
+    });
+});
+
 app.get('/', async (req, res) => {
     try {
         updateHeaderValues();
@@ -187,6 +208,24 @@ app.get('/p/history', async (req, res) => {
     res.render('pages/history.ejs', {
         headerCounts: headerCounts,
         pageName: "History",
+    });
+});
+
+app.get('/p/download', async (req, res) => {
+    updateHeaderValues();
+
+    res.render('pages/download.ejs', {
+        headerCounts: headerCounts,
+        pageName: "Download",
+    });
+});
+
+app.get('/p/beatmaplist', async (req, res) => {
+    updateHeaderValues();
+
+    res.render('pages/beatmaplist.ejs', {
+        headerCounts: headerCounts,
+        pageName: "Beatmap List",
     });
 });
 
@@ -296,6 +335,8 @@ app.all('/p/chat', async (req, res) => {
 })
 
 app.get('/p/register', (req, res) => {
+    updateHeaderValues();
+
     res.render('pages/register.ejs', {
         headerCounts: headerCounts,
         pageName: "Register",
@@ -321,6 +362,7 @@ app.post('/registerauth', async (req, res) => {
     }
 })
 
+updateHeaderValues();
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

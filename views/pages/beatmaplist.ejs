@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<%- include('../../partials/global/htmlhead.ejs') %>
+
+<html>
+<body data-new-gr-c-s-check-loaded="14.988.0" data-gr-ext-installed="">
+    <!-- <a name="top"></a> -->
+    <div class="bodytopbg">
+        <div class="mainbody">
+            <div class="mainbody2">
+                <div id="coolheader" style="background-image: url(&#39;/style/images/right-j.jpg&#39;);"></div>
+                <!-- <a id="top_support" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/support"> </a>
+                <a id="top_follow" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/twitter"> </a> -->
+                
+                <%- include('../../partials/global/header.ejs') %>
+                
+                <div class="content">
+                    <%- include('../../partials/global/loginform.ejs') %>
+
+                    <div class="content-with-bg">
+						<div class="content-with-bg">
+                        <script type="text/javascript">
+                            var myListener = new Object();
+                            	var isPlaying = false;
+                            	myListener.onInit = function()
+                            	{
+                            		this.position = 0;
+                            	};
+                            	myListener.onUpdate = function()
+                            	{
+                            		isPlaying = (this.isPlaying == "true");
+                            	};
+                            
+                            	function getFlashObject()
+                            	{
+                            		return document.getElementById("myFlash");
+                            	}
+                            	var playingid = -1;
+                            	function play(id)
+                            	{
+                            		stop();
+                            
+                            		if (id != playingid || !isPlaying)
+                            		{
+                            			setVolume(45);
+                            			getFlashObject().SetVariable("method:setUrl", "https://web.archive.org/web/20120501082555/http://s.ppy.sh/mp3/preview/" + id + ".mp3");
+                            			getFlashObject().SetVariable("method:play", "");
+                            			getFlashObject().SetVariable("enabled", "true");
+                            			playingid = id;
+                            		}
+                            
+                            		return false;
+                            	}
+                            	function stop()
+                            	{
+                            		getFlashObject().SetVariable("method:stop", "");
+                            	}
+                            	function setVolume(volume)
+                            	{
+                            		getFlashObject().SetVariable("method:setVolume", volume);
+                            	}
+                            
+                            	function load(id, e)
+                            	{
+                                    if (e.button !== 1)
+                                        loadUrl("/s/" + id)
+                            	}
+						</script>
+						
+                        <object class="playerpreview" id="myFlash" type="application/x-shockwave-flash" data="/style/images/mp3.swf.download" width="1" height="1">
+                            <param name="movie" value="/mp3/mp3.swf">
+                            <param name="AllowScriptAccess" value="always">
+                            <param name="FlashVars" value="listener=myListener&amp;interval=500">
+                        </object>
+
+                        <h1>Beatmap Listing</h1>
+                        <div class="paddingboth">
+                            Hover over an item to uncover quick links.
+                            <br> Click a thumbnail to hear an audio preview.
+                            <br>
+
+                            <div style="text-align:right;">
+                                <form name="mainform">
+                                    <input type="hidden" name="s" value="7">
+                                    <input type="hidden" name="o" value="1"> Search:
+                                    <input name="q" value="">
+                                    <input type="submit" value="search"> Display:
+                                    <select name="r" onchange="document.mainform.submit()">
+                                        <option value="0" selected="">Ranked
+                                        </option>
+                                        <option value="6">Approved
+                                        </option>
+                                        <option value="8">Mod Requests
+                                        </option>
+                                        <option value="2">Pending/Help
+                                        </option>
+                                        <option value="5">Graveyard
+                                        </option>
+                                        <option value="4">All</option>
+                                    </select>
+                                    Genre:
+                                    <select name="g" onchange="document.mainform.submit()">
+                                        <option value="0" selected="">Any</option>
+                                        <option value="1">Unspecified</option>
+                                        <option value="2">Video Game</option>
+                                        <option value="3">Anime</option>
+                                        <option value="4">Rock</option>
+                                        <option value="5">Pop</option>
+                                        <option value="6">Other</option>
+                                        <option value="7">Novelty</option>
+                                        <option value="9">Hip Hop</option>
+                                        <option value="10">Techno</option>
+                                    </select>
+                                    Language:
+                                    <select name="la" onchange="document.mainform.submit()">
+                                        <option value="0" selected="">Any</option>
+                                        <option value="2">English</option>
+                                        <option value="3">Japanese</option>
+                                        <option value="4">Chinese</option>
+                                        <option value="5">Instrumental</option>
+                                        <option value="6">Korean</option>
+                                        <option value="1">Other</option>
+                                        <option value="7">French</option>
+                                        <option value="8">German</option>
+                                        <option value="9">Swedish</option>
+                                        <option value="10">Spanish</option>
+                                        <option value="11">Italian</option>
+                                    </select>
+                                    <br>
+                                    <input type="checkbox" name="v" id="v" value="1" onchange="document.mainform.submit()">
+                                    <label for="v"> Has Video</label>
+                                    <input type="checkbox" name="sb" id="sb" value="1" onchange="document.mainform.submit()">
+                                    <label for="sb"> Has Storyboard</label>
+                                </form>
+                            </div>
+
+                        </div>
+
+
+                        <div class="pagination">Displaying 1 to 20 of many results.
+                            <br><b>1</b> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">2</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=3">3</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=4">4</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=5">5</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=6">6</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=7">7</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=8">8</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=9">9</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=10">10</a> ... <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=250">250</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">Next</a></div>
+
+                        <table class="beatmapListing" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th><a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=0&amp;o=&amp;r=0&amp;q=">Title</a></th>
+                                    <th><a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=1&amp;o=&amp;r=0&amp;q=">Artist</a></th>
+                                    <th><a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=2&amp;o=&amp;r=0&amp;q=">Creator</a></th>
+                                    <th><a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=3&amp;o=&amp;r=0&amp;q=">Difficulty</a></th>
+                                    <th><a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=0&amp;r=0&amp;q=">Ranked</a><img src="/style/images/down.gif"></th>
+
+                                    <th><a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=5&amp;o=&amp;r=0&amp;q=">User Rating</a></th>
+                                    <th><a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=6&amp;o=&amp;r=0&amp;q=">Plays</a></th>
+                                    <th>Pack</th>
+                                    <th>Genre</th>
+                                </tr>
+
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(SONGID)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/SONGID"></td>
+                                    <td onclick="load(SONGID,event)" class="block">
+										<div class="videoicon"></div><div class="storyicon"></div><a href="/s/SONGID">SONGNAME</a>
+									</td>
+                                    <td onclick="load(SONGID,event)">ARTIST
+                                        <div class="listing-src">SOURCE</div>
+                                    </td>
+                                    <td onclick="load(SONGID,event)"><a href="/u/creatorid">CREATOR</a></td>
+									<td onclick="load(SONGID,event)" width="96">
+										<img src="/style/images/easy.png"> 
+										<img src="/style/images/normal.png"> 
+										<img src="/style/images/hard.png"> 
+										<img src="/style/images/insane.png"> 
+									</td>
+                                    <td onclick="load(SONGID,event)">RANKDATE
+                                        <br><small>Ranked by RANKER</small></td>
+                                    <td onclick="load(SONGID)">
+                                        <center>-
+                                            <br><small>needs VOTESUNTILRATINGSHOWS votes</small></center>
+                                    </td>
+                                    <td onclick="load(SONGID,event)">
+                                        <center>PLAYS</center>
+                                    </td>
+                                    <td>
+                                        <center></center>
+                                    </td>
+                                    <td onclick="load(SONGID,event)"><a href="/p/beatmaplist?g=2">GENRE</a>
+                                        <br>(<a href="/p/beatmaplist?la=1">LANGUAGE</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="infoSONGID" style="display:none"><b>Quick Links:</b> <a href="/s/SONGID">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="pagination"><b>1</b> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">2</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=3">3</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=4">4</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=5">5</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=6">6</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=7">7</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=8">8</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=9">9</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=10">10</a> ... <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=250">250</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">Next</a></div>
+
+                        <div class="clear"></div>
+                    </div>
+                    </div>
+                </div>
+
+                <%- include('../../partials/global/footer.ejs') %>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="/js/brand.js"></script>
+    </div>
+</body>
+</html>
