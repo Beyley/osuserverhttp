@@ -248,9 +248,34 @@ app.get('/p/download', async (req, res) => {
 app.get('/p/beatmaplist', async (req, res) => {
     updateHeaderValues();
 
+    let page = req.query.page;
+    let query = req.query.q;
+
+    if (!page || page < 1) {
+        page = 1;
+    }
+
+
+    let allRankedMaps = await sql.getAllRankedMaps(query);
+
+    for (let setIndex in allRankedMaps) {
+        let set = allRankedMaps[setIndex].maps;
+
+        set.sort(function (a, b) { return a.starRating - b.starRating });
+    }
+
+    let bottomLimit = Math.min(Math.max(((page - 1) * 20) + 1, 1), allRankedMaps.length);
+    let upperLimit = Math.max(Math.min(page * 20, allRankedMaps.length), 1);
+
+    let thisSection = allRankedMaps.slice(bottomLimit - 1, upperLimit - 1);
+
     res.render('pages/beatmaplist.ejs', {
         headerCounts: headerCounts,
         pageName: "Beatmap List",
+        mapsToDisplay: thisSection,
+        currentPage: page,
+        bottomLimit: bottomLimit,
+        upperLimit: upperLimit,
     });
 });
 

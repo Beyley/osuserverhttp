@@ -136,8 +136,9 @@
                         </div>
 
 
-                        <div class="pagination">Displaying 1 to 20 of many results.
-                            <br><b>1</b> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">2</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=3">3</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=4">4</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=5">5</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=6">6</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=7">7</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=8">8</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=9">9</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=10">10</a> ... <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=250">250</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">Next</a></div>
+                        <div class="pagination">Displaying <%= bottomLimit %> to <%= upperLimit %> of many results.
+                            <br><a href="/p/beatmaplist?page=<%= currentPage - 1 %>">Prev</a> <b><%= currentPage %></b> <a href="/p/beatmaplist?page=<%= Number(currentPage) + 1 %>">Next</a>
+                        </div>
 
                         <table class="beatmapListing" cellspacing="0">
                             <tbody>
@@ -155,45 +156,64 @@
                                     <th>Genre</th>
                                 </tr>
 
-                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(SONGID)">
-                                    <td width="80"><img class="bmlistt" src="/style/images/SONGID"></td>
-                                    <td onclick="load(SONGID,event)" class="block">
-										<div class="videoicon"></div><div class="storyicon"></div><a href="/s/SONGID">SONGNAME</a>
-									</td>
-                                    <td onclick="load(SONGID,event)">ARTIST
-                                        <div class="listing-src">SOURCE</div>
-                                    </td>
-                                    <td onclick="load(SONGID,event)"><a href="/u/creatorid">CREATOR</a></td>
-									<td onclick="load(SONGID,event)" width="96">
-										<img src="/style/images/easy.png"> 
-										<img src="/style/images/normal.png"> 
-										<img src="/style/images/hard.png"> 
-										<img src="/style/images/insane.png"> 
-									</td>
-                                    <td onclick="load(SONGID,event)">RANKDATE
-                                        <br><small>Ranked by RANKER</small></td>
-                                    <td onclick="load(SONGID)">
-                                        <center>-
-                                            <br><small>needs VOTESUNTILRATINGSHOWS votes</small></center>
-                                    </td>
-                                    <td onclick="load(SONGID,event)">
-                                        <center>PLAYS</center>
-                                    </td>
-                                    <td>
-                                        <center></center>
-                                    </td>
-                                    <td onclick="load(SONGID,event)"><a href="/p/beatmaplist?g=2">GENRE</a>
-                                        <br>(<a href="/p/beatmaplist?la=1">LANGUAGE</a>)</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="10">
-                                        <div class="expandableInfo" id="infoSONGID" style="display:none"><b>Quick Links:</b> <a href="/s/SONGID">Scores &amp; Details</a>| Login for more options!</div>
-                                    </td>
-                                </tr>
+                                <% for(var i = 0; i < (mapsToDisplay.length); i++) { %>
+                                    <% var currentSet = mapsToDisplay[i].maps; %>
+
+                                    <% if(i % 2 == 0) { %>
+                                    <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(<%= currentSet[0].beatmapSetId %>)">
+                                    <% } else { %>
+                                    <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(<%= currentSet[0].beatmapSetId %>)">
+                                    <% } %>
+                                        <td width="80"><img class="bmlistt" src="https://b.ppy.sh/thumb/<%= currentSet[0].beatmapSetId %>.jpg"></td>
+                                        <td onclick="load(<%= currentSet[0].beatmapSetId %>,event)" class="block">
+                                            <% if(currentSet[0].hasVideo == 1) { %> <div class="videoicon"></div> <% } %> 
+                                            <% if(currentSet[0].hasStoryboard == 1) { %> <div class="storyicon"></div> <% } %> 
+                                            <a href="/s/<%= currentSet[0].beatmapSetId %>"><%= currentSet[0].title %></a>
+								    	</td>
+                                        <td onclick="load(<%= currentSet[0].beatmapSetId %>,event)"><%= currentSet[0].artist %>
+                                            <div class="listing-src"><%= currentSet[0].source %></div>
+                                        </td>
+                                        <td onclick="load(<%= currentSet[0].beatmapSetId %>,event)"><a href="https://osu.ppy.sh/u/<%= currentSet[0].creatorId %>"><%= currentSet[0].creator %></a></td>
+                                        <td onclick="load(<%= currentSet[0].beatmapSetId %>,event)" width="96">
+                                            <% for(var i2 = 0; i2 < currentSet.length; i2++) { %>
+                                                <% if(currentSet[i2].starRating < 2.5) { %> 
+                                                    <img src="/style/images/easy.png"> 
+                                                <% } else if(currentSet[i2].starRating < 3.5) { %> 
+                                                    <img src="/style/images/normal.png"> 
+                                                <% } else if(currentSet[i2].starRating < 4.5) { %> 
+                                                    <img src="/style/images/hard.png"> 
+                                                <% } else { %> 
+                                                    <img src="/style/images/insane.png"> 
+                                                <% } %> 
+                                            <% } %>
+								    	</td>
+                                        <td onclick="load(<%= currentSet[0].beatmapSetId %>,event)"><%= currentSet[0].approvedDate %>
+                                            <br><small>Ranked by UNKNOWN</small></td>
+                                        <td onclick="load(<%= currentSet[0].beatmapSetId %>)">
+                                            <center>-
+                                                <br><small>needs 0 votes</small></center>
+                                        </td>
+                                        <td onclick="load(<%= currentSet[0].beatmapSetId %>,event)">
+                                            <center>PLAYS</center>
+                                        </td>
+                                        <td>
+                                            <center></center>
+                                        </td>
+                                        <td onclick="load(<%= currentSet[0].beatmapSetId %>,event)"><a href="/p/beatmaplist?g=2"><%= currentSet[0].genreId %></a>
+                                            <br>(<a href="/p/beatmaplist?la=1"><%= currentSet[0].languageId %></a>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="10">
+                                            <div class="expandableInfo" id="info<%= currentSet[0].beatmapSetId %>" style="display:none"><b>Quick Links:</b> <a href="/s/<%= currentSet[0].beatmapSetId %>">Scores &amp; Details</a>| Login for more options!</div>
+                                        </td>
+                                    </tr>
+                                <% } %>
                             </tbody>
                         </table>
 
-                        <div class="pagination"><b>1</b> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">2</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=3">3</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=4">4</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=5">5</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=6">6</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=7">7</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=8">8</a> <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=9">9</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=10">10</a> ... <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=250">250</a>                            <a href="/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">Next</a></div>
+                        <div class="pagination">
+                            <a href="/p/beatmaplist?page=<%= currentPage - 1 %>">Prev</a> <b><%= currentPage %></b> <a href="/p/beatmaplist?page=<%= Number(currentPage) + 1 %>">Next</a>
+                        </div>
 
                         <div class="clear"></div>
                     </div>

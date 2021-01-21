@@ -6,6 +6,7 @@ var { Map } = require("./map.js");
 var { Post } = require('./post.js');
 const { Message } = require('./message.js');
 var { StringBuilder } = require("./stringbuilder.js");
+const { BeatmapSet } = require('./beatmapset.js');
 
 /**
      * Gets the time in plain text since the seconds
@@ -139,6 +140,42 @@ class Sql {
         });
     }
 
+    getAllRankedMaps(query) {
+        return new Promise((resolve, reject) => {
+            let map = null;
+
+            if (!query) {
+                query = "";
+            }
+
+            this.connection.query('SELECT * FROM server2008.osu_maps WHERE approved=\'2\' AND (artist LIKE ? OR creator LIKE ? OR `source` LIKE ? OR `title` LIKE ? OR version LIKE ? OR tags LIKE ?) ORDER BY approved_date DESC;', [`%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`], (err, allMaps, fields) => {
+                if (err) throw err;
+
+                let allSets = [];
+
+                allMaps.forEach((mapToCheck) => {
+                    let thisMap = new Map(mapToCheck);
+
+                    function doesMapsetExist(mapset) {
+                        return mapset.setId == thisMap.beatmapSetId;
+                    }
+
+                    let index = allSets.findIndex(doesMapsetExist);
+
+                    if (index != -1) {
+                        allSets[index].maps.push(thisMap);
+                    } else {
+                        allSets.push(new BeatmapSet(thisMap.beatmapSetId));
+                        index = allSets.findIndex(doesMapsetExist);
+                        allSets[index].maps.push(thisMap);
+                    }
+                });
+
+                resolve(allSets);
+            });
+        });
+    }
+
     /**
      * Gets the success rate of a map
      * @param {String} mapHash The hash of the map
@@ -188,7 +225,8 @@ class Sql {
                         return findScore.username == score.username;
                     }
 
-                    let index = scores.findIndex(doesScoreExist)
+                    let index = scores.findIndex(doesScoreExist);
+
                     if (index == -1) {
                         scores.push(new LeaderboardScore(score));
                     } else {
@@ -237,7 +275,7 @@ class Sql {
      */
     getUserGradeCounts(username) {
         return new Promise((resolve, reject) => {
-            this.connection.query('SELECT * FROM osu_scores WHERE username = ? AND pass = \'1\'', [username], (err, usersScores, fields) => {
+            this.connection.query('SELECT * FROM osu_scores WHERE username = ?', [username], (err, usersScores, fields) => {
                 if (err) throw err;
 
                 let xCount = 0;
