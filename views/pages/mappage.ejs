@@ -88,7 +88,11 @@
 
                         <div id="tablist">
                             <ul>
-                                <li><a class="active" href="/b/75&amp;m=0"><span style="background-image:url(/web/20120606071946im_/http://osu.ppy.sh/images/hard.png); background-position: center left; background-repeat: no-repeat; padding-left: 20px; display:inline-block; vertical-align:middle;">map.difficulty</span></a></li>
+                                <% for (i = 0; i < set.length; i++) { %>
+                                    <% let difficulty = set[i]; %>
+
+                                    <li><a <% if(difficulty.beatmapId == map.beatmapId) { %>class="active" <% } %> href="/s/<%= difficulty.beatmapSetId %>/<%= difficulty.beatmapId %>"><span style="background-image:url(/style/images/hard.png); background-position: center left; background-repeat: no-repeat; padding-left: 20px; display:inline-block; vertical-align:middle;"><%= difficulty.difficulty %></span></a></li>
+                                <% } %>
                             </ul>
                         </div>
                         <div>
@@ -119,7 +123,7 @@
                                             </div>
                                         </td>
                                         <td width="0%">Total Time:</td>
-                                        <td class="colour"><%= map.songLength %></td>
+                                        <td class="colour"><%= new Date(map.songLength * 1000).toISOString().substr(14, 5); %></td>
                                     </tr>
                                     <tr>
                                         <td width="0%">Creator:</td>
@@ -133,7 +137,7 @@
                                             </div>
                                         </td>
                                         <td width="0%">Draining Time:</td>
-                                        <td class="colour"><%= map.drainTime %></td>
+                                        <td class="colour"><%= new Date(map.drainTime * 1000).toISOString().substr(14, 5); %></td>
                                     </tr>
                                     <tr>
                                         <td width="0%">Source:</td>
@@ -208,12 +212,11 @@
                             <h2>Creator's Words</h2>
                             <div class="paddingboth">
                                 <div class="beatmapDownloadButton">
-                                    <a href="/forum/ucp.php?mode=login"><img src="/style/images/osu-download-login.png"></a>
+                                    <a href="https://chimu.moe/d/<%= map.beatmapSetId %>"><img src="/style/images/osu-download-beatmap.png"></a>
                                 </div>
 
                                 <div class="posttext">
-                                    <a href="/s/1#"><img class="bmt" src="/style/images/1l"></a>
-
+                                    map.description
                                 </div>
                             </div>
 
@@ -228,42 +231,59 @@
                             </div>
                             <div class="paddingall">
                                 <h2>Current Leader</h2>
+                                <!-- 
+                                    
+                                    
+                                    --- BEGIN LEADER --- 
+                                
+                                
+                                -->
+                                <% if(leaderboard.length > 0) { %>
+                                <% let leader = leaderboard[0] %>
                                 <table class="scoreLeader" cellpadding="0" cellspacing="0">
                                     <tbody>
                                         <tr>
-                                            <td class="title" colspan="3"><img class="flag" src="/style/images/pl.gif"> <a href="/u/39828">White Wolf</a> is in the lead! (1 year ago and counting)</td>
+                                            <td class="title" colspan="3"><!-- <img class="flag" src="/style/images/pl.gif"> --> <a href="/u/<%= leader.username %>"><%= leader.username %></a> is in the lead! (<%= leader.fancySubmitTime %> ago and counting)</td>
                                         </tr>
                                         <tr class="row1p">
                                             <td><strong>Score</strong></td>
-                                            <td>1,867,862 (100.00%)</td>
-                                            <td class="rank" width="120px" align="center" colspan="1" rowspan="7"><img src="/style/images/XH.png"></td>
+                                            <td><%= leader.score.toLocaleString('en') %> (<%= leader.accuracy %>%)</td>
+                                            <td class="rank" width="120px" align="center" colspan="1" rowspan="7"><img src="/style/images/<%= leader.grade %>.png"></td>
                                         </tr>
                                         <tr class="row2p">
                                             <td><strong>Max Combo</strong></td>
-                                            <td>314</td>
+                                            <td><%= leader.combo.toLocaleString('en') %></td>
                                         </tr>
                                         <tr class="row1p">
                                             <td><strong>300 / 100 / 50</strong></td>
-                                            <td>194 / 0 / 0</td>
+                                            <td><%= leader.hit300.toLocaleString('en') %> / <%= leader.hit100.toLocaleString('en') %> / <%= leader.hit50.toLocaleString('en') %></td>
                                         </tr>
                                         <tr class="row2p">
                                             <td><strong>Misses</strong></td>
-                                            <td>0</td>
+                                            <td><%= leader.hitMiss.toLocaleString('en') %></td>
                                         </tr>
                                         <tr class="row1p">
                                             <td><strong>Geki (Elite Beat!)</strong></td>
-                                            <td>45</td>
+                                            <td><%= leader.hitGeki.toLocaleString('en') %></td>
                                         </tr>
                                         <tr class="row2p">
                                             <td><strong>Katu (Beat!)</strong></td>
-                                            <td>0</td>
+                                            <td><%= leader.hitKatu.toLocaleString('en') %></td>
                                         </tr>
                                         <tr class="row1p">
                                             <td><strong>Mods</strong></td>
-                                            <td>DoubleTime,Flashlight</td>
+                                            <td><%= leader.fancyMods %></td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <% } %>
+                                <!-- 
+                                    
+                                    
+                                    --- END LEADER --- 
+                                
+                                
+                                -->
                             </div>
                         </div>
 
@@ -295,756 +315,30 @@
                                         <th><strong>Mods</strong></th>
                                         <th></th>
                                     </tr>
+
+                                    <% for(rank = 0; rank < leaderboard.length; rank++) { %>
+                                    <% var score = leaderboard[rank]; %>
+
+                                    <% if(rank % 2 == 0) { %>
                                     <tr class="row1p">
-                                        <td>#1</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td><b>1,867,862</b></td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/39828">White Wolf</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>DoubleTime,Flashlight</td>
+                                    <% } else { %>
+                                    <tr class="row2p">
+                                    <% } %>
+                                    
+                                        <td>#<%= rank + 1 %></td>
+                                        <td><img src="/style/images/<%= score.grade %>_small.png"></td>
+                                        <td><b><%= score.score.toLocaleString('en') %></b></td>
+                                        <td><b><%= score.accuracy %>%</b></td>
+                                        <td><!-- <img class="flag" src="/style/images/pl.gif" title="Poland"> --> <a href="/u/<%= score.username %>"><%= score.username %></a></td>
+                                        <td><%= score.combo.toLocaleString('en') %></td>
+                                        <td><%= score.hit300.toLocaleString('en') %>&nbsp;&nbsp;/&nbsp;&nbsp;<%= score.hit100.toLocaleString('en') %>&nbsp;&nbsp;/&nbsp;&nbsp;<%= score.hit50.toLocaleString('en') %></td>
+                                        <td><%= score.hitGeki.toLocaleString('en') %></td>
+                                        <td><%= score.hitKatu.toLocaleString('en') %></td>
+                                        <td><%= score.hitMiss.toLocaleString('en') %></td>
+                                        <td><%= score.fancyMods %></td>
                                         <td><a onclick="report(242518182);">Report</a></td>
                                     </tr>
-
-                                    <tr class="row2p">
-                                        <td>#2</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td>1,866,675</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/39129">ShaggoN</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>Hidden,HardRock,Flashlight</td>
-                                        <td><a onclick="report(75737722);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#3</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,836,911</td>
-                                        <td>98.97%</td>
-                                        <td><img class="flag" src="/style/images/no.gif" title="Norway"> <a href="/u/84841">CXu</a></td>
-                                        <td>314</td>
-                                        <td>191&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>43</td>
-                                        <td>2</td>
-                                        <td>0</td>
-                                        <td>DoubleTime,Flashlight</td>
-                                        <td><a onclick="report(558670085);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#4</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,798,768</td>
-                                        <td>97.59%</td>
-                                        <td><img class="flag" src="/style/images/fr.gif" title="France"> <a href="/u/422720">Leith</a></td>
-                                        <td>314</td>
-                                        <td>187&nbsp;&nbsp;/&nbsp;&nbsp;7&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>39</td>
-                                        <td>6</td>
-                                        <td>0</td>
-                                        <td>DoubleTime,Flashlight</td>
-                                        <td><a onclick="report(460834153);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#5</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,795,116</td>
-                                        <td>98.28%</td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/29130">Kubu</a></td>
-                                        <td>314</td>
-                                        <td>189&nbsp;&nbsp;/&nbsp;&nbsp;5&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>43</td>
-                                        <td>2</td>
-                                        <td>0</td>
-                                        <td>DoubleTime,Flashlight</td>
-                                        <td><a onclick="report(234103900);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#6</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,745,567</td>
-                                        <td>99.31%</td>
-                                        <td><img class="flag" src="/style/images/jp.gif" title="Japan"> <a href="/u/198574">Rorry</a></td>
-                                        <td>314</td>
-                                        <td>192&nbsp;&nbsp;/&nbsp;&nbsp;2&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>43</td>
-                                        <td>2</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(256625789);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#7</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,740,548</td>
-                                        <td>98.63%</td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/63829">Bass</a></td>
-                                        <td>314</td>
-                                        <td>190&nbsp;&nbsp;/&nbsp;&nbsp;4&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>41</td>
-                                        <td>4</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(519653168);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#8</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,724,599</td>
-                                        <td>98.28%</td>
-                                        <td><img class="flag" src="/style/images/gb.gif" title="United Kingdom"> <a href="/u/583765">Gon</a></td>
-                                        <td>314</td>
-                                        <td>189&nbsp;&nbsp;/&nbsp;&nbsp;5&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>40</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(457467413);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#9</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,724,344</td>
-                                        <td>98.54%</td>
-                                        <td><img class="flag" src="/style/images/si.gif" title="Slovenia"> <a href="/u/1544701">Lily Alice</a></td>
-                                        <td>314</td>
-                                        <td>190&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
-                                        <td>41</td>
-                                        <td>3</td>
-                                        <td>0</td>
-                                        <td>HardRock,Flashlight</td>
-                                        <td><a onclick="report(701197236);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#10</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,713,094</td>
-                                        <td>97.51%</td>
-                                        <td><img class="flag" src="/style/images/sk.gif" title="Slovakia"> <a href="/u/479399">ReVeNg3r</a></td>
-                                        <td>314</td>
-                                        <td>187&nbsp;&nbsp;/&nbsp;&nbsp;6&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
-                                        <td>39</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(370856800);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#11</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,712,842</td>
-                                        <td>97.59%</td>
-                                        <td><img class="flag" src="/style/images/jp.gif" title="Japan"> <a href="/u/951705">tenno-krs</a></td>
-                                        <td>314</td>
-                                        <td>187&nbsp;&nbsp;/&nbsp;&nbsp;7&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>39</td>
-                                        <td>6</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(451281318);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#12</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,704,249</td>
-                                        <td>96.22%</td>
-                                        <td><img class="flag" src="/style/images/jp.gif" title="Japan"> <a href="/u/1010286">s0r4</a></td>
-                                        <td>314</td>
-                                        <td>183&nbsp;&nbsp;/&nbsp;&nbsp;11&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>36</td>
-                                        <td>9</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(474436227);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#13</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,704,232</td>
-                                        <td>94.16%</td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/497847">Gotori</a></td>
-                                        <td>314</td>
-                                        <td>177&nbsp;&nbsp;/&nbsp;&nbsp;17&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>34</td>
-                                        <td>11</td>
-                                        <td>0</td>
-                                        <td>DoubleTime,Flashlight</td>
-                                        <td><a onclick="report(660588774);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#14</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,701,263</td>
-                                        <td>96.48%</td>
-                                        <td><img class="flag" src="/style/images/ru.gif" title="Russian Federation"> <a href="/u/865724">Rain</a></td>
-                                        <td>314</td>
-                                        <td>184&nbsp;&nbsp;/&nbsp;&nbsp;9&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
-                                        <td>37</td>
-                                        <td>7</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(520377034);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#15</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,690,511</td>
-                                        <td>96.56%</td>
-                                        <td><img class="flag" src="/style/images/ru.gif" title="Russian Federation"> <a href="/u/1142645">NyanGummy</a></td>
-                                        <td>314</td>
-                                        <td>184&nbsp;&nbsp;/&nbsp;&nbsp;10&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>38</td>
-                                        <td>7</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(460575704);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#16</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,687,417</td>
-                                        <td>96.82%</td>
-                                        <td><img class="flag" src="/style/images/gb.gif" title="United Kingdom"> <a href="/u/1218045">hoppip</a></td>
-                                        <td>314</td>
-                                        <td>185&nbsp;&nbsp;/&nbsp;&nbsp;8&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
-                                        <td>38</td>
-                                        <td>6</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(636309721);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#17</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,683,743</td>
-                                        <td>96.82%</td>
-                                        <td><img class="flag" src="/style/images/jp.gif" title="Japan"> <a href="/u/903117">Giffen</a></td>
-                                        <td>314</td>
-                                        <td>185&nbsp;&nbsp;/&nbsp;&nbsp;8&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
-                                        <td>38</td>
-                                        <td>6</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(704193657);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#18</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td>1,677,377</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/590069">Alduric</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>Flashlight</td>
-                                        <td><a onclick="report(527204742);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#19</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td>1,671,777</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/ca.gif" title="Canada"> <a href="/u/32067">FurukawaPan</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>Flashlight</td>
-                                        <td><a onclick="report(15699326);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#20</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td>1,670,677</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/55157">Andzia</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>Flashlight</td>
-                                        <td><a onclick="report(286422826);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#21</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td>1,669,577</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/uy.gif" title="Uruguay"> <a href="/u/58710">H1ko</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>Flashlight</td>
-                                        <td><a onclick="report(43329562);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#22</td>
-                                        <td><img src="/style/images/X_small.png"></td>
-                                        <td>1,669,577</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/kr.gif" title="Korea, Republic of"> <a href="/u/124493">Cookiezi</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(382708808);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#23</td>
-                                        <td><img src="/style/images/X_small.png"></td>
-                                        <td>1,666,077</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/cn.gif" title="China"> <a href="/u/715483">NDee</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(685397221);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#24</td>
-                                        <td><img src="/style/images/X_small.png"></td>
-                                        <td>1,665,077</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/at.gif" title="Austria"> <a href="/u/177913">Hakkero</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(691652872);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#25</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td>1,664,977</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/us.gif" title="United States"> <a href="/u/278954">david huhh</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>Flashlight</td>
-                                        <td><a onclick="report(207703394);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#26</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td>1,662,677</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/ca.gif" title="Canada"> <a href="/u/281028">Soar</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>Flashlight</td>
-                                        <td><a onclick="report(407987089);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#27</td>
-                                        <td><img src="/style/images/XH_small.png"></td>
-                                        <td>1,661,577</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/us.gif" title="United States"> <a href="/u/252524">geckogates</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>Flashlight</td>
-                                        <td><a onclick="report(90027567);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#28</td>
-                                        <td><img src="/style/images/X_small.png"></td>
-                                        <td>1,660,477</td>
-                                        <td><b>100.00%</b></td>
-                                        <td><img class="flag" src="/style/images/de.gif" title="Germany"> <a href="/u/19488">Dangaard</a></td>
-                                        <td>314</td>
-                                        <td>194&nbsp;&nbsp;/&nbsp;&nbsp;0&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>45</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(678005512);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#29</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,651,521</td>
-                                        <td>99.31%</td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/225529">White Wolf II</a></td>
-                                        <td>314</td>
-                                        <td>192&nbsp;&nbsp;/&nbsp;&nbsp;2&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>43</td>
-                                        <td>2</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(52849185);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#30</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,647,937</td>
-                                        <td>99.31%</td>
-                                        <td><img class="flag" src="/style/images/pt.gif" title="Portugal"> <a href="/u/280158">creativ</a></td>
-                                        <td>314</td>
-                                        <td>192&nbsp;&nbsp;/&nbsp;&nbsp;2&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>43</td>
-                                        <td>2</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(532335352);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#31</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,647,803</td>
-                                        <td>98.28%</td>
-                                        <td><img class="flag" src="/style/images/ar.gif" title="Argentina"> <a href="/u/242119">Salvage</a></td>
-                                        <td>314</td>
-                                        <td>189&nbsp;&nbsp;/&nbsp;&nbsp;5&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>41</td>
-                                        <td>4</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(638243830);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#32</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,643,508</td>
-                                        <td>99.31%</td>
-                                        <td><img class="flag" src="/style/images/th.gif" title="Thailand"> <a href="/u/110155">Xen</a></td>
-                                        <td>314</td>
-                                        <td>192&nbsp;&nbsp;/&nbsp;&nbsp;2&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>43</td>
-                                        <td>2</td>
-                                        <td>0</td>
-                                        <td>Flashlight</td>
-                                        <td><a onclick="report(39548521);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#33</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,643,199</td>
-                                        <td>98.54%</td>
-                                        <td><img class="flag" src="/style/images/ru.gif" title="Russian Federation"> <a href="/u/297889">Hitsugaya936</a></td>
-                                        <td>314</td>
-                                        <td>190&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
-                                        <td>41</td>
-                                        <td>3</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(501277076);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#34</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,643,010</td>
-                                        <td>98.97%</td>
-                                        <td><img class="flag" src="/style/images/de.gif" title="Germany"> <a href="/u/665100">BaBShadow</a></td>
-                                        <td>314</td>
-                                        <td>191&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>42</td>
-                                        <td>3</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(687122162);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#35</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,642,997</td>
-                                        <td>98.97%</td>
-                                        <td><img class="flag" src="/style/images/it.gif" title="Italy"> <a href="/u/353176">Kodoshi</a></td>
-                                        <td>314</td>
-                                        <td>191&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>42</td>
-                                        <td>3</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(640063524);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#36</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,639,901</td>
-                                        <td>98.28%</td>
-                                        <td><img class="flag" src="/style/images/nl.gif" title="Netherlands"> <a href="/u/23326">GladiOol</a></td>
-                                        <td>314</td>
-                                        <td>189&nbsp;&nbsp;/&nbsp;&nbsp;5&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>40</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(123919783);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#37</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,638,512</td>
-                                        <td>98.97%</td>
-                                        <td><img class="flag" src="/style/images/br.gif" title="Brazil"> <a href="/u/635173">Caco Roth</a></td>
-                                        <td>314</td>
-                                        <td>191&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>42</td>
-                                        <td>3</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(658563870);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#38</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,638,463</td>
-                                        <td>97.94%</td>
-                                        <td><img class="flag" src="/style/images/pl.gif" title="Poland"> <a href="/u/809360">White Cherry</a></td>
-                                        <td>314</td>
-                                        <td>188&nbsp;&nbsp;/&nbsp;&nbsp;6&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>40</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(293024093);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#39</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,637,632</td>
-                                        <td>98.28%</td>
-                                        <td><img class="flag" src="/style/images/at.gif" title="Austria"> <a href="/u/152238">Snowball</a></td>
-                                        <td>314</td>
-                                        <td>189&nbsp;&nbsp;/&nbsp;&nbsp;5&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>41</td>
-                                        <td>4</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(157119286);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#40</td>
-                                        <td><img src="/style/images/A_small.png"></td>
-                                        <td>1,637,601</td>
-                                        <td>94.93%</td>
-                                        <td><img class="flag" src="/style/images/jp.gif" title="Japan"> <a href="/u/285328">tekiya</a></td>
-                                        <td>314</td>
-                                        <td>180&nbsp;&nbsp;/&nbsp;&nbsp;11&nbsp;&nbsp;/&nbsp;&nbsp;3</td>
-                                        <td>35</td>
-                                        <td>9</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(254561505);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#41</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,637,216</td>
-                                        <td>98.63%</td>
-                                        <td><img class="flag" src="/style/images/cn.gif" title="China"> <a href="/u/88717">Ana_Coppola</a></td>
-                                        <td>314</td>
-                                        <td>190&nbsp;&nbsp;/&nbsp;&nbsp;4&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>41</td>
-                                        <td>4</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(73147413);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#42</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,635,463</td>
-                                        <td>98.28%</td>
-                                        <td><img class="flag" src="/style/images/jp.gif" title="Japan"> <a href="/u/352328">rrtyui</a></td>
-                                        <td>314</td>
-                                        <td>189&nbsp;&nbsp;/&nbsp;&nbsp;5&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>40</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(218561068);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#43</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,632,957</td>
-                                        <td>97.59%</td>
-                                        <td><img class="flag" src="/style/images/us.gif" title="United States"> <a href="/u/1485082">Stefan88</a></td>
-                                        <td>314</td>
-                                        <td>187&nbsp;&nbsp;/&nbsp;&nbsp;7&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>38</td>
-                                        <td>7</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(638905158);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#44</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,632,651</td>
-                                        <td>98.97%</td>
-                                        <td><img class="flag" src="/style/images/ru.gif" title="Russian Federation"> <a href="/u/167013">1337</a></td>
-                                        <td>314</td>
-                                        <td>191&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>42</td>
-                                        <td>3</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(657731233);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#45</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,632,608</td>
-                                        <td>98.28%</td>
-                                        <td><img class="flag" src="/style/images/cn.gif" title="China"> <a href="/u/44867">Crazy Jay</a></td>
-                                        <td>314</td>
-                                        <td>189&nbsp;&nbsp;/&nbsp;&nbsp;5&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>40</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(592328813);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#46</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,632,123</td>
-                                        <td>98.63%</td>
-                                        <td><img class="flag" src="/style/images/dk.gif" title="Denmark"> <a href="/u/573374">Leniralliux</a></td>
-                                        <td>314</td>
-                                        <td>190&nbsp;&nbsp;/&nbsp;&nbsp;4&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>41</td>
-                                        <td>4</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(300133204);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#47</td>
-                                        <td><img src="/style/images/SH_small.png"></td>
-                                        <td>1,631,232</td>
-                                        <td>94.85%</td>
-                                        <td><img class="flag" src="/style/images/se.gif" title="Sweden"> <a href="/u/817211">Nidert</a></td>
-                                        <td>314</td>
-                                        <td>179&nbsp;&nbsp;/&nbsp;&nbsp;15&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>34</td>
-                                        <td>11</td>
-                                        <td>0</td>
-                                        <td>Hidden,DoubleTime</td>
-                                        <td><a onclick="report(557993429);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#48</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,629,026</td>
-                                        <td>98.54%</td>
-                                        <td><img class="flag" src="/style/images/cl.gif" title="Chile"> <a href="/u/856304">bipolarmen98</a></td>
-                                        <td>314</td>
-                                        <td>190&nbsp;&nbsp;/&nbsp;&nbsp;3&nbsp;&nbsp;/&nbsp;&nbsp;1</td>
-                                        <td>41</td>
-                                        <td>3</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(526145401);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row1p">
-                                        <td>#49</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,628,892</td>
-                                        <td>97.94%</td>
-                                        <td><img class="flag" src="/style/images/ca.gif" title="Canada"> <a href="/u/118992">SilentWings</a></td>
-                                        <td>314</td>
-                                        <td>188&nbsp;&nbsp;/&nbsp;&nbsp;6&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>39</td>
-                                        <td>6</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(37812106);">Report</a></td>
-                                    </tr>
-
-                                    <tr class="row2p">
-                                        <td>#50</td>
-                                        <td><img src="/style/images/S_small.png"></td>
-                                        <td>1,627,521</td>
-                                        <td>97.59%</td>
-                                        <td><img class="flag" src="/style/images/ru.gif" title="Russian Federation"> <a href="/u/610462">BinGOSU3</a></td>
-                                        <td>314</td>
-                                        <td>187&nbsp;&nbsp;/&nbsp;&nbsp;7&nbsp;&nbsp;/&nbsp;&nbsp;0</td>
-                                        <td>38</td>
-                                        <td>7</td>
-                                        <td>0</td>
-                                        <td>DoubleTime</td>
-                                        <td><a onclick="report(445412579);">Report</a></td>
-                                    </tr>
-
+                                    <% } %>
                                 </tbody>
                             </table>
                         </div>

@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var { Player } = require("./player.js");
 var { Score } = require("./score.js");
+var { LeaderboardScore } = require("./leaderboardscore.js");
 var { Map } = require("./map.js");
 var { Post } = require('./post.js');
 const { Message } = require('./message.js');
@@ -117,16 +118,16 @@ class Sql {
     }
 
     /**
-     * Gets the set id of a map
-     * @param {Number} setId The id of the set
+     * Gets a map from a set id
+     * @param {Number} mapId The id of the set
      * 
      * @returns {Map} Map (null if not exist)
      */
-    getMapFromId(setId) {
+    getMapFromId(mapId) {
         return new Promise((resolve, reject) => {
             let map = null;
 
-            this.connection.query('SELECT * FROM osu_maps WHERE beatmapset_id = ?', [setId], (err, matchingMaps, fields) => {
+            this.connection.query('SELECT * FROM osu_maps WHERE beatmap_id = ?', [mapId], (err, matchingMaps, fields) => {
                 if (err) throw err;
 
                 matchingMaps.forEach((mapToCheck) => {
@@ -139,17 +140,127 @@ class Sql {
     }
 
     /**
+     * Gets the success rate of a map
+     * @param {String} mapHash The hash of the map
+     * 
+     * @returns {Array} An array (0 is passes, 1 is total plays)
+     */
+    getMapSuccessRate(mapHash) {
+        return new Promise((resolve, reject) => {
+            let rates = [];
+
+            this.connection.query('SELECT * FROM osu_scores WHERE osuhash = ?', [mapHash], (err, matchingScores, fields) => {
+                if (err) throw err;
+
+                let passes = 0;
+                let totalPlays = 0;
+
+                matchingScores.forEach((score) => {
+                    if (score.pass == 1) {
+                        passes++;
+                    }
+
+                    totalPlays++;
+                });
+
+                rates = [passes, totalPlays];
+
+                resolve(rates);
+            });
+        });
+    }
+
+    /**
+     * Gets the leaderboard of a map
+     * @param {String} mapHash The hash of the map
+     * 
+     * @returns {Score[]} An array containing all scores (limited to 50 scores) ordered by score
+     */
+    getMapLeaderboard(mapHash) {
+        return new Promise((resolve, reject) => {
+            let scores = [];
+
+            this.connection.query('SELECT * FROM osu_scores WHERE osuhash = ? AND pass = 1 ORDER BY score DESC', [mapHash], (err, mapsPassedScores, fields) => {
+                if (err) throw err;
+
+                mapsPassedScores.forEach((score) => {
+                    function doesScoreExist(findScore) {
+                        return findScore.username == score.username;
+                    }
+
+                    let index = scores.findIndex(doesScoreExist)
+                    if (index == -1) {
+                        scores.push(new LeaderboardScore(score));
+                    } else {
+                        let scoreToCheck = scores[index];
+
+                        if (scoreToCheck.score > score.score)
+                            return;
+
+                        scores[index] = new LeaderboardScore(score);
+                    }
+                });
+
+                if (scores.length > 50)
+                    scores.length = 50;
+
+                resolve(scores);
+            });
+        });
+    }
+
+    /**
+     * Gets the set from a set id
+     * @param {Number} setId The id of the set
+     * 
+     * @returns {Map} Map (empty if no maps match that set)
+     */
+    getSetFromId(setId) {
+        return new Promise((resolve, reject) => {
+            let set = [];
+
+            this.connection.query('SELECT * FROM osu_maps WHERE beatmapset_id = ?', [setId], (err, matchingMaps, fields) => {
+                if (err) throw err;
+
+                matchingMaps.forEach((mapToCheck) => {
+                    set.push(new Map(mapToCheck));
+                });
+
+                resolve(set);
+            });
+        });
+    }
+
+    /**
      * Gets the amoung of SS's that a player has
      * @param {String} username The username 
      */
-    getUserXCount(username) {
+    getUserGradeCounts(username) {
         return new Promise((resolve, reject) => {
-            this.connection.query('SELECT count(*) FROM osu_scores WHERE (grade = \'X\' OR grade = \'XH\') AND username = ?', [username], (err, results, fields) => {
+            this.connection.query('SELECT * FROM osu_scores WHERE username = ? AND pass = \'1\'', [username], (err, usersScores, fields) => {
                 if (err) throw err;
 
-                let xCount = results[0]["count(*)"];
+                let xCount = 0;
+                let sCount = 0;
+                let aCount = 0;
 
-                resolve(xCount);
+                usersScores.forEach((score) => {
+                    if (score.grade == "X" || score.grade == "XH") {
+                        xCount++;
+                    } else if (score.grade == "S" || score.grade == "SH") {
+                        sCount++;
+                    } else if (score.grade == "A") {
+                        aCount++;
+                    }
+                });
+
+                let grades = {
+                    xCount: xCount,
+                    sCount: sCount,
+                    aCount: aCount
+                }
+
+                resolve(grades);
             });
         });
     }
@@ -359,7 +470,7 @@ class Sql {
 
                         if (scoreExist == -1) {
                             if (hashIndex != -1) {
-                                scores.push(new Score(userScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId, maps[hashIndex].md5, userScore.submittime, userScore.grade, getSecondsFixedSinceToday(userScore.submittime)));
+                                scores.push(new Score(userScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].difficulty, maps[hashIndex].setId, maps[hashIndex].md5, userScore.submittime, userScore.grade, getSecondsFixedSinceToday(userScore.submittime)));
                             }
                         }
                     });
@@ -414,7 +525,7 @@ class Sql {
 
                         if (scoreExist == -1) {
                             if (hashIndex != -1) {
-                                scores.push(new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime)));
+                                scores.push(new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].difficulty, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime)));
                             }
                         }
                     });
@@ -455,10 +566,10 @@ class Sql {
 
                         if (hashIndex != -1) {
                             if (scoreExist == -1) {
-                                let tempScore = new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime));
+                                let tempScore = new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].difficulty, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime));
                                 scores.push({ amount: 1, score: tempScore });
                             } else {
-                                let tempScore = new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].diff, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime));
+                                let tempScore = new Score(currentScore.score, maps[hashIndex].artist, maps[hashIndex].title, maps[hashIndex].difficulty, maps[hashIndex].setId, maps[hashIndex].md5, currentScore.submittime, currentScore.grade, getSecondsFixedSinceToday(currentScore.submittime));
                                 scores[scoreExist] = { amount: (Number(scores[scoreExist].amount) + 1), score: tempScore }
                             }
                         }

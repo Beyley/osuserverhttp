@@ -99,9 +99,11 @@ app.get('/u/:id', async (req, res) => {
             return;
         }
 
-        player.gradeXCount = await sql.getUserXCount(username);
-        player.gradeSCount = await sql.getUserSCount(username);
-        player.gradeACount = await sql.getUserACount(username);
+        let grades = await sql.getUserGradeCounts(username);
+
+        player.gradeXCount = grades.xCount;
+        player.gradeSCount = grades.sCount;
+        player.gradeACount = grades.aCount;
 
         scores = await sql.getUserTop50(username);
         firstPlaces = await sql.getUserFirstPlaces(username);
@@ -140,24 +142,49 @@ app.get('/u/:id', async (req, res) => {
     }
 })
 
-app.get('/s/:id', async (req, res) => {
+app.get('/s/:setid/:id*?', async (req, res) => {
     updateHeaderValues();
 
     let mapId = req.params.id;
+    let setId = req.params.setid;
 
-    let map = await sql.getMapFromId(mapId);
+    let map = [];
+    let set = [];
+
+    let successRate = [];
 
     let leaderboard = [];
 
-    if (map == null) {
-        res.send("MAP NOT FOUND");
+    //Get the map set
+    set = await sql.getSetFromId(setId);
+
+    set = set.sort(function (b, a) { return b.starRating - a.starRating });
+
+    if (set.length == 0) {
+        res.send('MAP NOT FOUND!');
         return;
     }
+
+    if (!mapId) {
+        res.redirect(`/s/${setId}/${set[0].beatmapId}`);
+        return;
+    }
+
+    map = await sql.getMapFromId(mapId);
+
+    successRate = await sql.getMapSuccessRate(map.md5);
+
+    leaderboard = await sql.getMapLeaderboard(map.md5);
+
+    map.passcount = successRate[0];
+    map.playcount = successRate[1];
 
     res.render('pages/mappage.ejs', {
         headerCounts: headerCounts,
         pageName: `${map.artist} - ${map.title}`,
         map: map,
+        set: set,
+        leaderboard: leaderboard,
     });
 });
 
@@ -175,8 +202,6 @@ app.get('/', async (req, res) => {
         console.log(err);
     }
 })
-
-//http://osu.ppy.sh/forum/ucp.php?i=profile&mode=avatar
 
 app.get('/forum/ucp.php', async (req, res) => {
     if (req.query.mode == "avatar") {
@@ -241,7 +266,6 @@ app.post('/p/changeavatar', async (req, res) => {
         if ((avatarFile.type.toString() == "image/png" || avatarFile.type.toString() == "image/jpg") && avatarFile.size < 5000000) {
             fs.copyFile(avatarFile.path, config.avatarlocation + userId + "_000.png", (err) => {
                 if (err) throw err;
-                //console.log(avatarFile.path + " was copied to " + config.avatarlocation + userId + "_000.png");
             });
         }
     }
@@ -269,7 +293,7 @@ app.get('/p/playerranking', async (req, res) => {
             leaderboard.append(`<td><span>${player.playCount.toLocaleString('en')}</span></td>`);
             leaderboard.append(`<td><span>${player.totalScore.toLocaleString('en')}</span></td>`);
             leaderboard.append(`<td><span style="font-weight:bold">${player.rankedScore.toLocaleString('en')}</span></td>`);
-            leaderboard.append(`<td><span>${await sql.getUserXCount(player.username)}</span></td>`);
+            leaderboard.append(`<td><span>${await sql.getUserGradeCounts(player.username)}</span></td>`);
             leaderboard.append(`<td><span>${await sql.getUserSCount(player.username)}</span></td>`);
             leaderboard.append(`<td><span>${await sql.getUserACount(player.username)}</span></td>`);
 
