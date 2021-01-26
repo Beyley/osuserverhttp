@@ -312,7 +312,7 @@ app.get('/p/playerranking', async (req, res) => {
                 leaderboard.append(`<tr class="row2p" onclick="setDocumentLocation(/u/${player.username});">`);
             }
 
-            let playerCounts = sql.getUserGradeCounts(player.username);
+            let playerCounts = await sql.getUserGradeCounts(player.username);
 
             leaderboard.append(`<td><b>#${rank.toLocaleString('en')}</b></td>`);
             leaderboard.append(`<td><a href="/u/${player.username}">${player.username}</a></td>`);
