@@ -283,7 +283,7 @@ app.post('/p/changeavatar', async (req, res) => {
     let avatarFile = req.files.file;
 
     let username = req.fields.user.toString();
-    let password = req.fields.pass.toString();
+    let password = req.fields.pass.toString().toLowerCase();
 
     let userId = await sql.getUserId(username, password);
 
