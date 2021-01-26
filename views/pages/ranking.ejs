@@ -35,7 +35,10 @@
                             </ul>
                         </div>
 
-                        <div class="pagination">Displaying 1 to 50 of 1000 results.<br><b>1</b> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=2">2</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=3">3</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=4">4</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=5">5</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=6">6</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=7">7</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=8">8</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=9">9</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=10">10</a> ... <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=2">Next</a></div>
+                        <div class="pagination">Displaying <%= bottomLimit %> to <%= upperLimit %> of many results.<br>
+                            <a href="/p/playerranking?page=<%= currentPage - 1 %>">Prev</a> <b><%= currentPage %></b> <a href="/p/playerranking?page=<%= Number(currentPage) + 1 %>">Next</a>
+                        </div>
+
                         <table class="beatmapListing" cellspacing="0">
                             <tbody>
                                 <tr>
@@ -54,7 +57,10 @@
                             </tbody>
                         </table>
 
-                        <div class="pagination"><b>1</b> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=2">2</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=3">3</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=4">4</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=5">5</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=6">6</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=7">7</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=8">8</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=9">9</a> <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=10">10</a> ... <a href="https://web.archive.org/web/20120501080429/http://osu.ppy.sh/p/playerranking/?m=0&amp;s=3&amp;o=1&amp;page=2">Next</a></div>
+                        <div class="pagination">Displaying <%= bottomLimit %> to <%= upperLimit %> of many results.<br>
+                            <a href="/p/playerranking?page=<%= currentPage - 1 %>">Prev</a> <b><%= currentPage %></b> <a href="/p/playerranking?page=<%= Number(currentPage) + 1 %>">Next</a>
+                        </div>
+                        
                         <div class="clear"></div>
                     </div>
                 </div>

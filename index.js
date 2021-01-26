@@ -297,10 +297,19 @@ app.post('/p/changeavatar', async (req, res) => {
 })
 
 app.get('/p/playerranking', async (req, res) => {
-    updateHeaderValues();
+    await updateHeaderValues();
+
+    let page = req.query.page;
+
+    if (!page || page < 1) {
+        page = 1;
+    }
+
+    let bottomLimit = Math.min(Math.max(((page - 1) * 50) + 1, 1), headerCounts.totalUsers);
+    let upperLimit = Math.max(Math.min(page * 50, headerCounts.totalUsers), 1);
 
     try {
-        let players = await sql.getTop50();
+        let players = await sql.getTopPlayers(bottomLimit);
 
         let leaderboard = new StringBuilder();
 
@@ -333,7 +342,10 @@ app.get('/p/playerranking', async (req, res) => {
             headerCounts: headerCounts,
             pageName: "Player Ranking",
             leaderboard: leaderboard.toString(),
-            players: players
+            players: players,
+            currentPage: page,
+            bottomLimit: bottomLimit,
+            upperLimit: upperLimit,
         });
     } catch (err) { }
 })
