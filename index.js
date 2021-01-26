@@ -288,7 +288,7 @@ app.post('/p/changeavatar', async (req, res) => {
     let userId = await sql.getUserId(username, password);
 
     if (userId != -1) {
-        if ((avatarFile.type.toString() == "image/png" || avatarFile.type.toString() == "image/jpg") && avatarFile.size < 5000000) {
+        if ((avatarFile.type.toString() == "image/png" || avatarFile.type.toString() == "image/jpg" || avatarFile.type.toString() == "image/jpeg") && avatarFile.size < 5000000) {
             fs.copyFile(avatarFile.path, config.avatarlocation + userId + "_000.png", (err) => {
                 if (err) throw err;
             });
