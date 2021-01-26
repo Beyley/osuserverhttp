@@ -312,15 +312,17 @@ app.get('/p/playerranking', async (req, res) => {
                 leaderboard.append(`<tr class="row2p" onclick="setDocumentLocation(/u/${player.username});">`);
             }
 
+            let playerCounts = sql.getUserGradeCounts(player.username);
+
             leaderboard.append(`<td><b>#${rank.toLocaleString('en')}</b></td>`);
             leaderboard.append(`<td><a href="/u/${player.username}">${player.username}</a></td>`);
             leaderboard.append(`<td>${player.accuracy}%</td>`);
             leaderboard.append(`<td><span>${player.playCount.toLocaleString('en')}</span></td>`);
             leaderboard.append(`<td><span>${player.totalScore.toLocaleString('en')}</span></td>`);
             leaderboard.append(`<td><span style="font-weight:bold">${player.rankedScore.toLocaleString('en')}</span></td>`);
-            leaderboard.append(`<td><span>${await sql.getUserGradeCounts(player.username)}</span></td>`);
-            leaderboard.append(`<td><span>${await sql.getUserSCount(player.username)}</span></td>`);
-            leaderboard.append(`<td><span>${await sql.getUserACount(player.username)}</span></td>`);
+            leaderboard.append(`<td><span>${playerCounts.xCount}</span></td>`);
+            leaderboard.append(`<td><span>${playerCounts.sCount}</span></td>`);
+            leaderboard.append(`<td><span>${playerCounts.aCount}</span></td>`);
 
             leaderboard.append("</tr>");
 

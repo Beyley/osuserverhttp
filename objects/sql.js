@@ -9,10 +9,10 @@ var { StringBuilder } = require("./stringbuilder.js");
 const { BeatmapSet } = require('./beatmapset.js');
 
 /**
-     * Gets the time in plain text since the seconds
-     * @param {number} originTime 
-     * @returns {String} 
-     */
+ * Gets the time in plain text since the seconds
+ * @param {number} originTime 
+ * @returns {String} 
+*/
 function getSecondsFixed(originTime) {
     const year = 31540000;
     const month = 2628000; // assume 30 days in a month
