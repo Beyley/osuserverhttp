@@ -1,0 +1,1200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!-- saved from url=(0074)https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist -->
+<html>
+<div id="rb-div" style="display: block; visibility: visible; top: 158px; left: 384px;">
+    <div id="rb-tooltip"></div>
+    <div id="rb-menulist">
+        <a href="http://osu.ppy.sh/wiki/" data-rb-link-id="http://osu.ppy.sh/wiki/" data-rb-target-id="joemxfwb7" data-rb-tooltip="" style="background-color: rgb(133, 71, 124); background-position: -6em center !important;"></a>
+    </div>
+</div>
+<div id="twoseven-scripts" data-info="Scripts added by TwoSeven extension" style="display: none !important; position: static !important; top: 0px !important; left: 0px !important; width: 0px !important; height: 0px !important;">
+    <script type="text/javascript" async="" src="/style/images/ga.js.download"></script>
+    <script type="text/javascript" id="__tmpScript-685878983" data-added-by-two-seven="1">
+        (function() {
+            window.twoseven = {};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-578633025" data-added-by-two-seven="1">
+        (function() {
+            window.twoseven.waitForDOMNode = async function waitForDOMNode(e,t=document){e=e||{};const{type:n,value:o}=e;if(!n||!o)throw new Error("Must specify identifier");let s=o;switch(n){case"tag":s=o.toUpperCase()}if("check"!==n){const e=await i({type:"selector",value:s},[],t);if(e)return new Promise(t=>t(e))}async function i({type:e,value:t},n,o){let s;switch(e){case"tag":s=n.find(e=>e.tagName===t);break;case"selector":s=o.querySelector(t);break;case"check":for(const e of n){if(await t(e))return e}}return s}return new Promise((e,o)=>{const r=new MutationObserver(async o=>{for(const a of o)if("childList"===a.type){const o=Array.from(a.addedNodes),c=await i({type:n,value:s},o,t);if(c)return r.disconnect(),e(c)}});r.observe(t,{childList:!0,subtree:!0})})};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-560849512" data-added-by-two-seven="1">
+        (function() {
+            
+          window.twoseven.reportError = function reportError(e,t,n){"string"==typeof(n=n||{})&&(n={message:n});const{message:o,stack:s}=t;Object.assign(n,{tag:e,error:{message:o,stack:s}}),window.tsExtGetPostToParent()({name:name,tag:e,action:"report-error",json:n}),console.error(JSON.stringify(n.error))}
+        ;
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-515100430" data-added-by-two-seven="1">
+        (function() {
+            
+          window.twosevenHmsToSecondsOnly = function(str) {
+              var p = str.split(':'),
+                  s = 0, m = 1;
+        
+              while (p.length > 0) {
+                  s += m * parseInt(p.pop(), 10);
+                  m *= 60;
+              }
+        
+              return s;
+          }
+        ;
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-310156138" data-added-by-two-seven="1">
+        (function() {
+            window.twosevenExtLog = function twosevenExtLog(e,o,c){o||(o=e,e=void 0);let n=c||"black";if(c)switch(c){case"success":n="Green";break;case"info":n="DodgerBlue";break;case"error":n="Red";break;case"warning":n="Orange";break;default:n=c}e?console.log("%c"+e+": "+o,`color:${n}`):console.log("%c"+o,`color:${n}`)};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-461151806" data-added-by-two-seven="1">
+        (function() {
+            
+          document.twosevenGET = function(url, callback) {
+            var xmlhttp = new XMLHttpRequest();
+        
+            xmlhttp.onreadystatechange = function() {
+              if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+                if (xmlhttp.status == 200) {
+                  callback(null, xmlhttp.responseText);
+                } else {
+                  callback('something else other than 200 was returned', '');
+                }
+              }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+          };
+        ;
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-348233863" data-added-by-two-seven="1">
+        (function() {
+            
+          window.triggerEvent = function(e,t,n,o=!1){let s;o?(n&&"string"!=typeof n&&(n=JSON.stringify(n)),s=n):s={data:n},window.twosevenScriptsDiv&&n&&"object"==typeof n&&(console.warn(`WARNING: Attempting to send an object via event.detail from CS->Page does not work on Firefox: ${JSON.stringify(n)}`),console.error((new Error).stack));var i=new CustomEvent(t,{bubbles:!0,composed:!0,detail:s});e.dispatchEvent(i)}
+        ;
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-846573825" data-added-by-two-seven="1">
+        (function() {
+            window.twoseven.postTo = async function postTo(e,t,n=!1){let o;return t.name=t.name||name,o=n?new Promise(e=>{const n=`ack-${t.action}-${1e9*Math.random()|0}`;t.ack={event:n};window.debug&&["play","pause","currentTime"].some(e=>t.action.includes(e)),window.addEventListener("message",function t({data:o={}}){o.action===n&&(window.removeEventListener("message",t),e(o.json))})}):new Promise(e=>e()),e.postMessage(t,"*"),o};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-306581593" data-added-by-two-seven="1">
+        (function() {
+            window.tsExtGetPostTo = function tsExtGetPostTo(){return window.twoseven&&window.twoseven.postTo||window.postTo};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-993192482" data-added-by-two-seven="1">
+        (function() {
+            window.tsExtGetPostToParent = function tsExtGetPostToParent(){return window.twoseven&&window.twoseven.postToParent||window.postToParent};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-968239340" data-added-by-two-seven="1">
+        (function() {
+            window.twoseven.postResponse = async function postResponse(e,t){const{source:n,data:{ack:{event:o}}}=e;window.tsExtGetPostTo()(n,{action:o,json:t})};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-365093151" data-added-by-two-seven="1">
+        (function() {
+            window.twoseven.postToParent = async function postToParent(e,t=!1){return window.tsExtGetPostTo()(window.parent,e,t)};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-684527280" data-added-by-two-seven="1">
+        (function() {
+            window.twoseven.postToTop = async function postToTop(e,t=!1){return window.tsExtGetPostTo()(window.top,e,t)};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-911304724" data-added-by-two-seven="1">
+        (function() {
+            
+          window.twoseven.getFromStorage = e=>new Promise((t,n)=>{const o="get-from-storage-"+(1e9*Math.random()|0);window.addEventListener(o,e=>{window.removeEventListener(o,this);const{detail:{data:{value:n}}}=e;t(n)}),triggerEvent(window,"get-from-storage",{key:e,evt:o})})
+          window.twoseven.saveToStorage = e=>{triggerEvent(window,"save-to-storage",e)}
+        ;
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-417008301" data-added-by-two-seven="1">
+        (function() {
+            
+          function attachHistoryListeners(){var e=history.pushState;history.pushState=function(t,n,o){return"function"==typeof history.onpushstate&&history.onpushstate({state:t}),triggerEvent(window,"pushstate",{uri:o}),e.apply(history,arguments)};var t=history.replaceState;history.replaceState=function(e){return"function"==typeof history.onreplacestate&&history.onreplacestate({state:e}),t.apply(history,arguments)}}
+          attachHistoryListeners()
+        ;
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-854498666" data-added-by-two-seven="1">
+        (function() {
+            window.twoseven.once = function once(e,t,n){e.addEventListener(t,function o(s){e.removeEventListener(t,o),n(s)})};
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-611749669" data-added-by-two-seven="1">
+        (function() {
+            
+          window.twoseven.isOnTwoSevenTab = async () => {
+            const result = await window.twoseven.postTo(window, { action: 'is-on-twoseven-tab' }, true)
+            return result
+          }
+        ;
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-368085753" data-added-by-two-seven="1">
+        (function() {
+            
+          window.twoseven.isPaused = async () => {
+            const result = await window.twoseven.postTo(window, { action: 'twoseven:pause-state' }, true)
+            return result
+          }
+        ;
+          })();
+    </script>
+    <script type="text/javascript" id="__tmpScript-760507822" data-added-by-two-seven="1">
+        (function() {
+            
+              const modal = document.querySelector('.twoseven-ext-tab-media-modal')
+              const modalCloseBtn = modal.querySelector('.close')
+              function closeModal () {
+                modal.style.display = 'none'
+                const frame = document.querySelector('#twoseven-ext-tab-media-iframe').contentWindow
+                frame.postMessage({
+                  __evt_name: 'modal-hide'
+                }, '*')
+              }
+              modalCloseBtn.onclick = closeModal
+        
+              window.onmessage = function (e) {
+                if (e.data.__evt_name === 'modal-hide') {
+                  closeModal()
+                }
+              }
+        
+              window.twoseven.closeTabMediaModal = closeModal
+        
+              window.onclick = function (e) {
+                if (e.target.id === 'twoseven-ext-tab-media-modal' && modal.style.display === 'block') {
+                    closeModal()
+                }
+              }
+            ;
+          })();
+    </script>
+</div>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="/style/images/analytics.js.download" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded',function(){var v=archive_analytics.values;v.service='wb';v.server_name='wwwb-app29.us.archive.org';v.server_ms=1654;archive_analytics.send_pageview({});});
+    </script>
+    <script type="text/javascript" src="/style/images/playback.bundle.js.download" charset="utf-8"></script>
+    <script type="text/javascript" src="/style/images/wombat.js.download" charset="utf-8"></script>
+    <script type="text/javascript">
+        __wm.init("https://web.archive.org/web");
+          __wm.wombat("http://osu.ppy.sh/p/beatmaplist","20120501082555","https://web.archive.org/","web","/_static/",
+        	      "1335860755");
+    </script>
+    <link rel="stylesheet" type="text/css" href="/style/images/banner-styles.css">
+    <link rel="stylesheet" type="text/css" href="/style/images/iconochive.css">
+    <!-- End Wayback Rewrite JS Include -->
+
+    <link rel="shortcut icon" href="https://web.archive.org/web/20120501082555im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="https://web.archive.org/web/20120501082555im_/http://osu.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+
+    <meta name="description" content="osu! - Rhythm is just a *click* away!  With Ouendan/EBA, Taiko and original gameplay modes, as well as a fully functional level editor.">
+    <meta name="keywords" content="osu, peppy, ouendan, elite, beat, agents, ds, windows, game, taiko, tatsujin, simulator, sim, xna, ddr, beatmania, osu!, osume">
+
+    <link rel="stylesheet" type="text/css" href="/style/images/style.css" media="all">
+
+    <script type="text/javascript" src="/style/images/jquery.min.js.download"></script>
+    <script type="text/javascript" src="/style/images/main.js.download"></script>
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/feed/ranked">
+    <title>osu! - Beatmap Listing</title>
+
+    <meta name="viewport" content="width=864, user-scalable=yes">
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-4774947-1']);
+          _gaq.push(['_trackPageview']);
+        
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://web.archive.org/web/20120501082555/https://ssl' : 'https://web.archive.org/web/20120501082555/http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+    </script>
+    <link href="chrome-extension://cjdnfmjmdligcpfcekfmenlhiopehjkd/web_resources/modal/modal.css" rel="stylesheet" id="__tmpStyle">
+    <style>
+        #rb-div, #rb-div * {border: 0 !important;  box-sizing: content-box !important;  font: Menu !important;  margin: 0 !important;  padding: 0 !important;  transition: none !important; }						#rb-div {background-color: transparent !important;  box-shadow: 0 0 0px #000, 0 0 0px #fff !important; opacity: 1 !important;  position: absolute !important;  z-index: 15000000 !important; }						#rb-div:hover {opacity: 1 !important; }						#rb-div a {							background-image: url("data:image/svg+xml;charset=utf-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0D%0A%3Csvg%20xmlns%3Ardf%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Aosb%3D%22http%3A%2F%2Fwww.openswatchbook.org%2Furi%2F2009%2Fosb%22%20height%3D%2232%22%20width%3D%22224%22%20version%3D%221.1%22%20xmlns%3Acc%3D%22http%3A%2F%2Fcreativecommons.org%2Fns%23%22%20xmlns%3Adc%3D%22http%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%22%3E%0D%0A%3Cg%20transform%3D%22translate%280%20-1020.4%29%22%3E%0D%0A%3Cg%20transform%3D%22matrix%28.55078%200%200%20.55078%2032.315%201011%29%22%3E%0D%0A%3Cpath%20d%3D%22m29.385%2022.376v33.589c-0.05297%200.93126-2.0645%200.43156-3.6312%200-4.318-1.659-14.525%200.61102-14.525%207.2624-0.0043%203.2872%204.1141%207.2861%209.078%207.2624%206.5361%200.04302%2011.214-3.9298%2014.525-7.2624v-29.05c5.5756%203.2191%209.0509%206.4666%205.4468%2012.709-0.07976%200.85769%203.0893%201.0908%203.6312%200%205.4564-5.9817%201.1992-13.326-1.8156-16.34-4.1857-4.1857-5.305-4.5809-7.2624-8.1702-0.7021-0.82078-5.2536-0.71436-5.4468%200z%22%20fill%3D%22%23fff%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3Cg%20transform%3D%22matrix%28.55434%200%200%20.55434%2065.128%201002.6%29%22%3E%0D%0A%3Cpath%20style%3D%22color%3A%23000000%22%20d%3D%22m2.4752%2036.55%200.0000102%2048.707h15.334l-0.00001-10.824h18.039l0.00001%2010.824h15.334l-0.00001-48.707h-15.334l-0.000013%205.4118h-18.039v-5.4118zm4.5099%200h7.2158l-0.000013%203.6079h-7.2158zm32.471%200h7.2158v3.6079h-7.2158zm-32.471%209.0197h7.2158v5.4118h-7.2158zm32.471%200h7.2158v5.4118h-7.2158zm-21.647%201.8039h18.039v21.647l-18.039%200.000001zm-10.824%209.0197h7.2158l0.000013%205.4118h-7.2158zm32.471%200.000001h7.2158v5.4118h-7.2158zm-32.471%2010.824h7.2158v5.4118h-7.2158zm32.471%200h7.2158v5.4118h-7.2158zm-32.471%2018.039h7.2158-0.000013zm32.471-7.2158h7.2158v5.4118h-7.2158zm-32.471%200.000001h7.2158v5.4118l-7.2158%200.000037zm32.471%207.2158h0.000005%207.2158l-0.000023%200.000037z%22%20fill%3D%22%23fff%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3Cg%20fill%3D%22%23fff%22%20transform%3D%22translate%28-83%29%22%3E%0D%0A%3Cpath%20style%3D%22color%3A%23000000%22%20d%3D%22m89%201025.9c-2.5462%200-3.5%200.9138-3.5%203.5l-0.000004%2014c0%202.4878%201.0056%203.5%203.5%203.5h20c2.5183%200%203.5-1.0224%203.5-3.5v-14c0-2.5612-1.0774-3.5-3.5-3.5zm-0.5%205c0-2.0035-0.0035-2%202-2h17c2.0035%200%202%200.041%202%202v11c-1.8896-3.2729-6.209-3.1022-8%200-0.22638%200.3921-0.77359%200.3922-1%200-3.7999-6.5816-8.1748-6.6254-12%200z%22%2F%3E%0D%0A%3Ccircle%20cx%3D%22104.5%22%20stroke%3D%22%23fff%22%20cy%3D%221033.9%22%20r%3D%221.44%22%20stroke-width%3D%222.12%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3Cg%20fill%3D%22%23fff%22%3E%0D%0A%3Cpath%20style%3D%22color%3A%23000000%22%20d%3D%22m196.5%201022.9v27h23v-27zm15.5%205h-4l-3.5%201-2%202v1l0.5%201%201-0.5%200.5%202%201.5-0.5v1.5l-1%202%201%201%202%201%200.5%202.5%201.5%201v1.5l1%200.5v-2.5l1-1.5v-1.5l1-1%200.5-1.5%201-2-3-1-1.5%200.5-2-0.5-1.5-1.5-1.5%201%200.5-1-1-1-1%200.5v-1h3.5l2-1%202-1s3.4094%200.4138%203.5%200.5c1.7985%201.7131%203%204.0784%203%207%200%205.4272-3.9079%209.5-9.5%209.5-5.4832%200-9.5-3.9844-9.5-9.5%200-5.4875%203.9819-9.5%209.5-9.5%202.1924%200%204%201%204%201z%22%2F%3E%0D%0A%3Cpath%20d%3D%22m112%201049.9-10.5-10h7v-17h7v17h7z%22%2F%3E%0D%0A%3Cpath%20style%3D%22color%3A%23000000%22%20d%3D%22m131.5%201022.9v4c0-0.7456%201.0115-2%202.5-2%201.3788%200%202.5%200.9648%202.5%202.5%200%201.4413-0.96497%202.5-2.5%202.5-1.5038%200-2.5-1.2462-2.5-2v7c0-0.7851%200.93372-2%202.5-2s2.5%200.9336%202.5%202.5c0%201.535-0.99622%202.5-2.5%202.5-1.535%200-2.5-1.3088-2.5-2v7c0-0.7225%200.99622-2%202.5-2%201.41%200%202.5%200.9649%202.5%202.5%200%201.4414-1.0587%202.5-2.5%202.5-1.4725%200-2.5-1.3091-2.5-2v6c0-0.098%201.0587-1%202.5-1%201.4056%200%202.5%200.7986%202.5%201h20v-27z%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3Cg%20transform%3D%22translate%28.21502%2017%29%22%3E%0D%0A%3Cpath%20style%3D%22color%3A%23000000%22%20d%3D%22m-20.462%2034.746c-0.6261-1.0268-2.9818-1.0268-3.6079%200l-22.549%2036.981c-2.1366%203.504%200.08786%207.2158%204.5099%207.2158h39.687c4.2437%200%206.6124-3.7676%204.5099-7.2158zm-1.8039%207.2158%2019.843%2031.569-39.687-0.000054z%22%20transform%3D%22matrix%28.55434%200%200%20.55434%20188.13%20988.1%29%22%20fill%3D%22%23fff%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3Ccircle%20cx%3D%22176%22%20cy%3D%221042.4%22%20r%3D%221.5%22%20fill%3D%22%23fff%22%2F%3E%0D%0A%3Cpath%20d%3D%22m174.5%201033.9v5h3v-5z%22%20fill-rule%3D%22evenodd%22%20fill%3D%22%23fff%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3C%2Fsvg%3E") !important; 							background-origin: content-box !important;  background-repeat: no-repeat !important;  background-size: 7em 1em !important;  cursor: pointer !important;  display: inline-block !important;  float: left !important;  font-size: 22px !important;  height: 1em !important;  line-height: 1em !important;  padding: 1px !important;  text-decoration: none !important;  width: 1em !important; 						}						#rb-div a:hover {background-color: #000000 !important; }						#rb-tooltip {background: 2px 2px / 20px auto no-repeat #000000 !important;  color: #FFFFFF !important;  font-size: 12px !important;  line-height: normal !important;  max-width: 600px !important;  overflow: hidden !important;  padding: 2px 2px 2px 24px !important;  position: absolute !important;  text-align: left !important;  text-overflow: ellipsis !important;  visibility: hidden; white-space: nowrap !important;  z-index: 15000000 !important; }						#rb-tooltip * {line-height: normal !important;  color: #FFFFFF !important; }						a[rb-hl], a[rb-hl] img, area[rb-hl], a[rb-hl-replace]:hover, a[rb-hl-replace]:hover img, area[rb-hl-replace]:hover {outline: 2px dotted rgba(60,60,60,0.25) !important; outline-offset: -1px !important; }
+    </style>
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.991.0" data-gr-ext-installed="">
+    <!-- BEGIN WAYBACK TOOLBAR INSERT -->
+    <style type="text/css">
+        body {
+          margin-top:0 !important;
+          padding-top:0 !important;
+          /*min-width:800px !important;*/
+        }
+    </style>
+    <script>
+        __wm.rw(0);
+    </script>
+    <div id="wm-ipp-base" lang="en" style="display: block; direction: ltr;">
+    </div>
+    <div id="donato" style="position:relative;width:100%;">
+        <div id="donato-base">
+            <iframe id="donato-if" src="/style/images/donate.html" scrolling="no" frameborder="0" style="width:100%; height:100%">
+            </iframe>
+        </div>
+    </div>
+    <script type="text/javascript">
+        __wm.bt(650,27,25,2,"web","http://osu.ppy.sh/p/beatmaplist","20120501082555",1996,"/_static/",["/_static/css/banner-styles.css?v=bsmaklHF","/_static/css/iconochive.css?v=qtvMKcIJ"]);
+          __wm.rw(1);
+    </script>
+    <!-- END WAYBACK TOOLBAR INSERT -->
+    <a name="top"></a>
+
+
+    <div class="bodytopbg">
+        <div class="mainbody">
+            <div class="mainbody2">
+                <div id="coolheader" style="background-image: url(&#39;https://web.archive.org/web/20120501082555im_/http://s.ppy.sh/images/right-pippi.jpg&#39;);"></div>
+                <div id="donation" style="width:140px">
+                    <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/support"><img src="/style/images/paypal.gif"></a>&nbsp;&nbsp;
+                    <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/twitter"><img src="/style/images/twitter.gif"></a>
+                </div>
+                <div class="main-osu-logo"><img src="/style/images/head-logo.png"></div>
+                <div class="header clickable-cell">
+                    <a class="hidden" href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/">home</a>
+                    <div id="playstats">
+                        <b>1,336,766</b> users, <b>3,949</b> online now.
+                        <br> A total of <b><span id="playcount">783.41m</span></b> ranked plays!
+                    </div>
+                    <div class="menu">
+                        <ul class="sf-menu sf-js-enabled sf-shadow">
+                            <li>
+                                <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/about" class="sf-with-ul">Info<span class="sf-sub-indicator"> »</span></a>
+                                <ul style="display: none; visibility: hidden;">
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/changelog">Changelog</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/history">The Game (PC)</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/iphone">The Game (iPhone)</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/team">The Team</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/screenshots">Screenshots</a></li>
+
+
+                                </ul>
+                            </li>
+                            <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/download">Download</a></li>
+                            <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/wiki/" class="hovering">Wiki</a></li>
+                            <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/faq" class="sf-with-ul">Help!<span class="sf-sub-indicator"> »</span></a>
+                                <ul style="display: none; visibility: hidden;">
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/faq">FAQ</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/formatpost&amp;id=21575">Terms Glossary</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/forum/viewtopic.php?f=13&amp;t=3815">Video Tutorials</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/forum/viewtopic.php?f=5&amp;t=576">Report a Bug</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist" class="sf-with-ul">Beatmaps<span class="sf-sub-indicator"> »</span></a>
+                                <ul style="display: none; visibility: hidden;">
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=0">Ranked</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist&amp;s=4&amp;r=6">Approved</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist&amp;s=7&amp;r=2">Pending</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist">Beatmap Packs</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/pp" class="sf-with-ul">Rankings<span class="sf-sub-indicator"> »</span></a>
+                                <ul style="display: none; visibility: hidden;">
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/pp">Performance <span style="color:#eca1dd; vertical-align: super">beta</span></a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/chart">Charts</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/playerranking">Score</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/countryranking">Countries</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/mapperranking">Mappers</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/modranking">BAT</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/kudosu">Kudosu</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/forum/" class="sf-with-ul">Community<span class="sf-sub-indicator"> »</span></a>
+                                <ul style="display: none; visibility: hidden;">
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/forum/">Forums</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/support">Supporting osu!</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://www.cafepress.com/osume" target="_blank">Goodies</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://www.youtube.com/user/VideosuTV/videos?sort=da&amp;view=1" target="_blank">Videos</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/chat">Web Chat</a></li>
+                                    <li><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/gallery?g=fanart">Fanart</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-infoline">
+                        <form class="inline-form" action="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/search" id="cse-search-box">
+                            <div>
+                                <input type="hidden" name="cx" value="007714945049801807819:fwdivvi5sik">
+                                <input type="hidden" name="cof" value="FORID:10">
+                                <input type="hidden" name="ie" value="UTF-8">
+                                <input type="text" name="q" size="15" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url(&quot;https://web.archive.org/web/20120501082555if_/http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif&quot;) left center no-repeat rgb(255, 255, 255);">
+                            </div>
+                            <input name="siteurl" type="hidden" value="osu.ppy.sh/p/beatmaplist">
+                            <input name="ref" type="hidden" value="">
+                        </form>
+                        <form class="inline-form" onsubmit="return userSearch()">
+                            <input type="text" class="default form-text form-default-value-processed" name="user-search" id="user-search" size="10" value="User" style="color: rgb(185, 186, 181);">
+                        </form>
+                        <form class="inline-form" onsubmit="return beatmapSearch()">
+                            <input type="text" class="default form-text form-default-value-processed" name="beatmap-search" id="beatmap-search" size="10" value="Beatmap" style="color: rgb(185, 186, 181);">
+                        </form>
+                        <form action="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/forum/ucp.php?mode=login" method="post">
+                            user:
+                            <input class="post" type="text" name="username" size="15" maxlength="40" value="" tabindex="0"> pass:
+                            <input class="post" type="password" name="password" size="15" maxlength="100" tabindex="0">
+                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/forgot" title="Forgot Password">?</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/forum/ucp.php?mode=register" title="Register New Account">register</a>
+                            <input type="checkbox" class="radio" name="autologin" id="autologin">
+                            <label for="autologin">save</label>
+                            <input type="hidden" name="redirect" value="/p/beatmaplist">
+                            <input type="hidden" name="sid" value="8c43da3712822413d10515813175ea21">
+                            <input type="submit" name="login" value="login" tabindex="5">
+                        </form>
+                    </div>
+                    <div class="content-with-bg">
+                        <script type="text/javascript">
+                            var myListener = new Object();
+                            	var isPlaying = false;
+                            	myListener.onInit = function()
+                            	{
+                            		this.position = 0;
+                            	};
+                            	myListener.onUpdate = function()
+                            	{
+                            		isPlaying = (this.isPlaying == "true");
+                            	};
+                            
+                            	function getFlashObject()
+                            	{
+                            		return document.getElementById("myFlash");
+                            	}
+                            	var playingid = -1;
+                            	function play(id)
+                            	{
+                            		stop();
+                            
+                            		if (id != playingid || !isPlaying)
+                            		{
+                            			setVolume(45);
+                            			getFlashObject().SetVariable("method:setUrl", "https://web.archive.org/web/20120501082555/http://s.ppy.sh/mp3/preview/" + id + ".mp3");
+                            			getFlashObject().SetVariable("method:play", "");
+                            			getFlashObject().SetVariable("enabled", "true");
+                            			playingid = id;
+                            		}
+                            
+                            		return false;
+                            	}
+                            	function stop()
+                            	{
+                            		getFlashObject().SetVariable("method:stop", "");
+                            	}
+                            	function setVolume(volume)
+                            	{
+                            		getFlashObject().SetVariable("method:setVolume", volume);
+                            	}
+                            
+                            	function load(id, e)
+                            	{
+                                    if (e.button !== 1)
+                                        loadUrl("/s/" + id)
+                            	}
+                        </script>
+                        <!--[if IE]>
+<script type="text/javascript" event="FSCommand(command,args)" for="myFlash">
+eval(args);
+</script>
+<![endif]-->
+
+                        <object class="playerpreview" id="myFlash" type="application/x-shockwave-flash" data="/style/images/mp3.swf.download" width="1" height="1">
+                            <param name="movie" value="/mp3/mp3.swf">
+                            <param name="AllowScriptAccess" value="always">
+                            <param name="FlashVars" value="listener=myListener&amp;interval=500">
+                        </object>
+
+
+                        <h1>Beatmap Listing</h1>
+                        <div class="paddingboth">
+                            Hover over an item to uncover quick links.
+                            <br> Click a thumbnail to hear an audio preview.
+                            <br>
+
+                            <div style="text-align:right;">
+                                <form name="mainform">
+                                    <input type="hidden" name="s" value="7">
+                                    <input type="hidden" name="o" value="1"> Search:
+                                    <input name="q" value="">
+                                    <input type="submit" value="search"> Display:
+                                    <select name="r" onchange="document.mainform.submit()">
+                                        <option value="0" selected="">Ranked
+                                        </option>
+                                        <option value="6">Approved
+                                        </option>
+                                        <option value="8">Mod Requests
+                                        </option>
+                                        <option value="2">Pending/Help
+                                        </option>
+                                        <option value="5">Graveyard
+                                        </option>
+                                        <option value="4">All</option>
+                                    </select>
+                                    Genre:
+                                    <select name="g" onchange="document.mainform.submit()">
+                                        <option value="0" selected="">Any</option>
+                                        <option value="1">Unspecified</option>
+                                        <option value="2">Video Game</option>
+                                        <option value="3">Anime</option>
+                                        <option value="4">Rock</option>
+                                        <option value="5">Pop</option>
+                                        <option value="6">Other</option>
+                                        <option value="7">Novelty</option>
+                                        <option value="9">Hip Hop</option>
+                                        <option value="10">Techno</option>
+                                    </select>
+                                    Language:
+                                    <select name="la" onchange="document.mainform.submit()">
+                                        <option value="0" selected="">Any</option>
+                                        <option value="2">English</option>
+                                        <option value="3">Japanese</option>
+                                        <option value="4">Chinese</option>
+                                        <option value="5">Instrumental</option>
+                                        <option value="6">Korean</option>
+                                        <option value="1">Other</option>
+                                        <option value="7">French</option>
+                                        <option value="8">German</option>
+                                        <option value="9">Swedish</option>
+                                        <option value="10">Spanish</option>
+                                        <option value="11">Italian</option>
+                                    </select>
+                                    <br>
+                                    <input type="checkbox" name="v" id="v" value="1" onchange="document.mainform.submit()">
+                                    <label for="v"> Has Video</label>
+                                    <input type="checkbox" name="sb" id="sb" value="1" onchange="document.mainform.submit()">
+                                    <label for="sb"> Has Storyboard</label>
+                                </form>
+                            </div>
+
+                        </div>
+
+
+                        <div class="pagination">Displaying 1 to 20 of many results.
+                            <br><b>1</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">2</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=3">3</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=4">4</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=5">5</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=6">6</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=7">7</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=8">8</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=9">9</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=10">10</a> ... <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=250">250</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">Next</a></div>
+
+                        <table class="beatmapListing" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=0&amp;o=&amp;r=0&amp;q=">Title</a></th>
+                                    <th><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=1&amp;o=&amp;r=0&amp;q=">Artist</a></th>
+                                    <th><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=2&amp;o=&amp;r=0&amp;q=">Creator</a></th>
+                                    <th><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=3&amp;o=&amp;r=0&amp;q=">Difficulty</a></th>
+                                    <th><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=0&amp;r=0&amp;q=">Ranked</a><img src="/style/images/down.gif"></th>
+
+                                    <th><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=5&amp;o=&amp;r=0&amp;q=">User Rating</a></th>
+                                    <th><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=6&amp;o=&amp;r=0&amp;q=">Plays</a></th>
+                                    <th>Pack</th>
+                                    <th>Genre</th>
+                                </tr>
+
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(38394)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/38394"></td>
+                                    <td onclick="load(38394,event)" class="block">
+                                        <div class="storyicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/38394">EXEC_COSMOFLIPS/.</a></td>
+                                    <td onclick="load(38394,event)">KOKIA
+                                        <div class="listing-src">(Ar tonelico III)</div>
+                                    </td>
+                                    <td onclick="load(38394,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/171021">Beren</a></td>
+                                    <td onclick="load(38394,event)" width="96"><img src="/style/images/easy.png"> <img src="/style/images/normal.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> </td>
+                                    <td onclick="load(38394,event)">May 1, 2012
+                                        <br><small>Ranked by SapphireGhost</small></td>
+                                    <td onclick="load(38394)">
+                                        <center>-
+                                            <br><small>needs 32 votes</small></center>
+                                    </td>
+                                    <td onclick="load(38394,event)">
+                                        <center>1,241</center>
+                                    </td>
+                                    <td>
+                                        <center></center>
+                                    </td>
+                                    <td onclick="load(38394,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=1">Other</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info38394" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/38394">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(40985)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/40985"></td>
+                                    <td onclick="load(40985,event)" class="block">
+                                        <div class="storyicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/40985">OVER NIGHT</a></td>
+                                    <td onclick="load(40985,event)">AYA
+                                        <div class="listing-src">(Le Chevalier D'Eon)</div>
+                                    </td>
+                                    <td onclick="load(40985,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/208440">IceBeam</a></td>
+                                    <td onclick="load(40985,event)" width="96"><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> </td>
+                                    <td onclick="load(40985,event)">May 1, 2012
+                                        <br><small>Ranked by narakucrimson</small></td>
+                                    <td onclick="load(40985)">
+                                        <center><b>8.8</b>
+                                            <br><small>57 votes</small></center>
+                                    </td>
+                                    <td onclick="load(40985,event)">
+                                        <center>3,062</center>
+                                    </td>
+                                    <td>
+                                        <center></center>
+                                    </td>
+                                    <td onclick="load(40985,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=3">Anime</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=2">English</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info40985" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/40985">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(42084)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/42084"></td>
+                                    <td onclick="load(42084,event)" class="block">
+                                        <div class="videoicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/42084">swee-chu -Kiss Shite Onii-chan- (Short Ver.)</a></td>
+                                    <td onclick="load(42084,event)">ALT
+                                        <div class="listing-src">(Imouto Style)</div>
+                                    </td>
+                                    <td onclick="load(42084,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/593215">merchat7</a></td>
+                                    <td onclick="load(42084,event)" width="96"><img src="/style/images/normal.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(42084,event)">Apr 30, 2012
+                                        <br><small>Ranked by Beuchi-chan</small></td>
+                                    <td onclick="load(42084)">
+                                        <center><b>8.8</b>
+                                            <br><small>160 votes</small></center>
+                                    </td>
+                                    <td onclick="load(42084,event)">
+                                        <center>18,714</center>
+                                    </td>
+                                    <td>
+                                        <center></center>
+                                    </td>
+                                    <td onclick="load(42084,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info42084" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/42084">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(47907)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/47907"></td>
+                                    <td onclick="load(47907,event)" class="block">
+                                        <div class="videoicon"></div>
+                                        <div class="storyicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/47907">Theme of Miki Sayaka</a></td>
+                                    <td onclick="load(47907,event)">ice
+                                        <div class="listing-src">(Puella Magi Madoka Magica)</div>
+                                    </td>
+                                    <td onclick="load(47907,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/2363">DJPop</a></td>
+                                    <td onclick="load(47907,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/hard.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(47907,event)">Apr 29, 2012
+                                        <br><small>Ranked by SapphireGhost</small></td>
+                                    <td onclick="load(47907)">
+                                        <center><b>9.3</b>
+                                            <br><small>357 votes</small></center>
+                                    </td>
+                                    <td onclick="load(47907,event)">
+                                        <center>18,176
+                                            <br><small>(8,296/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center></center>
+                                    </td>
+                                    <td onclick="load(47907,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=3">Anime</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=5">Instrumental</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info47907" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/47907">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(45450)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/45450"></td>
+                                    <td onclick="load(45450,event)" class="block"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45450">Melody!</a></td>
+                                    <td onclick="load(45450,event)">Yellow Zebra
+                                        <div class="listing-src">(Touhou)</div>
+                                    </td>
+                                    <td onclick="load(45450,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/376831">wcx19911123</a></td>
+                                    <td onclick="load(45450,event)" width="96">
+                                        <br><img src="/style/images/normal.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(45450,event)">Apr 29, 2012
+                                        <br><small>Ranked by Beuchi-chan</small></td>
+                                    <td onclick="load(45450)">
+                                        <center><b>9.2</b>
+                                            <br><small>362 votes</small></center>
+                                    </td>
+                                    <td onclick="load(45450,event)">
+                                        <center>31,019
+                                            <br><small>(12,332/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center></center>
+                                    </td>
+                                    <td onclick="load(45450,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info45450" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45450">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(44775)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/44775"></td>
+                                    <td onclick="load(44775,event)" class="block">
+                                        <div class="videoicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/44775">Torinoko City</a></td>
+                                    <td onclick="load(44775,event)">Tianshi
+                                        <div class="listing-src">(40mP)</div>
+                                    </td>
+                                    <td onclick="load(44775,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/197974">spboxer3</a></td>
+                                    <td onclick="load(44775,event)" width="96">
+                                        <br><img src="/style/images/normal.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(44775,event)">Apr 28, 2012
+                                        <br><small>Ranked by Dangaard</small></td>
+                                    <td onclick="load(44775)">
+                                        <center><b>9.2</b>
+                                            <br><small>257 votes</small></center>
+                                    </td>
+                                    <td onclick="load(44775,event)">
+                                        <center>21,675
+                                            <br><small>(7,961/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center></center>
+                                    </td>
+                                    <td onclick="load(44775,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=7">Novelty</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info44775" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/44775">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(48135)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/48135"></td>
+                                    <td onclick="load(48135,event)" class="block">
+                                        <div class="videoicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/48135">*** Passionate (TV Size)</a></td>
+                                    <td onclick="load(48135,event)">Nomizu Iori
+                                        <div class="listing-src">(Kore wa Zombie Desu ka? OF THE DEAD)</div>
+                                    </td>
+                                    <td onclick="load(48135,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/115291">Vicho-kun</a></td>
+                                    <td onclick="load(48135,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(48135,event)">Apr 28, 2012
+                                        <br><small>Ranked by blissfulyoshi</small></td>
+                                    <td onclick="load(48135)">
+                                        <center><b>8.3</b>
+                                            <br><small>186 votes</small></center>
+                                    </td>
+                                    <td onclick="load(48135,event)">
+                                        <center>29,620
+                                            <br><small>(10,067/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center></center>
+                                    </td>
+                                    <td onclick="load(48135,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=3">Anime</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info48135" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/48135">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(47302)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/47302"></td>
+                                    <td onclick="load(47302,event)" class="block">
+                                        <div class="videoicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/47302">Scarlet (Short Ver.)</a></td>
+                                    <td onclick="load(47302,event)">Sakakibara Yui
+                                        <div class="listing-src">(DRACU-RIOT!)</div>
+                                    </td>
+                                    <td onclick="load(47302,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/1077845">Melophobia</a></td>
+                                    <td onclick="load(47302,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(47302,event)">Apr 28, 2012
+                                        <br><small>Ranked by blissfulyoshi</small></td>
+                                    <td onclick="load(47302)">
+                                        <center><b>9.4</b>
+                                            <br><small>343 votes</small></center>
+                                    </td>
+                                    <td onclick="load(47302,event)">
+                                        <center>32,325
+                                            <br><small>(10,529/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(47302,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info47302" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/47302">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(44129)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/44129"></td>
+                                    <td onclick="load(44129,event)" class="block"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/44129">100% Magical Star*</a></td>
+                                    <td onclick="load(44129,event)">Tamura Yukari, Kanai Mika, Horie Yui
+                                        <div class="listing-src">(Higurashi no Naku Koro ni Kira)</div>
+                                    </td>
+                                    <td onclick="load(44129,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/707980">Akemi_Homura</a></td>
+                                    <td onclick="load(44129,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(44129,event)">Apr 28, 2012
+                                        <br><small>Ranked by Beuchi-chan</small></td>
+                                    <td onclick="load(44129)">
+                                        <center><b>8.9</b>
+                                            <br><small>279 votes</small></center>
+                                    </td>
+                                    <td onclick="load(44129,event)">
+                                        <center>24,122
+                                            <br><small>(6,640/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(44129,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=3">Anime</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info44129" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/44129">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(46459)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/46459"></td>
+                                    <td onclick="load(46459,event)" class="block">
+                                        <div class="videoicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/46459">VISION (Short Ver.)</a></td>
+                                    <td onclick="load(46459,event)">Daiichi Uchuu Sokudo
+                                        <div class="listing-src">(SoniComi)</div>
+                                    </td>
+                                    <td onclick="load(46459,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/727012">AcceleratorRUS</a></td>
+                                    <td onclick="load(46459,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/normal.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(46459,event)">Apr 27, 2012
+                                        <br><small>Ranked by SapphireGhost</small></td>
+                                    <td onclick="load(46459)">
+                                        <center><b>9.5</b>
+                                            <br><small>421 votes</small></center>
+                                    </td>
+                                    <td onclick="load(46459,event)">
+                                        <center>29,555
+                                            <br><small>(7,322/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(46459,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info46459" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/46459">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(43419)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/43419"></td>
+                                    <td onclick="load(43419,event)" class="block">
+                                        <div class="videoicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/43419">Happy Girl (TV Size)</a></td>
+                                    <td onclick="load(43419,event)">Kitamura Eri
+                                        <div class="listing-src">(Papa no Iukoto wo Kikinasai!)</div>
+                                    </td>
+                                    <td onclick="load(43419,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/739813">-Chata-</a></td>
+                                    <td onclick="load(43419,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(43419,event)">Apr 27, 2012
+                                        <br><small>Ranked by SapphireGhost</small></td>
+                                    <td onclick="load(43419)">
+                                        <center><b>9.4</b>
+                                            <br><small>407 votes</small></center>
+                                    </td>
+                                    <td onclick="load(43419,event)">
+                                        <center>35,939
+                                            <br><small>(8,730/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(43419,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=3">Anime</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info43419" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/43419">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(45671)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/45671"></td>
+                                    <td onclick="load(45671,event)" class="block">
+                                        <div class="videoicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45671">Laplace</a></td>
+                                    <td onclick="load(45671,event)">sakuzyo
+                                        <div class="listing-src">(BMS)</div>
+                                    </td>
+                                    <td onclick="load(45671,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/465126">Shiirn</a></td>
+                                    <td onclick="load(45671,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png">
+                                        <br><img src="/style/images/insane-f.png"> </td>
+                                    <td onclick="load(45671,event)">Apr 26, 2012
+                                        <br><small>Ranked by Breeze</small></td>
+                                    <td onclick="load(45671)">
+                                        <center><b>8.7</b>
+                                            <br><small>246 votes</small></center>
+                                    </td>
+                                    <td onclick="load(45671,event)">
+                                        <center>20,500
+                                            <br><small>(3,973/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(45671,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=10">Techno</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=5">Instrumental</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info45671" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45671">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(44754)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/44754"></td>
+                                    <td onclick="load(44754,event)" class="block"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/44754">Take Me Back</a></td>
+                                    <td onclick="load(44754,event)">KaW</td>
+                                    <td onclick="load(44754,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/197805">Niva</a></td>
+                                    <td onclick="load(44754,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> </td>
+                                    <td onclick="load(44754,event)">Apr 26, 2012
+                                        <br><small>Ranked by Breeze</small></td>
+                                    <td onclick="load(44754)">
+                                        <center><b>8.9</b>
+                                            <br><small>185 votes</small></center>
+                                    </td>
+                                    <td onclick="load(44754,event)">
+                                        <center>13,510
+                                            <br><small>(2,600/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(44754,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=6">Other</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=5">Instrumental</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info44754" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/44754">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(38867)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/38867"></td>
+                                    <td onclick="load(38867,event)" class="block"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/38867">THE LAST STRIKER</a></td>
+                                    <td onclick="load(38867,event)">L.E.D.
+                                        <div class="listing-src">(Beatmania IIDX)</div>
+                                    </td>
+                                    <td onclick="load(38867,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/87065">Nakagawa-Kanon</a></td>
+                                    <td onclick="load(38867,event)" width="96"><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(38867,event)">Apr 25, 2012
+                                        <br><small>Ranked by Shiirn</small></td>
+                                    <td onclick="load(38867)">
+                                        <center><b>9.4</b>
+                                            <br><small>233 votes</small></center>
+                                    </td>
+                                    <td onclick="load(38867,event)">
+                                        <center>22,662
+                                            <br><small>(3,952/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(38867,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=5">Instrumental</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info38867" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/38867">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(45493)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/45493"></td>
+                                    <td onclick="load(45493,event)" class="block"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45493">Schrodinger's Kitten</a></td>
+                                    <td onclick="load(45493,event)">Hatsune Miku</td>
+                                    <td onclick="load(45493,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/57448">Lanttu</a></td>
+                                    <td onclick="load(45493,event)" width="96">
+                                        <br><img src="/style/images/normal.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> </td>
+                                    <td onclick="load(45493,event)">Apr 25, 2012
+                                        <br><small>Ranked by blissfulyoshi</small></td>
+                                    <td onclick="load(45493)">
+                                        <center><b>9.3</b>
+                                            <br><small>293 votes</small></center>
+                                    </td>
+                                    <td onclick="load(45493,event)">
+                                        <center>21,765
+                                            <br><small>(3,655/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(45493,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=7">Novelty</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info45493" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45493">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(45205)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/45205"></td>
+                                    <td onclick="load(45205,event)" class="block"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45205">subconsciousness</a></td>
+                                    <td onclick="load(45205,event)">guna with team kyukkyu
+                                        <div class="listing-src">(Colorful Channel)</div>
+                                    </td>
+                                    <td onclick="load(45205,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/85000">Charles445</a></td>
+                                    <td onclick="load(45205,event)" width="96"><img src="/style/images/easy.png"> <img src="/style/images/normal.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(45205,event)">Apr 25, 2012
+                                        <br><small>Ranked by Shiirn</small></td>
+                                    <td onclick="load(45205)">
+                                        <center><b>9.3</b>
+                                            <br><small>225 votes</small></center>
+                                    </td>
+                                    <td onclick="load(45205,event)">
+                                        <center>15,905
+                                            <br><small>(2,538/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(45205,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=5">Instrumental</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info45205" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45205">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(45016)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/45016"></td>
+                                    <td onclick="load(45016,event)" class="block">
+                                        <div class="storyicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45016">Majokko Mirakurun</a></td>
+                                    <td onclick="load(45016,event)">Taketatsu Ayana
+                                        <div class="listing-src">(Yuru Yuri)</div>
+                                    </td>
+                                    <td onclick="load(45016,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/759860">popner</a></td>
+                                    <td onclick="load(45016,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png">
+                                        <br><img src="/style/images/insane-t.png"> </td>
+                                    <td onclick="load(45016,event)">Apr 25, 2012
+                                        <br><small>Ranked by Mafiamaster</small></td>
+                                    <td onclick="load(45016)">
+                                        <center><b>9.2</b>
+                                            <br><small>278 votes</small></center>
+                                    </td>
+                                    <td onclick="load(45016,event)">
+                                        <center>24,782
+                                            <br><small>(3,844/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(45016,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=3">Anime</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info45016" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/45016">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(42021)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/42021"></td>
+                                    <td onclick="load(42021,event)" class="block">
+                                        <div class="storyicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/42021">Hello / How are You</a></td>
+                                    <td onclick="load(42021,event)">Hatsune Miku
+                                        <div class="listing-src">(Nanou)</div>
+                                    </td>
+                                    <td onclick="load(42021,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/467860">Lan wings</a></td>
+                                    <td onclick="load(42021,event)" width="96">
+                                        <br><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png"> </td>
+                                    <td onclick="load(42021,event)">Apr 24, 2012
+                                        <br><small>Ranked by Dangaard</small></td>
+                                    <td onclick="load(42021)">
+                                        <center><b>9.2</b>
+                                            <br><small>393 votes</small></center>
+                                    </td>
+                                    <td onclick="load(42021,event)">
+                                        <center>29,842
+                                            <br><small>(4,463/day)</small></center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                <br>S461</a>
+                                        </center>
+                                    </td>
+                                    <td onclick="load(42021,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=7">Novelty</a>
+                                        <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info42021" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/42021">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row1p" onmouseout="shrinkRows()" onmouseover="expandRow(42480)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/42480"></td>
+                                    <td onclick="load(42480,event)" class="block">
+                                        <div class="videoicon"></div><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/42480">Tsuki ni Murakumo Hana ni Kaze (Short Ver.)</a></td>
+                                    <td onclick="load(42480,event)">senya
+                                        <div class="listing-src">(Touhou)</div>
+                                    </td>
+                                    <td onclick="load(42480,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/102976">goodbye</a></td>
+                                    <td onclick="load(42480,event)" width="96"><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png"> </td>
+                                    <td
+                                    onclick="load(42480,event)">Apr 24, 2012
+                                        <br><small>Ranked by Garven</small></td>
+                                        <td onclick="load(42480)">
+                                            <center><b>9.1</b>
+                                                <br><small>361 votes</small></center>
+                                        </td>
+                                        <td onclick="load(42480,event)">
+                                            <center>35,014
+                                                <br><small>(5,084/day)</small></center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S461"><img src="/style/images/tick.png">
+                                                    <br>S461</a>
+                                            </center>
+                                        </td>
+                                        <td onclick="load(42480,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=2">Video Game</a>
+                                            <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info42480" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/42480">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+                                <tr class="row2p" onmouseout="shrinkRows()" onmouseover="expandRow(32021)">
+                                    <td width="80"><img class="bmlistt" src="/style/images/32021"></td>
+                                    <td onclick="load(32021,event)" class="block"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/32021">Sakura Zensen Ijou Nashi</a></td>
+                                    <td onclick="load(32021,event)">Hatsune Miku
+                                        <div class="listing-src">(WataruP)</div>
+                                    </td>
+                                    <td onclick="load(32021,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/u/177045">Lalarun</a></td>
+                                    <td onclick="load(32021,event)" width="96"><img src="/style/images/easy.png"> <img src="/style/images/hard.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png"> <img src="/style/images/insane.png"> </td>
+                                    <td
+                                    onclick="load(32021,event)">Apr 24, 2012
+                                        <br><small>Ranked by SapphireGhost</small></td>
+                                        <td onclick="load(32021)">
+                                            <center><b>9.4</b>
+                                                <br><small>462 votes</small></center>
+                                        </td>
+                                        <td onclick="load(32021,event)">
+                                            <center>54,878
+                                                <br><small>(7,764/day)</small></center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/packlist/?n=S460"><img src="/style/images/tick.png">
+                                                    <br>S460</a>
+                                            </center>
+                                        </td>
+                                        <td onclick="load(32021,event)"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?g=7">Novelty</a>
+                                            <br>(<a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?la=3">Japanese</a>)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="expandableInfo" id="info32021" style="display:none"><b>Quick Links:</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/s/32021">Scores &amp; Details</a>| Login for more options!</div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="pagination"><b>1</b> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">2</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=3">3</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=4">4</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=5">5</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=6">6</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=7">7</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=8">8</a> <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=9">9</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=10">10</a> ... <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=250">250</a>                            <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/beatmaplist?l=1&amp;r=0&amp;q=&amp;g=0&amp;la=0&amp;s=4&amp;o=1&amp;m=0&amp;page=2">Next</a></div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="33%"></td>
+                                <td width="33%" align="middle">osu! is © peppy 2007-2012</td>
+                                <td width="34%" align="right"><a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/terms">Terms of Service</a> | <a href="https://web.archive.org/web/20120501082555/http://osu.ppy.sh/p/copyright">Copyright</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="/style/images/brand"></script>
+    </div>
+    <div class="igtranslator-main-div" style="display: none; width: 0px; height: 0px;">
+        <iframe src="/style/images/saved_resource.html" class="igtranslator-iframe" scrolling="no" frameborder="0"></iframe>
+    </div>
+    <div class="igtranslator-activator-icon bounceIn" style="background-image: url(&quot;chrome-extension://jgnebchahhepphmokjeohhoebakpfggp/data/icons/home.png&quot;); display: none;" title="Click to Show Translation"></div>
+    <div>
+        <div id="twoseven-ext-tab-media-modal" class="twoseven-ext-tab-media-modal" style="display: none;">
+            <!-- Modal content -->
+            <div class="twoseven-ext-tab-media-modal-content">
+                <div class="iframe-container" style="height: 100%; width: 100%;">
+                    <span class="close">×</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style type="text/css" id="igtranslator-color"></style>
+
+</html>

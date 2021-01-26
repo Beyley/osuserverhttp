@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<%- include('../../partials/global/htmlhead.ejs') %>
+
+<html>
+<body data-new-gr-c-s-check-loaded="14.988.0" data-gr-ext-installed="">
+    <!-- <a name="top"></a> -->
+    <div class="bodytopbg">
+        <div class="mainbody">
+            <div class="mainbody2">
+                <div id="coolheader" style="background-image: url(&#39;/style/images/right-j.jpg&#39;);"></div>
+                <!-- <a id="top_support" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/support"> </a>
+                <a id="top_follow" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/twitter"> </a> -->
+                
+                <%- include('../../partials/global/header.ejs') %>
+                
+                <div class="content">
+                    <%- include('../../partials/global/loginform.ejs') %>
+
+                    <div class="content-with-bg">
+						<div class="content-with-bg">
+                        <script type="text/javascript" language="javascript">
+                            function updatebms()
+                            {
+                            	$("#updatestatus").html("updating...");
+                            	$.get("/pages/include/beatmap-update.php?s=1&o=" + $("#offset").attr("value") + "&t=" + urlencode($("#disptitle").attr("value")) + "&g=" + $('#genres').val() + "&l=" + $('#languages').val() + "&tags=" + $('#tags').val(), null, function(text){
+                            		$("#updatestatus").html(text);
+                            	});
+							}
+							
+							var myListener = new Object();
+							var isPlaying = false;
+							myListener.onInit = function()
+							{
+								this.position = 0;
+							};
+							myListener.onUpdate = function()
+							{
+								isPlaying = (this.isPlaying == "true");
+							};
+						
+							function getFlashObject()
+							{
+								return document.getElementById("myFlash");
+							}
+							var playingid = -1;
+							function play(id)
+							{
+								stop();
+						
+								if (id != playingid || !isPlaying)
+								{
+									setVolume(45);
+									getFlashObject().SetVariable("method:setUrl", "https://web.archive.org/web/20120606071946/http://s.ppy.sh/mp3/preview/" + id + ".mp3");
+									getFlashObject().SetVariable("method:play", "");
+									getFlashObject().SetVariable("enabled", "true");
+									playingid = id;
+								}
+						
+								return false;
+							}
+							function stop()
+							{
+								getFlashObject().SetVariable("method:stop", "");
+							}
+							function setVolume(volume)
+							{
+								getFlashObject().SetVariable("method:setVolume", volume);
+							}
+						
+							function load(id)
+							{
+								document.location="/s/"+id;
+							}
+						
+							function report(score_id)
+							{
+								check('/b/75&action=report&score=' + score_id + '&m=0&sid=0552d61bc7fe77dd8e7830261e6b4840','report this score for foul play. False reports will be punished')
+							}
+                        </script>
+
+                        <object class="playerpreview" id="myFlash" type="application/x-shockwave-flash" data="/style/images/mp3.swf.download" width="1" height="1">
+                            <param name="movie" value="/mp3/mp3.swf">
+                            <param name="AllowScriptAccess" value="always">
+                            <param name="FlashVars" value="listener=myListener&amp;interval=500">
+                        </object>
+
+                        <h1><a href="/p/beatmaplist">Beatmap Listing</a> » <%= map.artist %> - <%= map.title %></h1>
+
+                        <div id="tablist">
+                            <ul>
+                                <% for (i = 0; i < set.length; i++) { %>
+                                    <% let difficulty = set[i]; %>
+
+                                    <li><a <% if(difficulty.beatmapId == map.beatmapId) { %>class="active" <% } %> href="/s/<%= difficulty.beatmapSetId %>/<%= difficulty.beatmapId %>"><span style="background-image:url(/style/images/hard.png); background-position: center left; background-repeat: no-repeat; padding-left: 20px; display:inline-block; vertical-align:middle;"><%= difficulty.difficulty %></span></a></li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <div>
+                            <table id="songinfo" width="100%" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="0%">Artist:</td>
+                                        <td width="23%" class="colour"><a href="/p/beatmaplist?q=<%= map.artist %>"><%= map.artist %></a></td>
+                                        <td width="0%">Circle Size:</td>
+                                        <td width="23%" class="colour">
+                                            <div class="starfield" style="width:140px">
+                                                <div class="active" style="width:<%= map.circleSize * 14 %>px"></div>
+                                            </div>
+                                        </td>
+                                        <td width="0%">Star Difficulty:</td>
+                                        <td width="23%" class="colour">
+                                            <div class="starfield" style="width:140px">
+                                                <div class="active" style="width:<%= map.starRating * 14 %>px"></div>
+                                            </div> (<%= map.starRating.toFixed(2) %>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="0%">Title:</td>
+                                        <td class="colour"><a href="/p/beatmaplist?q=<%= map.title %>"><%= map.title %></a></td>
+                                        <td width="0%">HP Drain:</td>
+                                        <td class="colour">
+                                            <div class="starfield" style="width:140px">
+                                                <div class="active" style="width:<%= map.hpDrain * 14 %>px"></div>
+                                            </div>
+                                        </td>
+                                        <td width="0%">Total Time:</td>
+                                        <td class="colour"><%= new Date(map.songLength * 1000).toISOString().substr(14, 5); %></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="0%">Creator:</td>
+                                        <td class="colour"><a href="https://osu.ppy.sh/u/<%= map.creatorId %>"><%= map.creator %></a>
+                                            <a></a>
+                                        </td>
+                                        <td width="0%">Accuracy:</td>
+                                        <td class="colour">
+                                            <div class="starfield" style="width:140px">
+                                                <div class="active" style="width:<%= map.overallDifficulty * 14 %>px"></div>
+                                            </div>
+                                        </td>
+                                        <td width="0%">Draining Time:</td>
+                                        <td class="colour"><%= new Date(map.drainTime * 1000).toISOString().substr(14, 5); %></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="0%">Source:</td>
+                                        <td class="colour">
+                                            <a href="/p/beatmaplist?q=<%= map.source %>"><%= map.source %></a>
+                                        </td>
+                                        <td width="0%">Genre:</td>
+                                        <td class="colour"><a href="/p/beatmaplist?g=<%= map.genreId %>"><%= map.genreId %></a> (<a href="/p/beatmaplist?la=<%= map.languageId %>"><%= map.languageId %></a>)</td>
+                                        <td width="0%">BPM:</td>
+                                        <td class="colour"><%= map.bpm %></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="0%">Tags:</td>
+                                        <td class="colour"><a href="/p/beatmaplist?q=<%= map.tags %>"><%= map.tags %></a> </td>
+
+                                        <td width="0%">User Rating:</td>
+                                        <td class="colour">
+                                            <table width="100%" height="20px" style="color:#fff;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="background-color:#BC2036;text-align:right;border:solid 1px #82000B;" width="50">0</td>
+                                                        <td style="background-color:#78AB23;text-align:left;border:solid 1px #718F0A;" width="50">0</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td width="0%" rowspan="2" valign="top">
+                                            Success Rate:
+                                            <br> Points of Failure:
+                                            <br>
+                                            <span style="font-size:80%">(graph is accumulative, based on % at fail/retry)</span></td>
+                                        <td class="colour" rowspan="2">
+                                            <b><%= ((map.passcount / map.playcount) * 100).toFixed(2) %>%</b> (<%= map.passcount %> of <%= map.playcount %> plays)
+                                            <br>
+                                            <img width="200" height="60" src="/style/images/beatmap-fail-graph.php">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="0%">
+                                            Submitted:
+                                            <br> Ranked:
+                                        </td>
+                                        <td class="colour">
+                                            <%= map.submitDate %>
+                                            <br> <%= map.approvedDate %>
+                                        </td>
+
+                                        <td>Rating Spread:</td>
+                                        <td class="colour">
+                                            <img width="200" height="40" src="/style/images/beatmap-rating-graph.php">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <div><b>Favourited <%= map.favouriteCount %> times</b> in total</div>
+                                            Users that love this map:
+											<a href="/u/USERID">USERHERE</a> 
+										</td>
+                                        <td width="0%">Options:</td>
+                                        <!-- <td class="colour"><a href="/forum/t/213">This Beatmap's Thread</a> -->
+                                        </td>
+                                        <td class="colour"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+
+                        </div>
+                        <br>
+                        <div class="paddingboth">
+                            <h2>Creator's Words</h2>
+                            <div class="paddingboth">
+                                <div class="beatmapDownloadButton">
+                                    <a href="https://chimu.moe/d/<%= map.beatmapSetId %>"><img src="/style/images/osu-download-beatmap.png"></a>
+                                </div>
+
+                                <div class="posttext">
+                                    map.description
+                                </div>
+                            </div>
+
+                            <h1>Song Ranking</h1>
+
+                            <div id="tablist">
+                                <ul>
+                                    <li><a class="active" href="/p/beatmap?b=75&amp;m=0">osu! Standard</a></li>
+                                    <!-- <li><a href="/p/beatmap?b=75&amp;m=1">Taiko</a></li>
+                                    <li><a href="/p/beatmap?b=75&amp;m=2">Catch The Beat</a></li> -->
+                                </ul>
+                            </div>
+                            <div class="paddingall">
+                                <h2>Current Leader</h2>
+                                <!-- 
+                                    
+                                    
+                                    --- BEGIN LEADER --- 
+                                
+                                
+                                -->
+                                <% if(leaderboard.length > 0) { %>
+                                <% let leader = leaderboard[0] %>
+                                <table class="scoreLeader" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="title" colspan="3"><!-- <img class="flag" src="/style/images/pl.gif"> --> <a href="/u/<%= leader.username %>"><%= leader.username %></a> is in the lead! (<%= leader.fancySubmitTime %> ago and counting)</td>
+                                        </tr>
+                                        <tr class="row1p">
+                                            <td><strong>Score</strong></td>
+                                            <td><%= leader.score.toLocaleString('en') %> (<%= leader.accuracy %>%)</td>
+                                            <td class="rank" width="120px" align="center" colspan="1" rowspan="7"><img src="/style/images/<%= leader.grade %>.png"></td>
+                                        </tr>
+                                        <tr class="row2p">
+                                            <td><strong>Max Combo</strong></td>
+                                            <td><%= leader.combo.toLocaleString('en') %></td>
+                                        </tr>
+                                        <tr class="row1p">
+                                            <td><strong>300 / 100 / 50</strong></td>
+                                            <td><%= leader.hit300.toLocaleString('en') %> / <%= leader.hit100.toLocaleString('en') %> / <%= leader.hit50.toLocaleString('en') %></td>
+                                        </tr>
+                                        <tr class="row2p">
+                                            <td><strong>Misses</strong></td>
+                                            <td><%= leader.hitMiss.toLocaleString('en') %></td>
+                                        </tr>
+                                        <tr class="row1p">
+                                            <td><strong>Geki (Elite Beat!)</strong></td>
+                                            <td><%= leader.hitGeki.toLocaleString('en') %></td>
+                                        </tr>
+                                        <tr class="row2p">
+                                            <td><strong>Katu (Beat!)</strong></td>
+                                            <td><%= leader.hitKatu.toLocaleString('en') %></td>
+                                        </tr>
+                                        <tr class="row1p">
+                                            <td><strong>Mods</strong></td>
+                                            <td><%= leader.fancyMods %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <% } %>
+                                <!-- 
+                                    
+                                    
+                                    --- END LEADER --- 
+                                
+                                
+                                -->
+                            </div>
+                        </div>
+
+                        <a name="scores"></a>
+                        <h2>Top 50 Scoreboard</h2>
+                        <div>
+                            <form method="GET" action="/p/beatmap#scores">
+                                <input type="hidden" name="b" value="75">
+                                <input type="hidden" name="m" value="0">
+                                <input id="nm" type="checkbox" onchange="this.form.submit()" name="nm" value="1">
+                                <label for="nm">Show no-mod plays only</label>
+                            </form>
+                        </div>
+
+                        <div class="beatmapListing">
+                            <table width="100%" cellspacing="0">
+                                <tbody>
+                                    <tr class="titlerow">
+                                        <th></th>
+                                        <th><strong>Rank</strong></th>
+                                        <th><strong>Score</strong></th>
+                                        <th><strong>Accuracy</strong></th>
+                                        <th><strong>Player</strong></th>
+                                        <th><strong>Max Combo</strong></th>
+                                        <th><strong>300 / 100 / 50</strong></th>
+                                        <th><strong>Geki</strong></th>
+                                        <th><strong>Katu</strong></th>
+                                        <th><strong>Misses</strong></th>
+                                        <th><strong>Mods</strong></th>
+                                        <th></th>
+                                    </tr>
+
+                                    <% for(rank = 0; rank < leaderboard.length; rank++) { %>
+                                    <% var score = leaderboard[rank]; %>
+
+                                    <% if(rank % 2 == 0) { %>
+                                    <tr class="row1p">
+                                    <% } else { %>
+                                    <tr class="row2p">
+                                    <% } %>
+                                    
+                                        <td>#<%= rank + 1 %></td>
+                                        <td><img src="/style/images/<%= score.grade %>_small.png"></td>
+                                        <td><b><%= score.score.toLocaleString('en') %></b></td>
+                                        <td><b><%= score.accuracy %>%</b></td>
+                                        <td><!-- <img class="flag" src="/style/images/pl.gif" title="Poland"> --> <a href="/u/<%= score.username %>"><%= score.username %></a></td>
+                                        <td><%= score.combo.toLocaleString('en') %></td>
+                                        <td><%= score.hit300.toLocaleString('en') %>&nbsp;&nbsp;/&nbsp;&nbsp;<%= score.hit100.toLocaleString('en') %>&nbsp;&nbsp;/&nbsp;&nbsp;<%= score.hit50.toLocaleString('en') %></td>
+                                        <td><%= score.hitGeki.toLocaleString('en') %></td>
+                                        <td><%= score.hitKatu.toLocaleString('en') %></td>
+                                        <td><%= score.hitMiss.toLocaleString('en') %></td>
+                                        <td><%= score.fancyMods %></td>
+                                        <td><a onclick="report(242518182);">Report</a></td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                    </div>
+                </div>
+
+                <%- include('../../partials/global/footer.ejs') %>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="/js/brand.js"></script>
+    </div>
+</body>
+</html>

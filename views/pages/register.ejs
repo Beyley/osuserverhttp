@@ -1,76 +1,44 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<%- include('../../partials/global/htmlhead.ejs') %>
+
 <html>
-	<head>
-		<meta charset="utf-8">
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
-    	<meta name="description" content="">
-    	<meta name="author" content="">
-   	 	<link href="/style/bootstrap/css/bootstrap.css" rel="stylesheet">
-    	<link href="/style/starter-template.css" rel="stylesheet">
-    
-		<title>Register</title>
-		<style>
-		.login-form {
-			width: 300px;
-			margin: 0 auto;
-			font-family: Tahoma, Geneva, sans-serif;
-		}
-		.login-form h1 {
-			text-align: center;
-			color: #4d4d4d;
-			font-size: 24px;
-			padding: 20px 0 20px 0;
-		}
-		.login-form input[type="password"],
-		.login-form input[type="text"] {
-			width: 100%;
-			padding: 15px;
-			border: 1px solid #dddddd;
-			margin-bottom: 15px;
-			box-sizing:border-box;
-		}
-		.login-form input[type="submit"] {
-			width: 100%;
-			padding: 15px;
-			background-color: #535b63;
-			border: 0;
-			box-sizing: border-box;
-			cursor: pointer;
-			font-weight: bold;
-			color: #ffffff;
-		}
-		</style>
-	</head>
-	
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">osu!2012</a></div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"> <a href="/register">Register</a></li>
-                    <li> <a href="/ranking">Rankings</a></li>
-                    <li></li>
-                </ul>
+<body data-new-gr-c-s-check-loaded="14.988.0" data-gr-ext-installed="">
+    <!-- <a name="top"></a> -->
+    <div class="bodytopbg">
+        <div class="mainbody">
+            <div class="mainbody2">
+                <div id="coolheader" style="background-image: url(&#39;/style/images/right-j.jpg&#39;);"></div>
+                <!-- <a id="top_support" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/support"> </a>
+                <a id="top_follow" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/twitter"> </a> -->
+                
+                <%- include('../../partials/global/header.ejs') %>
+                
+                <div class="content">
+                    <%- include('../../partials/global/loginform.ejs') %>
+
+                    <div class="content-with-bg">
+						<div class="login-form">
+							<h1>Register to osu!</h1>
+							<form action="registerauth" method="POST">
+								<input type="text" name="username" placeholder="Username" required>
+								<input type="password" name="password" placeholder="Password" required>
+								<input type="password" name="passwordConfirm" placeholder="PasswordConfirm" required>
+								<input type="text" name="email" placeholder="Email" required>
+								<input type="submit">
+							</form>
+							<p>put real email so that i can change password if needed</p>
+							<p>no multiacc</p>
+						</div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <%- include('../../partials/global/footer.ejs') %>
             </div>
         </div>
-	</nav>
-	
-	<body>
-		<div class="login-form">
-            <h1>Register Form</h1>
-			<form action="registerauth" method="POST">
-                <input type="text" name="email" placeholder="Email" required>
-				<input type="text" name="username" placeholder="Username" required>
-				<input type="password" name="password" placeholder="Password" required>
-				<input type="password" name="passwordConfirm" placeholder="PasswordConfirm" required>
-				<input type="submit">
-            </form>
-            <p>put real email so that i can change password if needed</p>
-            <p>no multiacc</p>
-		</div>
-	<script src="/style/assets/js/jquery.min.js"></script>
-    <script src="/style/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/style/assets/js/ie10-viewport-bug-workaround.js"></script>
-	</body>
+
+        <script type="text/javascript" src="/js/brand.js"></script>
+    </div>
+</body>
 </html>

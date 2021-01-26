@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<%- include('../../partials/global/htmlhead.ejs') %>
+
+<html>
+<body data-new-gr-c-s-check-loaded="14.988.0" data-gr-ext-installed="">
+    <!-- <a name="top"></a> -->
+    <div class="bodytopbg">
+        <div class="mainbody">
+            <div class="mainbody2">
+                <div id="coolheader" style="background-image: url(&#39;/style/images/right-j.jpg&#39;);"></div>
+                <!-- <a id="top_support" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/support"> </a>
+                <a id="top_follow" class="top_button" href="https://web.archive.org/web/20120517111606/http://osu.ppy.sh/p/twitter"> </a> -->
+                
+                <%- include('../../partials/global/header.ejs') %>
+                
+                <div class="content">
+                    <%- include('../../partials/global/loginform.ejs') %>
+                    
+                    <div class="content-with-bg">
+                        <script>
+                            async function updateChat() {
+                                document.getElementById("chat").innerHTML = await (await fetch("/p/chat")).text();
+
+                                setTimeout(updateChat, 10000);
+                            }
+
+                            setTimeout(updateChat, 1000);
+                        </script>
+
+                        <div class="main-right main-column">
+                            <div class="main-download">
+                                <a href="/p/download"><img src="/style/images/osu-download.png"></a>
+                            </div>
+
+                            <div class="player-container">
+                                <h2 class="mtitle">Most Played Beatmaps <span>over the last 24 hours</span></h2>
+                                <div class="margin main-box">
+                                    <div id="most_played">
+                                        <table style="font-size:8pt" width="100%" cellspacing="1">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="10%">Plays</td>
+                                                    <td>
+                                                        <center>Artist / Title</center>
+                                                    </td>
+                                                    <td width="20%">Creator</td>
+                                                </tr>
+                                                <tr class="row1">
+                                                    <td align="center">25,626</td>
+                                                    <td align="left">
+                                                        <a href="https://osu.ppy.sh/s/48987"><img class="bmlistt" src="/style/images/48987"> May'n - Chase the world (TV Size)</a>
+                                                    </td>
+                                                    <td><a href="https://osu.ppy.sh/u/870067">Envi</a></td>
+                                                </tr>
+                                                <tr class="row2">
+                                                    <td align="center">8,970</td>
+                                                    <td align="left">
+                                                        <a href="https://osu.ppy.sh/s/48467"><img class="bmlistt" src="/style/images/48467"> Kalafina - to the beginning (TV Size)</a>
+                                                    </td>
+                                                    <td><a href="https://osu.ppy.sh/u/575846">Megurine Luka</a></td>
+                                                </tr>
+                                                <tr class="row1">
+                                                    <td align="center">8,507</td>
+                                                    <td align="left">
+                                                        <a href="https://osu.ppy.sh/s/47110"><img class="bmlistt" src="/style/images/47110"> Yuuyu feat. Megpoid GUMI - 228080!</a>
+                                                    </td>
+                                                    <td><a href="https://osu.ppy.sh/u/207340">Pokie</a></td>
+                                                </tr>
+                                                <tr class="row2">
+                                                    <td align="center">7,883</td>
+                                                    <td align="left">
+                                                        <a href="https://osu.ppy.sh/s/43824"><img class="bmlistt" src="/style/images/43824"> Hashimoto Miyuki - Koi Zakura (Short Ver.)</a>
+                                                    </td>
+                                                    <td><a href="https://osu.ppy.sh/u/611174">-Gamu-</a></td>
+                                                </tr>
+                                                <tr class="row1">
+                                                    <td align="center">7,678</td>
+                                                    <td align="left">
+                                                        <a href="https://osu.ppy.sh/s/47539"><img class="bmlistt" src="/style/images/47539"> Hatsune Miku - Tsubomi Zakura</a>
+                                                    </td>
+                                                    <td><a href="https://osu.ppy.sh/u/735289">Mythol</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="main-left main-column">
+                            <div class="paddingboth">
+                                <h2 class="ntitle"><a href="http://osu.ppy.sh/forum/9">Announcements</a></h2>
+
+                                <% for (var i = 0; i < posts.length; i++) { %>
+                                    <div class="news-heading"><%= posts[i].posttime %>&nbsp;
+                                        <b><%= posts[i].title %></b>&nbsp;
+                                        (<a href="/u/<%= posts[i].creator %>"><%= posts[i].creator %></a>)</div>
+                                    <div class="news-text"><%= posts[i].content %></div>
+                                <%}%>
+
+                                <div class="hug-bottom">
+                                    <h2 class="mtitle">Online Users <span>over the last 24 hours</span></h2>
+                                    <div>
+                                        <center>
+                                            <img width="460" height="70" src="/web/home-useractivity.php">
+                                        </center>
+                                    </div>
+
+                                    <h2 class="mtitle" style="margin-top:15px;">Game Chat <span>also connect from <a href="/p/chat">web</a> or <a target="_blank" href="irc://cho.ppy.sh/">irc://cho.ppy.sh</a></span></h2>
+                                    <div class="margin main-box">
+                                        <div id="chat">
+                                            <link rel="stylesheet" type="text/css" href="/style/banner-styles.css">
+                                            <link rel="stylesheet" type="text/css" href="/style/iconochive.css">
+                                            <!-- End Wayback Rewrite JS Include -->
+                                            <table style="font-size:8pt" width="100%" cellspacing="1">
+                                                <tbody>
+                                                    <tr class="row1">
+                                                        <td>Getting the current chat!</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <%- include('../../partials/global/footer.ejs') %>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="/js/brand.js"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<a href="/"><div id="coolheader" style="background-image: url(&#39;/style/images/right-j.jpg&#39;);"></div>
+<div class="main-osu-logo"><img src="/style/images/head-logo.png"></div></a>
+
+<div class="header">
+    <div id="playstats">
+        <b><%= headerCounts.totalUsers %></b> users, <b><span id="onlineusers"><%= headerCounts.onlineUsers %></span></b> online now.
+        <br> A total of <b><span id="playcount"><%= headerCounts.amountOfRankedPlays %></span></b> ranked plays!
+    </div>
+
+    <script>
+        async function updateOnlineUsers() {
+            document.getElementById("onlineusers").innerHTML = await (await fetch("/p/onlineusercount")).text();
+
+            setTimeout(updateOnlineUsers, 30000);
+        }
+
+        setTimeout(updateOnlineUsers, 1000);
+    </script>
+
+    <div class="menu">
+        <ul class="sf-menu sf-js-enabled sf-shadow">
+            <li class="">
+                <a href="/p/about" class="sf-with-ul">Info<span class="sf-sub-indicator"> »</span></a>
+                <ul style="display: none; visibility: hidden;">
+                    <li><a href="/p/changelog" class="">Changelog</a></li>
+                    <li><a href="/p/history" class="">The Game (PC)</a></li>
+                    <!-- <li><a href="/p/iphone">The Game (iPhone)</a></li>
+                    <li><a href="/p/team">The Team</a></li>
+                    <li><a href="/p/screenshots">Screenshots</a></li> -->
+                </ul>
+            </li>
+            <li><a href="/p/download" class="">Download</a></li>
+            <li><a href="/wiki/">Wiki</a></li>
+            <li><a href="/p/faq" class="sf-with-ul">Help!<span class="sf-sub-indicator"> »</span></a>
+                <ul style="display: none; visibility: hidden;">
+                    <li><a href="/p/faq">FAQ</a></li>
+                    <!-- <li><a href="/p/formatpost&amp;id=21575">Terms Glossary</a></li>
+                    <li><a href="/forum/viewtopic.php?f=13&amp;t=3815">Video Tutorials</a></li>
+                    <li><a href="/forum/viewtopic.php?f=5&amp;t=576">Report a Bug</a></li> -->
+                </ul>
+            </li>
+            <li class=""><a href="/p/beatmaplist" class="sf-with-ul">Beatmaps<span class="sf-sub-indicator"> »</span></a>
+                <ul style="display: none; visibility: hidden;">
+                    <li><a href="/p/beatmaplist&amp;s=4&amp;r=0">Ranked</a></li>
+                    <li><a href="/p/beatmaplist&amp;s=4&amp;r=6">Approved</a></li>
+                    <li><a href="/p/beatmaplist&amp;s=7&amp;r=2">Pending</a></li>
+                    <li><a href="/p/packlist">Beatmap Packs</a></li>
+                </ul>
+            </li>
+            <li><a href="/p/playerranking" class="sf-with-ul">Rankings<span class="sf-sub-indicator"> »</span></a>
+                <ul style="display: none; visibility: hidden;">
+                    <li><a href="/p/pp">Performance <span style="color:#eca1dd; vertical-align: super">beta</span></a></li>
+                    <!-- <li><a href="/p/chart">Charts</a></li> -->
+                    <li><a href="/p/playerranking">Score</a></li>
+                    <li><a href="/p/countryranking">Countries</a></li>
+                    <!-- <li><a href="/p/mapperranking">Mappers</a></li>
+                    <li><a href="/p/modranking">BAT</a></li>
+                    <li><a href="/p/kudosu">Kudosu</a></li> -->
+                </ul>
+            </li>
+            <li><a href="/p/webchat" class="sf-with-ul">Community<span class="sf-sub-indicator"> »</span></a>
+                <ul style="display: none; visibility: hidden;">
+                    <!--<li><a href="/forum/">Forums</a></li>
+                    <li><a href="/p/support">Supporting osu!</a></li>
+                    <li><a href="http://www.cafepress.com/osume" target="_blank">Goodies</a></li>
+                    <li><a href="http://www.youtube.com/user/VideosuTV/videos?sort=da&amp;view=1" target="_blank">Videos</a></li> -->
+                    <li><a href="/p/webchat">Web Chat</a></li>
+                    <!-- <li><a href="http://osu.ppy.sh/p/gallery?g=fanart">Fanart</a></li> -->
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

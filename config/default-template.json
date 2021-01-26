@@ -1,0 +1,8 @@
+{
+    "host": "MYSQLADDRESS",
+    "name": "MYSQLNAME",
+    "password": "MYSQLPASS",
+    "database": "server2008",
+    "avatarlocation": "/osuserver/avatar/a/",
+    "port": 999
+}
